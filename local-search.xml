@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Cisco Anyconnect 和网络连接冲突</title>
+    <link href="/2022/07/05/Cisco-Anyconnect/"/>
+    <url>/2022/07/05/Cisco-Anyconnect/</url>
+    
+    <content type="html"><![CDATA[<h3 id="anyconnect-连接问题">Anyconnect 连接问题</h3><h3 id="问题发生时间">问题发生时间</h3><p>2022/07/04</p><h3 id="问题描述">问题描述</h3><p>在 Cisco Anyconnect中输入了一个地址（后来发现地址是错误的）并连接成功后，电脑就显示“无Internet，安全”。<br />另外发现此时 Anyconnect 无法更改地址，并且右键的 quit 选项消失。<br />通过重启关闭 Anyconnect 后，发现即使 Anyconnect没有运行，也无法连接网络。<br />再次打开 Anyconnect，上述情况依旧没有变化。</p><h3 id="解决方案">解决方案</h3><p><strong>重装 Anyconnect</strong><br />需要注意在设置中卸载不能解决问题，这样只是把 C:/Program Files(x86)中的程序卸载了，数据、配置等信息似乎并没有被一起删除。<br />所以需要<strong>到 C:/ProgramData/ 中删除 Cisco/ 后再重装</strong>。</p><h3 id="具体解决思路">具体解决思路</h3><ol type="1"><li>已知手机连接该网络能正常上网，所以不是网络的问题</li><li>然后尝试在电脑另一个系统中上网，可以上网则说明不是硬件的问题于是从软件的角度思考<br /></li><li>在网上搜索解决方案，大部分都是“连上 vpn 后，显示‘无Internet，安全’”，和本文的问题相似，但并不相同。试着根据那些方案修改网络设置、修改网络适配器，也确实没有应有的效果</li><li>尝试重装，从设置里卸载再重装也没有解决问题</li><li>找到一篇修改 Anyconnect 配置的博客，也不起作用</li><li>此时发现即使 Anyconnect被卸载了，其配置没有被删除，所以可能重装后的软件读取了原来有问题的配置</li><li>由于不知道原来的配置错在哪，所以索性直接删除，然后再安装</li><li>问题解决</li></ol><h3 id="后记">后记</h3><p>莫名其妙的问题还是得靠莫名其妙的方法，仅仅是做个记录。<br />大概有半年多没有用 Cisco Anyconnect了，出点问题也很正常。以后重装软件的时候还是得多留意一下是否卸载干净了。<br />这半年里为了学校里的 ROS 课程升级了win11，推测是因为系统升级导致原来的程序不可用了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Problems(Solved)</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Cisco Anyconnect</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2022/06/19/hello-world/"/>
     <url>/2022/06/19/hello-world/</url>
