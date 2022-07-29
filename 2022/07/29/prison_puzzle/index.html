@@ -16,22 +16,22 @@
   <meta name="author" content="Sicong Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Anyconnect 连接问题 问题发生时间 2022&#x2F;07&#x2F;04 问题描述 在 Cisco Anyconnect中 输入了一个地址（后来发现地址是错误的）并连接成功后，电脑就显示“无 Internet，安全”。 另外发现此时 Anyconnect 无法更改地址，并且右键的 quit 选项消失。 通过重启关闭 Anyconnect 后，发现即使 Anyconnect 没有运行，也">
+    <meta name="description" content="问题描述 背景：假设有 100 名从 1 - 100 编号的囚犯，100张写有他们编号的纸条。这些纸条被放在密闭房间的 100 个盒子中。 操作：每名囚犯可以依次单独进入房间，打开这 100 个盒子中的任意 50 个。 限制：完成后，他们必须还原并离开房间，并且无法以任何方式和其他囚犯交流。 在操作开始前，囚犯们可以商讨对策。 成功条件：每个囚犯都在盒子中找到了自己的编号。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cisco Anyconnect 和网络连接冲突">
-<meta property="og:url" content="https://term-inator.github.io/2022/07/05/Cisco-Anyconnect/index.html">
+<meta property="og:title" content="Prison Puzzle">
+<meta property="og:url" content="https://term-inator.github.io/2022/07/29/prison_puzzle/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
-<meta property="og:description" content="Anyconnect 连接问题 问题发生时间 2022&#x2F;07&#x2F;04 问题描述 在 Cisco Anyconnect中 输入了一个地址（后来发现地址是错误的）并连接成功后，电脑就显示“无 Internet，安全”。 另外发现此时 Anyconnect 无法更改地址，并且右键的 quit 选项消失。 通过重启关闭 Anyconnect 后，发现即使 Anyconnect 没有运行，也">
+<meta property="og:description" content="问题描述 背景：假设有 100 名从 1 - 100 编号的囚犯，100张写有他们编号的纸条。这些纸条被放在密闭房间的 100 个盒子中。 操作：每名囚犯可以依次单独进入房间，打开这 100 个盒子中的任意 50 个。 限制：完成后，他们必须还原并离开房间，并且无法以任何方式和其他囚犯交流。 在操作开始前，囚犯们可以商讨对策。 成功条件：每个囚犯都在盒子中找到了自己的编号。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-05T13:31:14.000Z">
-<meta property="article:modified_time" content="2022-07-05T15:39:37.968Z">
+<meta property="article:published_time" content="2022-07-29T15:00:59.000Z">
+<meta property="article:modified_time" content="2022-07-29T15:31:05.833Z">
 <meta property="article:author" content="Sicong Chen">
-<meta property="article:tag" content="Cisco Anyconnect">
+<meta property="article:tag" content="interesting math">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Cisco Anyconnect 和网络连接冲突 - Sicong&#39;s Blog</title>
+  <title>Prison Puzzle - Sicong&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Cisco Anyconnect 和网络连接冲突"></span>
+            <span id="subtitle" data-typed-text="Prison Puzzle"></span>
           
         </div>
 
@@ -224,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-05 21:31" pubdate>
-          2022年7月5日 晚上
+        <time datetime="2022-07-29 23:00" pubdate>
+          2022年7月29日 晚上
         </time>
       </span>
     
@@ -236,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          747 字
+          273 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
         
-          7 分钟
+          3 分钟
         
       </span>
     
@@ -293,12 +293,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Cisco Anyconnect 和网络连接冲突</h1>
+            <h1 style="display: none">Prison Puzzle</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年7月5日 晚上
+                    本文最后更新于：2022年7月29日 晚上
                   
                 
               </p>
@@ -306,43 +306,22 @@
             
               <div class="markdown-body">
                 
-                <h3 id="anyconnect-连接问题">Anyconnect 连接问题</h3>
-<h3 id="问题发生时间">问题发生时间</h3>
-<p>2022/07/04</p>
-<h3 id="问题描述">问题描述</h3>
-<p>在 Cisco Anyconnect中
-输入了一个地址（后来发现地址是错误的）并连接成功后，电脑就显示“无
-Internet，安全”。<br />
-另外发现此时 Anyconnect 无法更改地址，并且右键的 quit 选项消失。<br />
-通过重启关闭 Anyconnect 后，发现即使 Anyconnect
-没有运行，也无法连接网络。<br />
-再次打开 Anyconnect，上述情况依旧没有变化。</p>
-<h3 id="解决方案">解决方案</h3>
-<p><strong>重装 Anyconnect</strong><br />
-需要注意在设置中卸载不能解决问题，这样只是把 C:/Program Files(x86)
-中的程序卸载了，数据、配置等信息似乎并没有被一起删除。<br />
-所以需要<strong>到 C:/ProgramData/ 中删除 Cisco/ 后再重装</strong>。</p>
-<h3 id="具体解决思路">具体解决思路</h3>
-<ol type="1">
-<li>已知手机连接该网络能正常上网，所以不是网络的问题</li>
-<li>然后尝试在电脑另一个系统中上网，可以上网则说明不是硬件的问题
-于是从软件的角度思考<br />
-</li>
-<li>在网上搜索解决方案，大部分都是“连上 vpn 后，显示‘无
-Internet，安全’”，和本文的问题相似，但并不相同。试着根据那些方案修改网络设置、修改网络适配器，也确实没有应有的效果</li>
-<li>尝试重装，从设置里卸载再重装也没有解决问题</li>
-<li>找到一篇修改 Anyconnect 配置的博客，也不起作用</li>
-<li>此时发现即使 Anyconnect
-被卸载了，其配置没有被删除，所以可能重装后的软件读取了原来有问题的配置</li>
-<li>由于不知道原来的配置错在哪，所以索性直接删除，然后再安装</li>
-<li>问题解决</li>
-</ol>
-<h3 id="后记">后记</h3>
-<p>莫名其妙的问题还是得靠莫名其妙的方法，仅仅是做个记录。<br />
-大概有半年多没有用 Cisco Anyconnect
-了，出点问题也很正常。以后重装软件的时候还是得多留意一下是否卸载干净了。<br />
-这半年里为了学校里的 ROS 课程升级了
-win11，推测是因为系统升级导致原来的程序不可用了</p>
+                <h3 id="问题描述">问题描述</h3>
+<p><strong>背景</strong>：假设有 100 名从 1 - 100
+编号的囚犯，100张写有他们编号的纸条。这些纸条被放在密闭房间的 100
+个盒子中。<br />
+<strong>操作</strong>：每名囚犯可以依次单独进入房间，打开这 100
+个盒子中的任意 50 个。<br />
+<strong>限制</strong>：完成后，他们必须还原并离开房间，并且无法以任何方式和其他囚犯交流。</p>
+<p>在操作开始前，囚犯们可以商讨对策。<br />
+<strong>成功条件</strong>：每个囚犯都在盒子中找到了自己的编号。<br />
+</p>
+<h3 id="策略">策略</h3>
+<h4 id="随机查看盒子">随机查看盒子</h4>
+<p>每个囚犯找到自己编号的概率为 <span
+class="math inline">\(\frac{1}{2}\)</span><br />
+成功概率 P(Success) = <span class="math inline">\((\frac{1}{2})^{100}
+\approx 7.8886 \times 10^{-31}\)</span></p>
 
                 
               </div>
@@ -361,7 +340,7 @@ win11，推测是因为系统升级导致原来的程序不可用了</p>
     
       <span class="category-chain">
         
-  <a href="/categories/Problems-Solved/" class="category-chain-item">Problems(Solved)</a>
+  <a href="/categories/Math/" class="category-chain-item">Math</a>
   
   
 
@@ -376,7 +355,7 @@ win11，推测是因为系统升级导致原来的程序不可用了</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Cisco-Anyconnect/">#Cisco Anyconnect</a>
+        <a href="/tags/interesting-math/">#interesting math</a>
       
     </div>
   
@@ -388,8 +367,8 @@ win11，推测是因为系统升级导致原来的程序不可用了</p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Cisco Anyconnect 和网络连接冲突</div>
-      <div>https://term-inator.github.io/2022/07/05/Cisco-Anyconnect/</div>
+      <div>Prison Puzzle</div>
+      <div>https://term-inator.github.io/2022/07/29/prison_puzzle/</div>
     </div>
     <div class="license-meta">
       
@@ -401,13 +380,13 @@ win11，推测是因为系统升级导致原来的程序不可用了</p>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月5日</div>
+          <div>2022年7月29日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年7月5日</div>
+          <div>2022年7月29日</div>
         </div>
       
       <div class="license-meta-item">
@@ -442,18 +421,12 @@ win11，推测是因为系统升级导致原来的程序不可用了</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/22/linux-root-user/" title="Linux 创建 root 用户">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux 创建 root 用户</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/19/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2022/07/22/linux_root_user/" title="Linux 创建 root 用户">
+                        <span class="hidden-mobile">Linux 创建 root 用户</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

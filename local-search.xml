@@ -4,9 +4,34 @@
   
   
   <entry>
+    <title>Prison Puzzle</title>
+    <link href="/2022/07/29/prison_puzzle/"/>
+    <url>/2022/07/29/prison_puzzle/</url>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述">问题描述</h3><p><strong>背景</strong>：假设有 100 名从 1 - 100编号的囚犯，100张写有他们编号的纸条。这些纸条被放在密闭房间的 100个盒子中。<br /><strong>操作</strong>：每名囚犯可以依次单独进入房间，打开这 100个盒子中的任意 50 个。<br /><strong>限制</strong>：完成后，他们必须还原并离开房间，并且无法以任何方式和其他囚犯交流。</p><p>在操作开始前，囚犯们可以商讨对策。<br /><strong>成功条件</strong>：每个囚犯都在盒子中找到了自己的编号。<br /></p><h3 id="策略">策略</h3><h4 id="随机查看盒子">随机查看盒子</h4><p>每个囚犯找到自己编号的概率为 <spanclass="math inline">\(\frac{1}{2}\)</span><br />成功概率 P(Success) = <span class="math inline">\((\frac{1}{2})^{100}\approx 7.8886 \times 10^{-31}\)</span></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Math</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>interesting math</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux 创建 root 用户</title>
-    <link href="/2022/07/22/linux-root-user/"/>
-    <url>/2022/07/22/linux-root-user/</url>
+    <link href="/2022/07/22/linux_root_user/"/>
+    <url>/2022/07/22/linux_root_user/</url>
     
     <content type="html"><![CDATA[<p>网上搜到的几乎一模一样，都有修改 /etc/sudoers文件的步骤，但是我这里并没有这个文件。所以在这里记录一份，省的以后忘了再去搜了。</p><h3 id="步骤">步骤</h3><ol type="1"><li>首先登录 root 账户</li><li>新建用户 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adduser <span class="hljs-variable">$&#123;username&#125;</span><br></code></pre></td></tr></table></figure></li><li>创建密码 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">passwd <span class="hljs-variable">$&#123;username&#125;</span><br></code></pre></td></tr></table></figure></li><li>将用户加入 sudo 组 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">usermod -aG sudo <span class="hljs-variable">$&#123;username&#125;</span><br></code></pre></td></tr></table></figure></li><li>切换到该用户 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">su <span class="hljs-variable">$&#123;username&#125;</span><br></code></pre></td></tr></table></figure></li><li>使用 sudo<br />没有 sudo 命令的话，需要安装 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">ls</span> -la /root<br></code></pre></td></tr></table></figure></li></ol><h2 id="参考">参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1"class="footnote-text"><span><a href="https://phoenixnap.com/kb/create-a-sudo-user-on-debian">Howto Create a Sudo User on Debian</a><a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><ahref="https://linuxize.com/post/how-to-create-a-sudo-user-on-debian/">HowTo Create a Sudo User on Debian</a><a href="#fnref:2" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
     
@@ -32,8 +57,8 @@
   
   <entry>
     <title>Cisco Anyconnect 和网络连接冲突</title>
-    <link href="/2022/07/05/Cisco-Anyconnect/"/>
-    <url>/2022/07/05/Cisco-Anyconnect/</url>
+    <link href="/2022/07/05/Cisco_Anyconnect/"/>
+    <url>/2022/07/05/Cisco_Anyconnect/</url>
     
     <content type="html"><![CDATA[<h3 id="anyconnect-连接问题">Anyconnect 连接问题</h3><h3 id="问题发生时间">问题发生时间</h3><p>2022/07/04</p><h3 id="问题描述">问题描述</h3><p>在 Cisco Anyconnect中输入了一个地址（后来发现地址是错误的）并连接成功后，电脑就显示“无Internet，安全”。<br />另外发现此时 Anyconnect 无法更改地址，并且右键的 quit 选项消失。<br />通过重启关闭 Anyconnect 后，发现即使 Anyconnect没有运行，也无法连接网络。<br />再次打开 Anyconnect，上述情况依旧没有变化。</p><h3 id="解决方案">解决方案</h3><p><strong>重装 Anyconnect</strong><br />需要注意在设置中卸载不能解决问题，这样只是把 C:/Program Files(x86)中的程序卸载了，数据、配置等信息似乎并没有被一起删除。<br />所以需要<strong>到 C:/ProgramData/ 中删除 Cisco/ 后再重装</strong>。</p><h3 id="具体解决思路">具体解决思路</h3><ol type="1"><li>已知手机连接该网络能正常上网，所以不是网络的问题</li><li>然后尝试在电脑另一个系统中上网，可以上网则说明不是硬件的问题于是从软件的角度思考<br /></li><li>在网上搜索解决方案，大部分都是“连上 vpn 后，显示‘无Internet，安全’”，和本文的问题相似，但并不相同。试着根据那些方案修改网络设置、修改网络适配器，也确实没有应有的效果</li><li>尝试重装，从设置里卸载再重装也没有解决问题</li><li>找到一篇修改 Anyconnect 配置的博客，也不起作用</li><li>此时发现即使 Anyconnect被卸载了，其配置没有被删除，所以可能重装后的软件读取了原来有问题的配置</li><li>由于不知道原来的配置错在哪，所以索性直接删除，然后再安装</li><li>问题解决</li></ol><h3 id="后记">后记</h3><p>莫名其妙的问题还是得靠莫名其妙的方法，仅仅是做个记录。<br />大概有半年多没有用 Cisco Anyconnect了，出点问题也很正常。以后重装软件的时候还是得多留意一下是否卸载干净了。<br />这半年里为了学校里的 ROS 课程升级了win11，推测是因为系统升级导致原来的程序不可用了</p>]]></content>
     
@@ -57,8 +82,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="/2022/06/19/hello-world/"/>
-    <url>/2022/06/19/hello-world/</url>
+    <link href="/2022/06/19/hello_world/"/>
+    <url>/2022/06/19/hello_world/</url>
     
     <content type="html"><![CDATA[<h3 id="测试">测试</h3><h3 id="一代码块">一、代码块</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HelloWorld</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String args[])</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello World&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h3 id="二表格">二、表格</h3><table><thead><tr class="header"><th style="text-align: center;">0</th><th style="text-align: center;">1</th><th style="text-align: center;">2</th><th style="text-align: center;">3</th></tr></thead><tbody><tr class="odd"><td style="text-align: center;">xx</td><td style="text-align: center;">xx</td><td style="text-align: center;">xx</td><td style="text-align: center;">xx</td></tr></tbody></table><h3 id="三latex">三、Latex</h3><p><span class="math display">\[E=mc^2\]</span></p><p><span class="math display">\[P(A\rightarrow x) = \frac{weight_x}{\sum_{i=1}^{n}weight_i}\]</span></p><h3 id="四mermaid">四、Mermaid</h3><pre><code class=" mermaid">classDiagramClass01 &lt;|-- AveryLongClass : CoolClass03 *-- Class04Class05 o-- Class06Class07 .. Class08Class09 --&gt; C2 : Where am i?Class09 --* C3Class09 --|&gt; Class07Class07 : equals()Class07 : Object[] elementDataClass01 : size()Class01 : int chimpClass01 : int gorillaClass08 &lt;--&gt; C2: Cool label</code></pre><h3 id="四图片">四、图片</h3><figure><img src="/img/index/220621_helloWorld_1280x720.png"alt="Hello World" /><figcaption aria-hidden="true">Hello World</figcaption></figure><h3id="五脚注1">五、脚注<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><spanclass="hint--top hint--rounded"aria-label="参考资料1">[1]</span></a></sup></h3><h2 id="参考">参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>参考资料1<a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>参考资料2<a href="#fnref:2" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
     
