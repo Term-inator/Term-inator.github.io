@@ -1,0 +1,2609 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Sicong Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content=".center {   width: auto;   display: table;   margin: auto; } .img-table {   margin-bottom: 0 !important; } .img-table-caption {   font-size: 0.8rem ;   color: #fefefe;   opacity: 0.65;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Style Transfer">
+<meta property="og:url" content="https://term-inator.github.io/2022/08/01/style_transfer/index.html">
+<meta property="og:site_name" content="Sicong&#39;s Blog">
+<meta property="og:description" content=".center {   width: auto;   display: table;   margin: auto; } .img-table {   margin-bottom: 0 !important; } .img-table-caption {   font-size: 0.8rem ;   color: #fefefe;   opacity: 0.65;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/vgg.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/18993.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/29052.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/30925.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/78717.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/mosaic.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/pearl.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/picasso.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/star.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/content_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/content_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/weight_000_500.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/weight_000_1000.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/weight_111_500.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/weight_111_1000.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/18993_000_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/18993.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/18993_000_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/18993_000_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/18993_000_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/18993_111_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/18993_111_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/18993_111_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/18993_111_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/29052_000_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/29052.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/29052_000_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/29052_000_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/29052_000_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/29052_111_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/29052_111_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/29052_111_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/29052_111_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/30925_000_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/30925.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/30925_000_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/30925_000_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/30925_000_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/30925_111_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/30925_111_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/30925_111_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/30925_111_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/78717_000_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/78717.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/78717_000_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/78717_000_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/78717_000_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/78717_111_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/78717_111_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/78717_111_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/78717_111_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/mosaic_000_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/mosaic.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/mosaic_000_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/mosaic_000_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/mosaic_000_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/mosaic_111_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/mosaic_111_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/mosaic_111_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/mosaic_111_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/pearl_000_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/pearl.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/pearl_000_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/pearl_000_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/pearl_000_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/pearl_111_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/pearl_111_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/pearl_111_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/pearl_111_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/picasso_000_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/picasso.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/picasso_000_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/picasso_000_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/picasso_000_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/picasso_111_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/picasso_111_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/picasso_111_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/picasso_111_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/star_000_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/star.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/star_000_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/star_000_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/star_000_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/star_111_500_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/star_111_500_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/star_111_1000_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/comparison/star_111_1000_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_18993_111_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/18993.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_18993_111_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_18993_011_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_18993_011_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_18993_101_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_18993_101_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_18993_110_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_18993_110_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_29052_111_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/29052.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_29052_111_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_29052_011_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_29052_011_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_29052_101_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_29052_101_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_29052_110_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_29052_110_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_30925_111_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/30925.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_30925_111_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_30925_011_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_30925_011_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_30925_101_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_30925_101_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_30925_110_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_30925_110_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_78717_111_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/78717.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_78717_111_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_78717_011_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_78717_011_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_78717_101_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_78717_101_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_78717_110_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_78717_110_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_mosaic_111_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/mosaic.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_mosaic_111_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_mosaic_011_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_mosaic_011_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_mosaic_101_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_mosaic_101_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_mosaic_110_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_mosaic_110_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_pearl_111_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/pearl.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_pearl_111_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_pearl_011_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_pearl_011_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_pearl_101_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_pearl_101_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_pearl_110_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_pearl_110_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_picasso_111_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/picasso.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_picasso_111_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_picasso_011_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_picasso_011_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_picasso_101_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_picasso_101_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_picasso_110_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_picasso_110_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_star_111_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/star.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_star_111_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_star_011_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_star_011_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_star_101_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_star_101_1.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_star_110_0.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/08/01/ablation/abl_star_110_1.png">
+<meta property="article:published_time" content="2022-08-01T00:49:00.000Z">
+<meta property="article:modified_time" content="2022-08-01T15:15:30.044Z">
+<meta property="article:author" content="Sicong Chen">
+<meta property="article:tag" content="Convolutional Neural Networks">
+<meta property="article:tag" content="Style Transfer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://term-inator.github.io/img/2022/08/01/vgg.png">
+  
+  
+  
+  <title>Style Transfer - Sicong&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"term-inator.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"NSLgCyW2xj2NWaUzqpEOPNUw-gzGzoHsz","app_key":"xF6owlUMqsLa8jfDP652O4sg","server_url":"https://nslgcyw2.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sicong Chen&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Style Transfer"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-01 08:49" pubdate>
+          2022年8月1日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          59 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Style Transfer</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年8月1日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <style>
+.center {
+  width: auto;
+  display: table;
+  margin: auto;
+}
+.img-table {
+  margin-bottom: 0 !important;
+}
+.img-table-caption {
+  font-size: 0.8rem ;
+  color: #fefefe;
+  opacity: 0.65;
+  line-height: 1;
+  margin: -0.75rem auto 2rem;
+  text-align: center;
+  cursor: text;
+}
+</style>
+<h3 id="摘要">摘要</h3>
+<p>近几年风格迁移出现了各种各样的实现方案。本文是数字图像课程的期末项目报告，同时也作为课程项目的数字图像处理系统的一个功能。本文的模型改进了课程提供的代码，从将
+vgg16 改成 vgg19，ResidualBlock 改成 ResNextBlock，mse loss 改成 gram
+三个角度改进模型，使其在小数据集上的效果超过原模型。同时使用的不同种类的风格图和内容图进行迁移，比较效果。另外，本文还进行了消融实验，探究了改进的这三个部分在风格迁移起了什么作用。</p>
+<p><strong>关键字:</strong> 风格迁移，卷积神经网络</p>
+<h3 id="介绍">介绍</h3>
+<p>风格迁移是一个出现了很久的问题，它研究一个将一张图片的风格应用到另一张图片上的问题。从问题提出到现在，大量研究者提出了各种各样的模型和解决方法。比如，Rethinking
+Style Transfer: From Pixels to Parameterized
+Brushstrokes<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="D. Kotovenko, M. Wright, A. Heimbrecht, and B. Ommer, “Rethinking style transfer: From pixels to parameterized brushstrokes,” CVPR, 2021.">[1]</span></a></sup>
+中提出需要将笔触考虑在内，能更好地还原风格图像的风格。StyleGAN3<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="T. Karras, M. Aittala, S. Laine, E. Härkönen, J. Hellsten, J. Lehtinen, and T. Aila, “Alias-free generative adversarial networks,” in Proc. NeurIPS, 2021.">[2]</span></a></sup>
+则更加强大，可以实现表情、年龄、性别、肤色等等的风格迁移。DALL-E2
+<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="A. Ramesh, P. Dhariwal, A. Nichol, C. Chu, and M. Chen, “Hierarchical text-conditional image generation with clip latents,” arXiv preprint arXiv:2204.06125, 2022.">[3]</span></a></sup>
+更为惊艳，基于 CLIP
+实现了将文字转换成图片的功能。用文字对场景进行描述即可生成一张符合描述的图片，用文字描述一种风格来完成类似风格迁移的功能也非常令人惊喜。</p>
+<p>本文是数字图像课程的期末项目报告，不涉及这些前沿的研究，主要对提供的论文和代码进行改进<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="[StyleTransferTrilogy](https://github.com/CortexFoundation/StyleTransferTrilogy)">[4]</span></a></sup>。本文涉及到的训练均在笔记本
+cpu 上完成，因此后文提到的训练时间都特指在这个 cpu 上训练的时间。</p>
+<h3 id="相关工作">相关工作</h3>
+<p>在 A neural algorithm of artistic style
+<sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="L. A. Gatys, A. S. Ecker, and M. Bethge, “A neural algorithm of artistic style,” arXiv preprint arXiv:1508.06576, 2015.">[5]</span></a></sup>
+中，提出用图像识别的思路提取内容图和风格图的特征，使用 Gram 矩阵
+求风格的 loss。Gram 矩阵是对 feature map
+做内积，就好像是高维空间的两个向量，向量之间的夹角 <span
+class="math inline">\(\theta\)</span> 越小，这两个向量就越相似，感觉类似
+Word Embedding。总的 loss 是内容的 loss 和风格的 loss 的和，当这个 loss
+变小，说明生成的图片和内容图、风格图都有相似之处，达成风格迁移的目标。但由于这个做法没有训练出模型，所以当内容图或风格图发生改变时，都要重新进行训练，生成一张图片要近
+30
+分钟，速度过于缓慢。将这样的算法嵌入期末项目的系统中显然是不合适的。</p>
+<p>Perceptual losses for real-time style transfer and super-resolution
+<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="J. Johnson, A. Alahi, and L. Fei-Fei, “Perceptual losses for real-time style transfer and super resolution,” in European conference on computer vision. Springer, 2016, pp. 694–711.">[6]</span></a></sup>
+提出了一种固定风格任意内容的风格迁移方法。通过在 COCO2014 上训练
+TransformNet，得到某个风格图对应的模型。将这个模型应用在任意的内容图上都可以得到对应的迁移图像。然而，如果想要换一个风格，就要重新训练一个模型。如果想要实现用户上传两张图片，进行风格迁移的操作的话，这样的算法是不能满足需求的。对于用户上传的风格图，系统不知道该用哪一个模型进行风格迁移。因此，这个方法也是不合适的。</p>
+<p>Meta networks for neural style transfer
+<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="F. Shen, S. Yan, and G. Zeng, “Meta networks for neural style transfer,” arXiv preprint arXiv:1709.04111, 2017.">[7]</span></a></sup>
+提出了任意风格任意内容的风格迁移方法。通过在 COCO2014 和 WikiArt
+上训练一个 MetaNet，然后将训练出来的权值赋给
+TransformNet，完成风格迁移。在训练的过程中，每次迭代都将 MetaNet
+训练得到的权值赋值给 TransformNet，然后用 TransformNet
+对图像进行操作，得到转换后的图像。用这个图像和内容图、风格图比较，求出内容
+loss 和风格
+loss。这个方法是满足系统的需求的，因此本文对这个模型进行改进。本文中，这篇文章中提出的模型称作原模型，本文的模型称作改进模型。改进的方向是在数据集比较小的情况下，如何让这个模型的表现超过原来的模型。</p>
+<h3 id="改进方法">改进方法</h3>
+<p>由于论文使用数据集非常大，COCO2014 有 82783 张内容图，WikiArt 中也有
+79433 张风格图。另外，目前设备的 GPU 显存只有
+2G，运行论文的代码会爆显存，所以只能在 cpu
+上训练。但是直接运行代码发现一个 epoch 就要 80 小时左右， 22个 epoch
+也就是 73 天，这显然是不能接受的。所以本文从内容、风格数据集中分别提取出
+500 张和 1000 张图片进行训练，缩短训练时间。每次取图片的 seed 均为
+42。本文“大小为 500 的数据集”指内容图 500 张和风格图 500 张。“大小为
+1000 的数据集”指内容图 1000 张和风格图 1000 张。</p>
+<h4 id="替换-backbone">替换 backbone</h4>
+<p>原来的网络中使用的是 vgg16 来提取图像特征，所以想到改用 vgg19。
+原先模型使用的是 vgg16 的 3, 8, 5, 22 层，根据图 <a
+href="#fig:vgg">vgg</a>，这些层都是 maxpooling 的前一层。所以换成 vgg19
+后，应该相应地使用 3, 8, 17, 26 层。 <img src="/img/2022/08/01/vgg.png" srcset="/img/loading.gif" lazyload
+id="fig:vgg" alt="vgg[8]" /></p>
+<h4 id="替换-residual-block">替换 residual block</h4>
+<p>根据图 <a href="#fig:transform_net">transform net</a>，原来的
+TransformNet 在上采样和下采样之间有 5 个 ResidualBlock，所以想到 ResNet
+的升级版ResNeXt
+<sup id="fnref:9" class="footnote-ref"><a href="#fn:9" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="S. Xie, R. Girshick, P. Dollár, Z. Tu, and K. He, “Aggregated residual transformations for deep neural networks,” in Proceedings of the IEEE conference on computer vision and pattern recognition, 2017, pp. 1492–1500.">[9]</span></a></sup>，用一个
+ResNeXtBlock 代替原来的ResidualBlock。ResNeXtBlock
+的入通道和出通道保持相同，内部有 32 个相同的分支。没有采用 5 个
+ResNeXtBlock 的原因是这样的结构非常消耗计算资源，一个 ResNextBlock
+带来的时间开销已经大幅超过了 5 个 ResidualBlock。原先的模型训练 1 个
+epoch 只需要约 25 分钟，修改后的模型则需要约 35 分钟。</p>
+<p>这也是合理的，相当于用 32 个分支代替了 5
+个串行的结构，训练量增加了。但本文没有将 ResNextBlock 所有的参数都传入
+TransformNet 中，中间 32 个分支的参数没有存入 TransformNet
+，因为这些分支参数量相当大，没有必要放入
+TransformNet，而且放入的话内存不够，所以舍弃。 <img
+src="/img/2022/08/01/transform_net.png" srcset="/img/loading.gif" lazyload id="fig:transform_net"
+alt="transform net[7]" /></p>
+<h4 id="替换-style-loss">替换 style loss</h4>
+<p>Gram 矩阵适合用来比较图像的相似度，所以这里用 Gram
+矩阵代替原来训练用的 MSE loss。由于修改了 loss 计算方法，所以 style loss
+的 weight 也需要做调整。为了让 style loss 和 content loss
+的值相近，weight 选择 3e5。</p>
+<h3 id="实验结果">实验结果</h3>
+<strong>训练时间显著增长。</strong> 表<a
+href="#tab:training_time">训练时间</a>展示的是两个模型大致的训练时间。
+<a name="tab:training_time"></a>
+<div class="center">
+<center>
+训练时间
+</center>
+<table>
+<th>
+<td>
+原模型
+</td>
+<td>
+改进模型
+</td>
+</th>
+<tr>
+<td>
+500
+</td>
+<td>
+22min
+</td>
+<td>
+50min
+</td>
+</tr>
+<tr>
+<td>
+1000
+</td>
+<td>
+35min
+</td>
+<td>
+80min
+</td>
+</tr>
+</table>
+</div>
+<p>可以看出数据集翻倍后，训练花费的时间近似于翻倍。改进模型花费的时间约为原模型的
+1.6
+倍。相应的，用模型进行风格迁移的时间也变长了。由于原模型风格迁移的过程是先指定风格图片，训练
+20 个 batch，得到一个类似 Perceptual losses for real-time style transfer
+and super-resolution
+<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="J. Johnson, A. Alahi, and L. Fei-Fei, “Perceptual losses for real-time style transfer and super resolution,” in European conference on computer vision. Springer, 2016, pp. 694–711.">[6]</span></a></sup>
+中的固定风格任意内容的风格迁移模型，然后将该模型应用到大量图片上，所以风格迁移的时间是
+20 个 batch 的训练时间（较长）+
+转换时间（与图片数量有关）。因此这里比较的是转换一张图的时间，近似认为是
+20 个 batch 的训练时间。原模型大约是 8-10 分钟，改进模型大约是 12-14
+分钟。</p>
+<p><strong>模型文件缩小。</strong> 由于改进模型只保存了 ResNeXtBlock
+的两层，相比于原模型的五层
+ResidualBlock，模型文件大幅缩小。原模型的两个模型文件约为
+850MB，改进模型的两个模型文件约为 647 MB，约为原模型的 <span
+class="math inline">\(\frac{3}{4}\)</span>。</p>
+<p><strong>小数据集。</strong> 相比于原模型的 80K
+的训练，改进模型的训练集仅为 <span
+class="math inline">\(\frac{1}{160}\)</span> 和 <span
+class="math inline">\(\frac{1}{80}\)</span>，大幅减少了训练时间，并且二者在大小为
+500 和 1000
+的数据集上训练后，进行风格迁移的效果差不多，甚至改进模型更好，见<a
+href="#app:comparison">附录</a>。</p>
+<p>选择的<a href="#fig:style">风格图</a>
+色调上包含红、黄、绿、蓝、黑、白等常见的颜色，内容上包含人像、自然景物、建筑等，绘画流派上包含了抽象派、印象派等。依次为
+18993，29052，30925，78717，mosaic，带珍珠耳环的少女，picasso，星月夜。前四个是
+COCO2014 中的编号。后文以这些名称指代这些风格图。 选择的<a
+href="#fig:content">内容图</a>
+主要为人像、动物、建筑、景物和文字，其中两张是黑白图。 另外，在这 8
+张风格图和 8 张内容图中，各有一半不在训练集中。</p>
+<a name="fig:style"></a>
+<table class="img-table">
+<tr>
+<td>
+<img src="/img/2022/08/01/18993.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/29052.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/30925.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/78717.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+</table>
+<center>
+<a class="img-table-caption">数据集内的风格图</a>
+</center>
+<table class="img-table">
+<tr>
+<td>
+<img src="/img/2022/08/01/mosaic.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/pearl.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/picasso.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/star.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+</table>
+<center>
+<a class="img-table-caption">数据集外的风格图</a>
+</center>
+<center>
+<a class="img-table-caption">风格图</a>
+</center>
+<br />
+<a name="fig:content"></a>
+<table class="img-table">
+<tr>
+<td>
+<img src="/img/2022/08/01/content_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+</table>
+<center>
+<a class="img-table-caption">数据集内的内容图</a>
+</center>
+<table class="img-table">
+<tr>
+<td>
+<img src="/img/2022/08/01/content_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+</table>
+<center>
+<a class="img-table-caption">数据集外的内容图</a>
+</center>
+<center>
+<a class="img-table-caption">内容图</a>
+</center>
+<p><br />
+从附录的图中可以看出，原模型的迁移结果有许多斑点，仿佛绘画的时候颜料
+撒了，在画布上晕染开来，而且色块颜色和其他地方非常不协调。
+而改进模型没有这个问题。 尤其是在大小 500
+的数据集上训练的改进模型，整体颜色都比较协调。 在大小 1000
+的数据集上训练的改进模型虽然也有一些突出的色块，但色块
+的颜色不突兀，出现的位置相比原模型也更合理，都是一些原图明亮的、
+偏白色的位置。 但目前并不清楚为什么数据集变大了会出现这样的现象。</p>
+<p><strong>权值不停增大的问题依然存在。</strong> 由于没有在 80K
+的数据集上训练，所以无法得出解决权值不停增大的结论。 图 <a
+href="#fig:weight">权值</a> 显示 transform_net.downsampling.1.weight 的
+权值。可以看出改进模型权值上升的趋势明显，至少在大小 500 和 1000
+上权值在不停增大，而不是稳定在一个区间内。另外，改进模型权值的上升速度比原模型快，相同的迭代次数下，改进模型的权值普遍比原模型高，这可能也是改进模型效果更好的原因。</p>
+<a name="fig:weight"></a>
+<table class="img-table">
+<tr>
+<td>
+<img src="/img/2022/08/01/weight_000_500.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/weight_000_1000.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+<img src="/img/2022/08/01/weight_111_500.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/weight_111_1000.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+</table>
+<center>
+<a class="img-table-caption">模型权值</a>
+</center>
+<p><br />
+由于改进模型修改了原模型的三个地方，所以本文做了消融实验探究各个地方的
+改进分别对风格迁移起了什么作用，见<a href="#app:ablation">附录</a>。
+这部分的实验都是在大小为 500 的数据集上进行。</p>
+<p>从图中可以看出，vgg16+resnext+gram 处理白色的效果不好。虽然在大小为
+1000
+的数据集上训练的改进模型在原图明亮的位置也用了和周围不同的颜色，但饱和度低，和周围的颜色是相近、协调的。而
+vgg16+resnext+gram
+的版本用了饱和度很高、鲜艳的颜色代替原图中明亮的位置，非常突兀。vgg19+resnet+gram
+处理黑色的效果不好。在原图黑色或偏暗的位置出现了饱和度很高的颜色，如红色、绿色、白色，并且这些颜色出现的位置不连续。vgg19+resnext+mse
+处理阴影的效果不好。在人物影子、水面倒影、云层阴影的位置都用了和周围相差很大、不协调、饱和度很低的颜色。</p>
+<p>所以推测 vgg19 能更好地理解图像，能更正确地按语义分割图像，从而在
+合适的位置替换合适的颜色。resnext 和 gram 则是优化了黑色和阴影的
+转换，是图像的颜色更协调、线条更平滑。</p>
+<h3 id="总结">总结</h3>
+<p>本文通过分析三种风格迁移的方案，根据方案的可拓展性和运行时间确定可以在数字图像处理系统中应用的方案，并对该方案的模型进行改进。本文从将
+vgg16 改成 vgg19，ResidualBlock 改成 ResNextBlock，mse loss 改成 gram
+三个角度改进模型，使其在小数据集上的效果超过原模型。同时使用的不同种类的风格图和内容图进行迁移，比较效果。可以看出改进模型的风格迁移效果要优于原模型，但代价是更多的训练时间和迁移时间。</p>
+<p>本文还进行了消融实验，探究了改进的这三个部分在风格迁移中起了什么作用，得出修改的每一部分对模型的效果都起到了作用。遗憾的一点是受制于设备，无法让其在
+80K
+的数据集上进行训练，所以也无法得知在大数据集上，改进模型的效果是否优于原模型。而且，即使在《18993》，《29052》，《78717》，《星月夜》等风格图上取得了不错的效果，但在转换一些特定的图片上，模型的效果并不好。比如《30925》或《戴珍珠耳环的少女》。这两张图都有占比较少的、使画面丰富的颜色，如亮绿色和淡蓝色。可以看出原模型尝试在图像中引入这些颜色，虽然这些颜色出现的位置非常奇怪。但改进模型迁移的结果中完全没有这些颜色，取而代之的是占据大部分画面的黄色和黑色。虽然改进模型的结果更自然，但很难让人从迁移结果中联想出风格图的内容。</p>
+<p>另外，原模型和改进模型都有图像不清晰的问题。因此模型还有许多地方有待改进，但受制于时间等因素，本文没能继续进行改进。</p>
+<h3 id="a-效果对比">A 效果对比</h3>
+<p><a name="app:comparison"></a></p>
+<details>
+<summary>
+18993
+</summary>
+<table>
+<tr>
+<td>
+原模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/18993_000_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/18993.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/18993_000_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+原模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/18993_000_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/18993_000_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/18993_111_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/18993_111_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/18993_111_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/18993_111_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+29052
+</summary>
+<table>
+<tr>
+<td>
+原模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/29052_000_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/29052.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/29052_000_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+原模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/29052_000_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/29052_000_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/29052_111_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/29052_111_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/29052_111_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/29052_111_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+30925
+</summary>
+<table>
+<tr>
+<td>
+原模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/30925_000_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/30925.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/30925_000_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+原模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/30925_000_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/30925_000_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/30925_111_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/30925_111_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/30925_111_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/30925_111_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+78717
+</summary>
+<table>
+<tr>
+<td>
+原模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/78717_000_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/78717.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/78717_000_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+原模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/78717_000_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/78717_000_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/78717_111_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/78717_111_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/78717_111_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/78717_111_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+mosaic
+</summary>
+<table>
+<tr>
+<td>
+原模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/mosaic_000_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/mosaic.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/mosaic_000_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+原模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/mosaic_000_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/mosaic_000_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/mosaic_111_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/mosaic_111_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/mosaic_111_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/mosaic_111_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+pearl
+</summary>
+<table>
+<tr>
+<td>
+原模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/pearl_000_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/pearl.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/pearl_000_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+原模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/pearl_000_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/pearl_000_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/pearl_111_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/pearl_111_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/pearl_111_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/pearl_111_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+picasso
+</summary>
+<table>
+<tr>
+<td>
+原模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/picasso_000_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/picasso.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/picasso_000_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+原模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/picasso_000_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/picasso_000_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/picasso_111_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/picasso_111_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/picasso_111_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/picasso_111_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+star
+</summary>
+<table>
+<tr>
+<td>
+原模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/star_000_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/star.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/star_000_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+原模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/star_000_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/star_000_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 500
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/star_111_500_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/star_111_500_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+改进模型 1000
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/star_111_1000_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/comparison/star_111_1000_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<h3 id="b-消融实验结果">B 消融实验结果</h3>
+<p><a name="app:ablation"></a></p>
+<details>
+<summary>
+18993
+</summary>
+<table>
+<tr>
+<td>
+改进模型 vgg19 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_18993_111_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/18993.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_18993_111_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg16 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_18993_011_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_18993_011_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnet gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_18993_101_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_18993_101_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnext mse
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_18993_110_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_18993_110_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+29052
+</summary>
+<table>
+<tr>
+<td>
+改进模型 vgg19 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_29052_111_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/29052.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_29052_111_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg16 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_29052_011_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_29052_011_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnet gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_29052_101_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_29052_101_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnext mse
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_29052_110_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_29052_110_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+30925
+</summary>
+<table>
+<tr>
+<td>
+改进模型 vgg19 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_30925_111_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/30925.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_30925_111_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg16 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_30925_011_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_30925_011_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnet gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_30925_101_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_30925_101_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnext mse
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_30925_110_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_30925_110_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+78717
+</summary>
+<table>
+<tr>
+<td>
+改进模型 vgg19 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_78717_111_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/78717.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_78717_111_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg16 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_78717_011_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_78717_011_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnet gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_78717_101_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_78717_101_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnext mse
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_78717_110_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_78717_110_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+mosaic
+</summary>
+<table>
+<tr>
+<td>
+改进模型 vgg19 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_mosaic_111_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/mosaic.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_mosaic_111_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg16 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_mosaic_011_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_mosaic_011_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnet gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_mosaic_101_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_mosaic_101_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnext mse
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_mosaic_110_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_mosaic_110_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+pearl
+</summary>
+<table>
+<tr>
+<td>
+改进模型 vgg19 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_pearl_111_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/pearl.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_pearl_111_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg16 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_pearl_011_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_pearl_011_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnet gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_pearl_101_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_pearl_101_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnext mse
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_pearl_110_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_pearl_110_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+picasso
+</summary>
+<table>
+<tr>
+<td>
+改进模型 vgg19 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_picasso_111_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/picasso.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_picasso_111_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg16 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_picasso_011_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_picasso_011_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnet gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_picasso_101_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_picasso_101_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnext mse
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_picasso_110_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_picasso_110_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<details>
+<summary>
+star
+</summary>
+<table>
+<tr>
+<td>
+改进模型 vgg19 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_star_111_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+<img src="/img/2022/08/01/star.png" srcset="/img/loading.gif" lazyload/>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_star_111_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg16 resnext gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_star_011_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_star_011_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnet gram
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_star_101_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_star_101_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+vgg19 resnext mse
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_star_110_0.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<img src="/img/2022/08/01/ablation/abl_star_110_1.png" srcset="/img/loading.gif" lazyload/>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</details>
+<h3 id="参考文献">参考文献</h3>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>D. Kotovenko, M. Wright, A.
+Heimbrecht, and B. Ommer, “Rethinking style transfer: From pixels to
+parameterized brushstrokes,” CVPR, 2021.
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2" class="footnote-text"><span>T. Karras, M. Aittala, S.
+Laine, E. Härkönen, J. Hellsten, J. Lehtinen, and T. Aila, “Alias-free
+generative adversarial networks,” in Proc. NeurIPS, 2021.
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:3" class="footnote-text"><span>A. Ramesh, P. Dhariwal, A.
+Nichol, C. Chu, and M. Chen, “Hierarchical text-conditional image
+generation with clip latents,” arXiv preprint arXiv:2204.06125, 2022.
+<a href="#fnref:3" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:4" class="footnote-text"><span><a
+target="_blank" rel="noopener" href="https://github.com/CortexFoundation/StyleTransferTrilogy">StyleTransferTrilogy</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:5" class="footnote-text"><span>L. A. Gatys, A. S. Ecker,
+and M. Bethge, “A neural algorithm of artistic style,” arXiv preprint
+arXiv:1508.06576, 2015.
+<a href="#fnref:5" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:6" class="footnote-text"><span>J. Johnson, A. Alahi, and L.
+Fei-Fei, “Perceptual losses for real-time style transfer and super
+resolution,” in European conference on computer vision. Springer, 2016,
+pp. 694–711. <a href="#fnref:6" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:7" class="footnote-text"><span>F. Shen, S. Yan, and G.
+Zeng, “Meta networks for neural style transfer,” arXiv preprint
+arXiv:1709.04111, 2017.
+<a href="#fnref:7" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:8" class="footnote-text"><span>K. Simonyan and A.
+Zisserman, “Very deep convolutional networks for large-scale image
+recognition,” arXiv preprint arXiv:1409.1556, 2014.
+<a href="#fnref:8" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:9" class="footnote-text"><span>S. Xie, R. Girshick, P.
+Dollár, Z. Tu, and K. He, “Aggregated residual transformations for deep
+neural networks,” in Proceedings of the IEEE conference on computer
+vision and pattern recognition, 2017, pp. 1492–1500.
+<a href="#fnref:9" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Deep-Learning/" class="category-chain-item">Deep Learning</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Convolutional-Neural-Networks/">#Convolutional Neural Networks</a>
+      
+        <a href="/tags/Style-Transfer/">#Style Transfer</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Style Transfer</div>
+      <div>https://term-inator.github.io/2022/08/01/style_transfer/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Sicong Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月1日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年8月1日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/29/100_prisoners_problem/" title="100 Prisoners Problem">
+                        <span class="hidden-mobile">100 Prisoners Problem</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
