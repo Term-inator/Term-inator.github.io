@@ -1,0 +1,863 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Sicong Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="问题描述 背景：假设有 100 名从 1 - 100 编号的囚犯，100张写有他们编号的纸条。这些纸条被放在密闭房间的 100 个盒子中，编号也是 1 - 100。 操作：每名囚犯可以依次单独进入房间，打开这 100 个盒子中的任意 50 个。 限制：完成后，他们必须还原并离开房间，并且无法以任何方式和其他囚犯交流。 在操作开始前，囚犯们可以商讨对策。 成功条件：所有囚犯在盒子中找">
+<meta property="og:type" content="article">
+<meta property="og:title" content="100 Prisoners Problem">
+<meta property="og:url" content="https://term-inator.github.io/2022/07/29/100-prisoners-problem/index.html">
+<meta property="og:site_name" content="Sicong&#39;s Blog">
+<meta property="og:description" content="问题描述 背景：假设有 100 名从 1 - 100 编号的囚犯，100张写有他们编号的纸条。这些纸条被放在密闭房间的 100 个盒子中，编号也是 1 - 100。 操作：每名囚犯可以依次单独进入房间，打开这 100 个盒子中的任意 50 个。 限制：完成后，他们必须还原并离开房间，并且无法以任何方式和其他囚犯交流。 在操作开始前，囚犯们可以商讨对策。 成功条件：所有囚犯在盒子中找">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://term-inator.github.io/img/index/20220731_puzzle_1280x720.png">
+<meta property="article:published_time" content="2022-07-29T15:00:59.000Z">
+<meta property="article:modified_time" content="2022-07-31T14:20:36.401Z">
+<meta property="article:author" content="Sicong Chen">
+<meta property="article:tag" content="Interesting Math">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://term-inator.github.io/img/index/20220731_puzzle_1280x720.png">
+  
+  
+  
+  <title>100 Prisoners Problem - Sicong&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"term-inator.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"NSLgCyW2xj2NWaUzqpEOPNUw-gzGzoHsz","app_key":"xF6owlUMqsLa8jfDP652O4sg","server_url":"https://nslgcyw2.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sicong Chen&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="100 Prisoners Problem"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-29 23:00" pubdate>
+          2022年7月29日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">100 Prisoners Problem</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年7月31日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="问题描述">问题描述</h3>
+<p><strong>背景</strong>：假设有 100 名从 1 - 100
+编号的囚犯，100张写有他们编号的纸条。这些纸条被放在密闭房间的 100
+个盒子中，编号也是 1 - 100。<br />
+<strong>操作</strong>：每名囚犯可以依次单独进入房间，打开这 100
+个盒子中的任意 50 个。<br />
+<strong>限制</strong>：完成后，他们必须还原并离开房间，并且无法以任何方式和其他囚犯交流。</p>
+<p>在操作开始前，囚犯们可以商讨对策。<br />
+<strong>成功条件</strong>：所有囚犯在盒子中找到自己的编号。</p>
+<h3 id="策略">策略</h3>
+<h4 id="随机查看盒子">随机查看盒子</h4>
+<p>每个囚犯找到自己编号的概率为 <span
+class="math inline">\(\frac{1}{2}\)</span><br />
+成功概率 P(success) = <span class="math inline">\((\frac{1}{2})^{100}
+\approx 0.000 0000000000000000000000000008\)</span></p>
+<h4 id="循环链表策略">循环链表策略</h4>
+<p>囚犯 <span class="math inline">\(P_a\)</span>
+进入房间后，先去找自己编号对应的盒子 <span
+class="math inline">\(B_a\)</span>，如果 <span
+class="math inline">\(B_a\)</span> 中的纸条是 a，则直接完成。<br />
+如果 <span class="math inline">\(B_a\)</span> 中的纸条为 b (<span
+class="math inline">\(b \not= a\)</span>)，则 <span
+class="math inline">\(P_a\)</span> 再去找盒子 <span
+class="math inline">\(B_b\)</span> ...... 直到找到盒子 <span
+class="math inline">\(B_n(1 \leq n \leq 100)\)</span>，其中的纸条为 a。
+<pre><code class=" mermaid">flowchart TB
+    A(开始) --&gt; Box_a
+    subgraph Box_a
+    b
+    end
+    subgraph Box_b
+    x
+    end
+    subgraph Box_n
+    a
+    end
+    b --&gt; Box_b
+    x -.若干步.-&gt; Box_n
+    a --&gt; Box_a
+</code></pre> 根据策略定义函数 <span class="math inline">\(f: B \to
+B\)</span>，含义：根据当前打开盒子中的纸条编号找到下一个盒子 <span
+class="math display">\[
+\begin{aligned}
+&amp; f(B_x)=B_{(x+k)\mod 100}, \\
+&amp; 0 &lt; x \leq 100, x \in \mathbb{Z}\\
+&amp; 0 \leq k &lt; 100, k \in \mathbb{Z}
+\end{aligned}
+\]</span></p>
+<p><br />
+<strong>定理 1</strong> <span class="math display">\[
+\begin{aligned}
+&amp; \forall i \in \{x | 0 &lt; x \leq 100, x \in \mathbb{Z} \},\\
+&amp; \exists n \in \{x | 0 \leq x &lt; 100, x \in \mathbb{Z} \},\\
+&amp; f^n(B_i) = B_i
+\end{aligned}
+\]</span> <strong>证明</strong><br />
+即证 <span class="math inline">\(\exists n,\ (i + \sum_{j=1}^{n}k_j)
+\mod 100 = i\)</span><br />
+即证 <span class="math inline">\(\exists k&#39;,\ (i + k&#39;) \mod 100
+= i,\, 0 \leq k&#39; &lt; 100\)</span> 显然存在这样的 <span
+class="math inline">\(k&#39;\)</span>。</p>
+<p>所以集合 B 由一系列不通长度的环形链表构成。这些链表构成集合 B
+的一个划分。</p>
+<p><br />
+<strong>引理 1.</strong> <span class="math inline">\(f\)</span>
+可逆<br />
+<strong>证明</strong><br />
+<span class="math inline">\(\because\)</span> 盒子中的纸条是唯一的<br />
+<span class="math inline">\(\therefore\)</span>
+任意两个不同的盒子，内部的纸条不相同<br />
+<span class="math inline">\(\quad\)</span>即 <span
+class="math inline">\(\not\exists i,\ j,\ i \not= j, f(B_i) =
+f(B_j)\)</span><br />
+<span class="math inline">\(\therefore f\)</span> 是单射。<br />
+<span class="math inline">\(\therefore f\)</span> 可逆，且由于 <span
+class="math inline">\(f\)</span> 的定义域和值域相同， <span
+class="math inline">\(f^{-1}\)</span> 和 <span
+class="math inline">\(f\)</span> 的定义域相同。</p>
+<p><br />
+<strong>定理 2</strong><br />
+根据引理 1 和引理 2，当 <span class="math inline">\(n \not= 1\)</span>
+时，<span class="math inline">\(f^{-1}(B_i) = f^{n -
+1}B_i\)</span>。<br />
+即囚犯可以通过执行 n - 1 次 <span class="math inline">\(f\)</span>
+操作找到对应的纸条。</p>
+<p>所以只要保证不存在长度 &gt; 50
+的环形链表，囚犯就能按此策略找到自己的编号。<br />
+定义 <span class="math inline">\(Loop_n\)</span> 表示长度为 <span
+class="math inline">\(n\)</span> 的循环链表， <span
+class="math display">\[
+P(Loop_n) = \frac{环排列}{全排列} = \frac{\frac{P_n^n}{n}}{P_n^n} =
+\frac{1}{n}
+\]</span> <span class="math inline">\(P(Loop_{n&gt;50}) =
+\sum_{n=51}^{100}\frac{1}{n} \approx 0.6882\)</span><br />
+<span class="math inline">\(P(success) = 1 - P(Loop_{n&gt;50}) \approx
+0.3118\)</span></p>
+<h3 id="有-2n-名囚犯时">有 <span class="math inline">\(2n\)</span>
+名囚犯时</h3>
+<p>定义 <span class="math inline">\(H_n = \sum_{i=1}^n
+\frac{1}{n}\)</span><br />
+<span class="math inline">\(\begin{aligned} P(success) &amp; = 1 -
+(H_{2n} - H_n)\\ &amp; = 1 - (H_{2n} - \ln 2n) + (H_n - \ln2n)\\ &amp; =
+1 - (H_{2n} - \ln 2n) + (H_n - \ln n) - \ln 2 \end{aligned}\)</span></p>
+<p>使用 Euler–Mascheroni 常数，<br />
+<span class="math inline">\(\lim \limits_{n \to \inf} (H_n - \ln n) =
+\gamma\)</span><br />
+<span class="math inline">\(\begin{aligned} \lim \limits_{n \to \inf}
+P(success) &amp; = 1 - \gamma + \gamma - \ln 2\\ &amp; = 1 - \ln 2\\
+&amp; = 0.3069 \end{aligned}\)</span></p>
+<h2 id="参考">参考</h2>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1"
+class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=iSNsgj1OCLA">The
+Riddle That Seems Impossible Even If You Know The Answer</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2"
+class="footnote-text"><span><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/100_prisoners_problem">100
+Prisoners Problem</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Math/" class="category-chain-item">Math</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Interesting-Math/">#Interesting Math</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>100 Prisoners Problem</div>
+      <div>https://term-inator.github.io/2022/07/29/100-prisoners-problem/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Sicong Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月29日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年7月31日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/01/style-transfer/" title="Style Transfer">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Style Transfer</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/22/linux-root-user/" title="Linux 创建 root 用户">
+                        <span class="hidden-mobile">Linux 创建 root 用户</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
