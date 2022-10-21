@@ -16,23 +16,23 @@
   <meta name="author" content="Sicong Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="凯撒加密 经典的移位加密。 定义 \(ord()\) 和 \(chr()\)，\(ord(a) &#x3D; 97\), \(chr(97) &#x3D; a\)。秘钥 \(K \in \{0, 25\}\) 。 \[ \begin{aligned} Enc: &amp; \\ &amp; c &#x3D; chr((ord(c) + K)\mod 26)\\\\ Dec: &amp; \\ &amp; c">
+    <meta name="description" content="标题中的 XXXXX 代表数字 问题描述 Xampp mysql 又启动不了了，原因未知，报错如下： 123456789101112131415[Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions[Note] InnoDB: Uses event mutexes[Note] InnoDB: Compresse">
 <meta property="og:type" content="article">
-<meta property="og:title" content="凯撒密码">
-<meta property="og:url" content="https://term-inator.github.io/2022/09/20/caesar-encryption/index.html">
+<meta property="og:title" content="InnoDB: Missing MLOG_CHECKPOINT at XXXXX between the checkpoint XXXXX and the end XXXXX.">
+<meta property="og:url" content="https://term-inator.github.io/2022/10/13/XAMPP-Mysql/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
-<meta property="og:description" content="凯撒加密 经典的移位加密。 定义 \(ord()\) 和 \(chr()\)，\(ord(a) &#x3D; 97\), \(chr(97) &#x3D; a\)。秘钥 \(K \in \{0, 25\}\) 。 \[ \begin{aligned} Enc: &amp; \\ &amp; c &#x3D; chr((ord(c) + K)\mod 26)\\\\ Dec: &amp; \\ &amp; c">
+<meta property="og:description" content="标题中的 XXXXX 代表数字 问题描述 Xampp mysql 又启动不了了，原因未知，报错如下： 123456789101112131415[Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions[Note] InnoDB: Uses event mutexes[Note] InnoDB: Compresse">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://term-inator.github.io/img/2022/09/20/frequency.png">
-<meta property="article:published_time" content="2022-09-20T15:08:00.000Z">
-<meta property="article:modified_time" content="2022-10-01T15:50:07.548Z">
+<meta property="article:published_time" content="2022-10-13T12:39:50.000Z">
+<meta property="article:modified_time" content="2022-10-14T15:47:29.021Z">
 <meta property="article:author" content="Sicong Chen">
+<meta property="article:tag" content="XAMPP">
+<meta property="article:tag" content="Mysql">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://term-inator.github.io/img/2022/09/20/frequency.png">
   
   
   
-  <title>凯撒密码 - Sicong&#39;s Blog</title>
+  <title>InnoDB: Missing MLOG_CHECKPOINT at XXXXX between the checkpoint XXXXX and the end XXXXX. - Sicong&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +214,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="凯撒密码"></span>
+            <span id="subtitle" data-typed-text="InnoDB: Missing MLOG_CHECKPOINT at XXXXX between the checkpoint XXXXX and the end XXXXX."></span>
           
         </div>
 
@@ -225,8 +225,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-20 23:08" pubdate>
-          2022年9月20日 晚上
+        <time datetime="2022-10-13 20:39" pubdate>
+          2022年10月13日 晚上
         </time>
       </span>
     
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.1k 字
         
       </span>
     
@@ -294,12 +294,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">凯撒密码</h1>
+            <h1 style="display: none">InnoDB: Missing MLOG_CHECKPOINT at XXXXX between the checkpoint XXXXX and the end XXXXX.</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月1日 晚上
+                    本文最后更新于：2022年10月14日 晚上
                   
                 
               </p>
@@ -307,45 +307,45 @@
             
               <div class="markdown-body">
                 
-                <h3 id="凯撒加密">凯撒加密</h3>
-<p>经典的移位加密。<br />
-定义 <span class="math inline">\(ord()\)</span> 和 <span
-class="math inline">\(chr()\)</span>，<span class="math inline">\(ord(a)
-= 97\)</span>, <span class="math inline">\(chr(97) = a\)</span>。秘钥
-<span class="math inline">\(K \in \{0, 25\}\)</span> 。 <span
-class="math display">\[
-\begin{aligned}
-Enc: &amp; \\
-&amp; c = chr((ord(c) + K)\mod 26)\\\\
-Dec: &amp; \\
-&amp; c = chr((ord(c) - K)\mod 26)
-\end{aligned}
-\]</span></p>
-<h3 id="破解方法">破解方法</h3>
-<h4 id="暴力">暴力</h4>
-<p>因为 <span class="math inline">\(|K| = 26\)</span>，所以枚举 26
-次就能得到有意义的明文。</p>
-<h4 id="统计">统计</h4>
-<p>因为凯撒密码不是概率加密，即同一个字符每一次加密的结果都是一样的，所以密文和明文的字母概率分布是相同的，所以对于有意义的文本，可以通过统计字母出现的频率，如下图，猜测出秘钥
-K。 <img src="/img/2022/09/20/frequency.png" srcset="/img/loading.gif" lazyload
-alt="英文文本中字母的平均频率[1]" /> 不难算出 <span
-class="math display">\[
-\sum_{i=0}^{25} p_i^2 \approx 0.065
-\]</span> 令 <span class="math inline">\(q_i\)</span> 表示第 <span
-class="math inline">\(i\)</span> 个字符在密文中出现的频率（A 是第 <span
-class="math inline">\(0\)</span> 个字符）。对于秘钥 <span
-class="math inline">\(k \in {0, .., 25}\)</span>， <span
-class="math display">\[
-I_k = \sum_{i=0}^{25} p_i * q_{(i+k) \mod 26} \approx 0.065
-\]</span> 核心代码如下。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs python">p = &#123;<br>  <span class="hljs-number">0</span>: <span class="hljs-number">0.082</span>,<br>  <span class="hljs-number">1</span>: <span class="hljs-number">0.015</span>,<br>  <span class="hljs-number">2</span>: <span class="hljs-number">0.028</span>,<br>  <span class="hljs-number">3</span>: <span class="hljs-number">0.042</span>,<br>  <span class="hljs-number">4</span>: <span class="hljs-number">0.127</span>,<br>  <span class="hljs-number">5</span>: <span class="hljs-number">0.022</span>,<br>  <span class="hljs-number">6</span>: <span class="hljs-number">0.020</span>,<br>  <span class="hljs-number">7</span>: <span class="hljs-number">0.061</span>,<br>  <span class="hljs-number">8</span>: <span class="hljs-number">0.070</span>,<br>  <span class="hljs-number">9</span>: <span class="hljs-number">0.001</span>,<br>  <span class="hljs-number">10</span>: <span class="hljs-number">0.008</span>,<br>  <span class="hljs-number">11</span>: <span class="hljs-number">0.040</span>,<br>  <span class="hljs-number">12</span>: <span class="hljs-number">0.024</span>,<br>  <span class="hljs-number">13</span>: <span class="hljs-number">0.067</span>,<br>  <span class="hljs-number">14</span>: <span class="hljs-number">0.075</span>,<br>  <span class="hljs-number">15</span>: <span class="hljs-number">0.019</span>,<br>  <span class="hljs-number">16</span>: <span class="hljs-number">0.001</span>,<br>  <span class="hljs-number">17</span>: <span class="hljs-number">0.060</span>,<br>  <span class="hljs-number">18</span>: <span class="hljs-number">0.063</span>,<br>  <span class="hljs-number">19</span>: <span class="hljs-number">0.090</span>,<br>  <span class="hljs-number">20</span>: <span class="hljs-number">0.028</span>,<br>  <span class="hljs-number">21</span>: <span class="hljs-number">0.010</span>,<br>  <span class="hljs-number">22</span>: <span class="hljs-number">0.024</span>,<br>  <span class="hljs-number">23</span>: <span class="hljs-number">0.020</span>,<br>  <span class="hljs-number">24</span>: <span class="hljs-number">0.001</span>,<br>  <span class="hljs-number">25</span>: <span class="hljs-number">0.001</span><br>&#125;<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">attack</span>(<span class="hljs-params">ciphertext</span>):<br>  n = <span class="hljs-built_in">len</span>(ciphertext)<br>  I = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>)]<br>  freq = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>)] <span class="hljs-comment"># 密文字符的频率</span><br>  <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> ciphertext:<br>      freq[getIndex(char)] += <span class="hljs-number">1</span><br>  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(freq)):<br>      freq[i] /= n<br><br>  eps = <span class="hljs-number">0.005</span><br>  res = <span class="hljs-number">0</span><br>  <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-number">26</span>):<br>      <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>):<br>          I[key] += p[i] * freq[(i + key) % <span class="hljs-number">26</span>] <span class="hljs-comment"># 计算 I_k</span><br>      <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(I[key] - <span class="hljs-number">0.065</span>) &lt; eps:<br>          res = key<br>          eps = <span class="hljs-built_in">abs</span>(I[key] - <span class="hljs-number">0.065</span>)<br>  <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></table></figure> <a
-target="_blank" rel="noopener" href="https://github.com/Term-inator/Cipher/blob/main/Caesar/main.py">完整代码</a></p>
-<h3 id="参考文献">参考文献</h3>
+                <p>标题中的 XXXXX 代表数字</p>
+<h3 id="问题描述">问题描述</h3>
+<p>Xampp mysql 又启动不了了，原因未知，报错如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Log">[Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions<br>[Note] InnoDB: Uses event mutexes<br>[Note] InnoDB: Compressed tables use zlib 1.2.11<br>[Note] InnoDB: Number of pools: 1<br>[Note] InnoDB: Using SSE2 crc32 instructions<br>[Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M<br>[Note] InnoDB: Completed initialization of buffer pool<br>[ERROR] InnoDB: Missing MLOG_CHECKPOINT at 5963236 between the checkpoint 5963236 and the end 5962752.<br>[ERROR] InnoDB: Plugin initialization aborted with error Generic error<br>[Note] InnoDB: Starting shutdown...<br>[ERROR] Plugin &#x27;InnoDB&#x27; init function returned error.<br>[ERROR] Plugin &#x27;InnoDB&#x27; registration as a STORAGE ENGINE failed.<br>[Note] Plugin &#x27;FEEDBACK&#x27; is disabled.<br>[ERROR] Unknown/unsupported storage engine: InnoDB<br>[ERROR] Aborting<br></code></pre></td></tr></table></figure></p>
+<h3 id="环境">环境</h3>
+<p>OS: Win11<br />
+XAMPP: 3.2.4</p>
+<h3 id="解决方案">解决方案</h3>
+<ol type="1">
+<li>删除 /mysql/data/ib_logfile<em>（</em>代表数字）</li>
+<li>重启 mysql</li>
+<li>问题解决</li>
+</ol>
+<p><strong>注意</strong>：<br />
+ib_logfile*是 redo
+log，所以删除虽然可以解决问题，但可能带来风险。不过目前我没有更好地解决方案。<br />
+该数据库是我个人使用且业务量不大，从目前的结果看没有丢失数据。</p>
+<h3 id="参考">参考</h3>
 <section class="footnotes">
 <div class="footnote-list">
 <ol>
 <li>
-<span id="fn:1" class="footnote-text"><span>Introduction To Modern
-Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
+<span id="fn:1" class="footnote-text"><span><a
+target="_blank" rel="noopener" href="https://nready.net/xampp-error-mysql-shutdown-unexpectedly-wont-start-again/">XAMPP
+Error: InnoDB/MySQL shutdown unexpectedly won’t start again</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2" class="footnote-text"><span><a
+target="_blank" rel="noopener" href="https://dba.stackexchange.com/questions/163445/innodb-ignoring-the-redo-log-due-to-missing-mlog-checkpoint">InnoDB:
+Ignoring the redo log due to missing MLOG_CHECKPOINT</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:3" class="footnote-text"><span><a
+target="_blank" rel="noopener" href="https://support.inductiveautomation.com/hc/en-us/articles/4415186180493-MySQL-or-MariaDB-is-faulted-due-a-startup-error">MySQL
+or MariaDB is faulted due a startup error</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref">
 ↩︎</a></span></span>
 </li>
 </ol>
@@ -359,6 +359,36 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Problems-Solved/" class="category-chain-item">Problems(Solved)</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/XAMPP/">#XAMPP</a>
+      
+        <a href="/tags/Mysql/">#Mysql</a>
+      
+    </div>
   
 </div>
 
@@ -368,8 +398,8 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>凯撒密码</div>
-      <div>https://term-inator.github.io/2022/09/20/caesar-encryption/</div>
+      <div>InnoDB: Missing MLOG_CHECKPOINT at XXXXX between the checkpoint XXXXX and the end XXXXX.</div>
+      <div>https://term-inator.github.io/2022/10/13/XAMPP-Mysql/</div>
     </div>
     <div class="license-meta">
       
@@ -381,13 +411,13 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年9月20日</div>
+          <div>2022年10月13日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年10月1日</div>
+          <div>2022年10月14日</div>
         </div>
       
       <div class="license-meta-item">
@@ -422,18 +452,12 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/29/XAMPP-Mysql/" title="MYSQL shutdown unexpectedly on XAMPP - Plugin &#39;FEEDBACK&#39; is disabled. Server socket created on IP: &#39;::&#39;">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MYSQL shutdown unexpectedly on XAMPP - Plugin &#39;FEEDBACK&#39; is disabled. Server socket created on IP: &#39;::&#39;</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/08/minimum-representation/" title="最小表示法">
-                        <span class="hidden-mobile">最小表示法</span>
+                      <a href="/2022/10/04/vigenere-cipher/" title="维吉尼亚密码">
+                        <span class="hidden-mobile">维吉尼亚密码</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -487,12 +511,6 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -684,40 +702,6 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 

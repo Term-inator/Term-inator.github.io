@@ -16,21 +16,24 @@
   <meta name="author" content="Sicong Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="循环同构 对于字符串 \(S,\ S.length &#x3D; n,\\ \forall \ i, \ S[i..n] + S[0..i-1]\) 与 \(S\) 循环同构。 最小表示 字符串 \(S\) 的循环同构中字典序最小的字符串 1234567891011121314151617181920212223function minimumRepresentation(s: string):">
+    <meta name="description" content="凯撒密码介绍和破解方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="最小表示法">
-<meta property="og:url" content="https://term-inator.github.io/2022/08/08/minimum-representation/index.html">
+<meta property="og:title" content="凯撒密码">
+<meta property="og:url" content="https://term-inator.github.io/2022/09/20/caesar-cipher/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
-<meta property="og:description" content="循环同构 对于字符串 \(S,\ S.length &#x3D; n,\\ \forall \ i, \ S[i..n] + S[0..i-1]\) 与 \(S\) 循环同构。 最小表示 字符串 \(S\) 的循环同构中字典序最小的字符串 1234567891011121314151617181920212223function minimumRepresentation(s: string):">
+<meta property="og:description" content="凯撒密码介绍和破解方法">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-08T15:47:57.000Z">
-<meta property="article:modified_time" content="2022-08-11T15:56:26.049Z">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/09/20/frequency.png">
+<meta property="article:published_time" content="2022-09-20T15:08:00.000Z">
+<meta property="article:modified_time" content="2022-10-20T15:26:07.285Z">
 <meta property="article:author" content="Sicong Chen">
+<meta property="article:tag" content="Caesar">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://term-inator.github.io/img/2022/09/20/frequency.png">
   
   
   
-  <title>最小表示法 - Sicong&#39;s Blog</title>
+  <title>凯撒密码 - Sicong&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +215,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="最小表示法"></span>
+            <span id="subtitle" data-typed-text="凯撒密码"></span>
           
         </div>
 
@@ -223,8 +226,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-08 23:47" pubdate>
-          2022年8月8日 晚上
+        <time datetime="2022-09-20 23:08" pubdate>
+          2022年9月20日 晚上
         </time>
       </span>
     
@@ -235,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          1.2k 字
         
       </span>
     
@@ -246,7 +249,7 @@
         
         
         
-          13 分钟
+          11 分钟
         
       </span>
     
@@ -292,12 +295,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">最小表示法</h1>
+            <h1 style="display: none">凯撒密码</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年8月11日 晚上
+                    本文最后更新于：2022年10月20日 晚上
                   
                 
               </p>
@@ -305,48 +308,43 @@
             
               <div class="markdown-body">
                 
-                <h3 id="循环同构">循环同构</h3>
-<p>对于字符串 <span class="math inline">\(S,\ S.length = n,\\ \forall \
-i, \ S[i..n] + S[0..i-1]\)</span> 与 <span
-class="math inline">\(S\)</span> 循环同构。</p>
-<h3 id="最小表示">最小表示</h3>
-<p>字符串 <span class="math inline">\(S\)</span>
-的循环同构中字典序最小的字符串</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minimumRepresentation</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">number</span> &#123;<br>  <span class="hljs-keyword">let</span> <span class="hljs-attr">len</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">i</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">j</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">n</span>: <span class="hljs-built_in">number</span> = s.<span class="hljs-property">length</span><br>  <span class="hljs-keyword">while</span> (len &lt; n &amp;&amp; i &lt; n &amp;&amp; j &lt; n) &#123;<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">a</span>: <span class="hljs-built_in">string</span> = s[(i + len) % n]<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span> = s[(j + len) % n]<br>    <span class="hljs-keyword">if</span> (a == b) &#123;<br>      ++len<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (a &gt; b) &#123;<br>        ++i<br>      &#125;<br>      <span class="hljs-keyword">else</span> &#123;<br>        ++j<br>      &#125;<br>      len = <span class="hljs-number">0</span><br>      <span class="hljs-keyword">if</span> (i == j) &#123;<br>        ++i<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(i, j)<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>算法时间复杂度最好情况 <span
-class="math inline">\(O(n)\)</span>，最坏 <span
-class="math inline">\(O(n^2)\)</span><br />
-对于形如 <span class="math inline">\(s = yyy...yyx,\ s.length =
-n\)</span> 的数据，复杂度为 <span
-class="math inline">\(O(n^2)\)</span>。</p>
-<h3 id="优化">优化</h3>
-<p>对于长为 <span class="math inline">\(n\)</span> 的字符串 <span
-class="math inline">\(S\)</span> 的两个循环同构 <span
-class="math inline">\(S_i,\ S_j\ (i &lt; j)\)</span>, 易知 <span
-class="math inline">\(S_i,\ S_j\)</span> 是 <span
-class="math inline">\(2S = S + S\)</span> 的子字符串。假设它们的前 <span
-class="math inline">\(l\ (l &lt; n)\)</span> 个字符相同，即 <span
-class="math inline">\(S[i..i+l-1] = S[j..j+l-1]\)</span></p>
-<p>如果它们的下一个字符 <span class="math inline">\(S[i+l] \not= S[j +
-l]\)</span>，不妨设 <span class="math inline">\(S[i+l] &lt;
-S[j+l]\)</span> 时，那么对 <span class="math inline">\(\forall k \in [0,
-l]\)</span>，<span class="math inline">\(S_{i+k} &lt;
-S_{j+k}\)</span></p>
-<p><strong>证明</strong><br />
-<span class="math inline">\(S_{i+k} = S[i..i+l-1] + S[i+l] +
-S[i+l+1...]\)</span><br />
-<span class="math inline">\(S_{j+k} = S[j..j+l-1] + S[j+l] +
-S[j+l+1...]\)</span><br />
-<span class="math inline">\(\because S[i..i+l-1] = S[j..j+l-1],\ S[i+l]
-&lt; S[j+l]\)</span><br />
-<span class="math inline">\(\therefore S_{i+k} &lt; S_{j+k}\)</span></p>
-<p><span class="math inline">\(S[i+l] &gt; S[j+l]\)</span>
-的情况类似。<br />
-所以 <span class="math inline">\(j\)</span> 可以跳过下标 <span
-class="math inline">\([j, j+l]\)</span>，直接去比较 <span
-class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minimumRepresentation</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">number</span> &#123;<br>  <span class="hljs-keyword">let</span> <span class="hljs-attr">len</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">i</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">j</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">n</span>: <span class="hljs-built_in">number</span> = s.<span class="hljs-property">length</span><br>  <span class="hljs-keyword">while</span> (len &lt; n &amp;&amp; i &lt; n &amp;&amp; j &lt; n) &#123;<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">a</span>: <span class="hljs-built_in">string</span> = s[(i + len) % n]<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span> = s[(j + len) % n]<br>    <span class="hljs-keyword">if</span> (a == b) &#123;<br>      ++len<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (a &gt; b) &#123;<br>        i = i + len + <span class="hljs-number">1</span><br>      &#125;<br>      <span class="hljs-keyword">else</span> &#123;<br>        j = j + len + <span class="hljs-number">1</span><br>      &#125;<br>      len = <span class="hljs-number">0</span><br>      <span class="hljs-keyword">if</span> (i == j) &#123;<br>        ++i<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(i, j)<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>此时时间复杂度稳定在 <span class="math inline">\(O(n)\)</span>。</p>
+                <h3 id="凯撒密码">凯撒密码</h3>
+<p>经典的移位密码。<br />
+定义 <span class="math inline">\(ord()\)</span> 和 <span
+class="math inline">\(chr()\)</span>，<span
+class="math inline">\(ord(&#39;a&#39;) = 97\)</span>, <span
+class="math inline">\(chr(97) = &#39;a&#39;\)</span>。秘钥 <span
+class="math inline">\(K \in \{0, 25\}\)</span> 。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">encryption</span>(<span class="hljs-params">S, K</span>):<br>  res = <span class="hljs-string">&#x27;&#x27;</span><br>  <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> S:<br>    res += (<span class="hljs-built_in">ord</span>(c) + K) % <span class="hljs-number">26</span><br>  <span class="hljs-keyword">return</span> res<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">decryption</span>(<span class="hljs-params">S, K</span>):<br>  res = <span class="hljs-string">&#x27;&#x27;</span><br>  <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> S:<br>    res += (<span class="hljs-built_in">ord</span>(c) - K) % <span class="hljs-number">26</span><br>  <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></table></figure></p>
+<h3 id="破解方法">破解方法</h3>
+<h4 id="暴力">暴力</h4>
+<p>因为 <span class="math inline">\(|K| = 26\)</span>，所以枚举 26
+次就能得到有意义的明文。</p>
+<h4 id="统计">统计</h4>
+<p>因为凯撒密码不是概率加密，即同一个字符每一次加密的结果都是一样的，所以密文和明文的字母概率分布是相同的，所以对于有意义的文本，可以通过统计字母出现的频率，如下图，猜测出秘钥
+K。 <img src="/img/2022/09/20/frequency.png" srcset="/img/loading.gif" lazyload
+alt="英文文本中字母的平均频率[1]" /> 不难算出 <span
+class="math display">\[
+\sum_{i=0}^{25} p_i^2 \approx 0.065
+\]</span> 令 <span class="math inline">\(q_i\)</span> 表示第 <span
+class="math inline">\(i\)</span> 个字符在密文中出现的频率（A 是第 <span
+class="math inline">\(0\)</span> 个字符）。对于秘钥 <span
+class="math inline">\(k \in {0, .., 25}\)</span>， <span
+class="math display">\[
+I_k = \sum_{i=0}^{25} p_i * q_{(i+k) \mod 26} \approx 0.065
+\]</span> 核心代码如下。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs python">p = &#123;<br>  <span class="hljs-number">0</span>: <span class="hljs-number">0.082</span>,<br>  <span class="hljs-number">1</span>: <span class="hljs-number">0.015</span>,<br>  <span class="hljs-number">2</span>: <span class="hljs-number">0.028</span>,<br>  <span class="hljs-number">3</span>: <span class="hljs-number">0.042</span>,<br>  <span class="hljs-number">4</span>: <span class="hljs-number">0.127</span>,<br>  <span class="hljs-number">5</span>: <span class="hljs-number">0.022</span>,<br>  <span class="hljs-number">6</span>: <span class="hljs-number">0.020</span>,<br>  <span class="hljs-number">7</span>: <span class="hljs-number">0.061</span>,<br>  <span class="hljs-number">8</span>: <span class="hljs-number">0.070</span>,<br>  <span class="hljs-number">9</span>: <span class="hljs-number">0.001</span>,<br>  <span class="hljs-number">10</span>: <span class="hljs-number">0.008</span>,<br>  <span class="hljs-number">11</span>: <span class="hljs-number">0.040</span>,<br>  <span class="hljs-number">12</span>: <span class="hljs-number">0.024</span>,<br>  <span class="hljs-number">13</span>: <span class="hljs-number">0.067</span>,<br>  <span class="hljs-number">14</span>: <span class="hljs-number">0.075</span>,<br>  <span class="hljs-number">15</span>: <span class="hljs-number">0.019</span>,<br>  <span class="hljs-number">16</span>: <span class="hljs-number">0.001</span>,<br>  <span class="hljs-number">17</span>: <span class="hljs-number">0.060</span>,<br>  <span class="hljs-number">18</span>: <span class="hljs-number">0.063</span>,<br>  <span class="hljs-number">19</span>: <span class="hljs-number">0.090</span>,<br>  <span class="hljs-number">20</span>: <span class="hljs-number">0.028</span>,<br>  <span class="hljs-number">21</span>: <span class="hljs-number">0.010</span>,<br>  <span class="hljs-number">22</span>: <span class="hljs-number">0.024</span>,<br>  <span class="hljs-number">23</span>: <span class="hljs-number">0.020</span>,<br>  <span class="hljs-number">24</span>: <span class="hljs-number">0.001</span>,<br>  <span class="hljs-number">25</span>: <span class="hljs-number">0.001</span><br>&#125;<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">attack</span>(<span class="hljs-params">ciphertext</span>):<br>  n = <span class="hljs-built_in">len</span>(ciphertext)<br>  I = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>)]<br>  freq = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>)] <span class="hljs-comment"># 密文字符的频率</span><br>  <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> ciphertext:<br>      freq[getIndex(char)] += <span class="hljs-number">1</span><br>  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(freq)):<br>      freq[i] /= n<br><br>  eps = <span class="hljs-number">0.005</span><br>  res = <span class="hljs-number">0</span><br>  <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-number">26</span>):<br>      <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>):<br>          I[key] += p[i] * freq[(i + key) % <span class="hljs-number">26</span>] <span class="hljs-comment"># 计算 I_k</span><br>      <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(I[key] - <span class="hljs-number">0.065</span>) &lt; eps:<br>          res = key<br>          eps = <span class="hljs-built_in">abs</span>(I[key] - <span class="hljs-number">0.065</span>)<br>  <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></table></figure> <a
+target="_blank" rel="noopener" href="https://github.com/Term-inator/Cipher/blob/main/Caesar/main.py">完整代码</a></p>
+<h3 id="参考文献">参考文献</h3>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>Introduction To Modern
+Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
 
                 
               </div>
@@ -365,7 +363,7 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
     
       <span class="category-chain">
         
-  <a href="/categories/Algorithm/" class="category-chain-item">Algorithm</a>
+  <a href="/categories/Cipher/" class="category-chain-item">Cipher</a>
   
   
 
@@ -377,6 +375,13 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Caesar/">#Caesar</a>
+      
+    </div>
+  
 </div>
 
 
@@ -385,8 +390,8 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>最小表示法</div>
-      <div>https://term-inator.github.io/2022/08/08/minimum-representation/</div>
+      <div>凯撒密码</div>
+      <div>https://term-inator.github.io/2022/09/20/caesar-cipher/</div>
     </div>
     <div class="license-meta">
       
@@ -398,13 +403,13 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年8月8日</div>
+          <div>2022年9月20日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月11日</div>
+          <div>2022年10月20日</div>
         </div>
       
       <div class="license-meta-item">
@@ -439,9 +444,9 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/20/caesar-cipher/" title="凯撒密码">
+                      <a href="/2022/09/29/XAMPP-Mysql/" title="MYSQL shutdown unexpectedly on XAMPP - Plugin &#39;FEEDBACK&#39; is disabled. Server socket created on IP: &#39;::&#39;">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">凯撒密码</span>
+                        <span class="hidden-mobile">MYSQL shutdown unexpectedly on XAMPP - Plugin &#39;FEEDBACK&#39; is disabled. Server socket created on IP: &#39;::&#39;</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -449,8 +454,8 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/04/899-Orderly-Queue/" title="899. 有序队列">
-                        <span class="hidden-mobile">899. 有序队列</span>
+                      <a href="/2022/08/08/minimum-representation/" title="最小表示法">
+                        <span class="hidden-mobile">最小表示法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
