@@ -16,16 +16,16 @@
   <meta name="author" content="Sicong Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="问题描述 昨天笔记本电量不足关机，今天打开电脑重启 Xampp 的数据库，出现问题，报错如下。 123456789101112131415161718[Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions[Note] InnoDB: Uses event mutexes[Note] InnoDB: Compre">
+    <meta name="description" content="问题发生时间 2022&#x2F;09&#x2F;08 问题描述 昨天笔记本电量不足关机，今天打开电脑重启 Xampp 的数据库，出现问题，报错如下。 123456789101112131415161718[Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions[Note] InnoDB: Uses event mutexes[">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MYSQL shutdown unexpectedly on XAMPP - Plugin &#39;FEEDBACK&#39; is disabled. Server socket created on IP: &#39;::&#39;">
 <meta property="og:url" content="https://term-inator.github.io/2022/09/29/XAMPP-Mysql/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
-<meta property="og:description" content="问题描述 昨天笔记本电量不足关机，今天打开电脑重启 Xampp 的数据库，出现问题，报错如下。 123456789101112131415161718[Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions[Note] InnoDB: Uses event mutexes[Note] InnoDB: Compre">
+<meta property="og:description" content="问题发生时间 2022&#x2F;09&#x2F;08 问题描述 昨天笔记本电量不足关机，今天打开电脑重启 Xampp 的数据库，出现问题，报错如下。 123456789101112131415161718[Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions[Note] InnoDB: Uses event mutexes[">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://term-inator.github.io/img/2022/09/29/change_pswd2.png">
 <meta property="article:published_time" content="2022-09-29T02:39:33.000Z">
-<meta property="article:modified_time" content="2022-10-13T13:04:10.509Z">
+<meta property="article:modified_time" content="2022-10-31T13:09:30.981Z">
 <meta property="article:author" content="Sicong Chen">
 <meta property="article:tag" content="XAMPP">
 <meta property="article:tag" content="Mysql">
@@ -239,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          1.8k 字
         
       </span>
     
@@ -301,7 +301,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月13日 晚上
+                    本文最后更新于：2022年10月31日 晚上
                   
                 
               </p>
@@ -309,7 +309,9 @@
             
               <div class="markdown-body">
                 
-                <h3 id="问题描述">问题描述</h3>
+                <h3 id="问题发生时间">问题发生时间</h3>
+<p>2022/09/08</p>
+<h3 id="问题描述">问题描述</h3>
 <p>昨天笔记本电量不足关机，今天打开电脑重启 Xampp
 的数据库，出现问题，报错如下。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Log">[Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions<br>[Note] InnoDB: Uses event mutexes<br>[Note] InnoDB: Compressed tables use zlib 1.2.11<br>[Note] InnoDB: Number of pools: 1<br>[Note] InnoDB: Using SSE2 crc32 instructions<br>[Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M<br>[Note] InnoDB: Completed initialization of buffer pool<br>[Note] InnoDB: Starting crash recovery from checkpoint LSN=300288<br>[Note] InnoDB: 128 out of 128 rollback segments are active.<br>[Note] InnoDB: Removed temporary tablespace data file: &quot;ibtmp1&quot;<br>[Note] InnoDB: Creating shared tablespace for temporary tables<br>[Note] InnoDB: Setting file &#x27;D:\Programs\Xampp\mysql\data\ibtmp1&#x27; size to 12 MB. Physically writing the file full; Please wait ...<br>[Note] InnoDB: File &#x27;D:\Programs\Xampp\mysql\data\ibtmp1&#x27; size is now 12 MB.<br>[Note] InnoDB: Waiting for purge to start<br>[Note] InnoDB: 10.4.11 started; log sequence number 300297; transaction id 171<br>[Note] InnoDB: Loading buffer pool(s) from D:\Programs\Xampp\mysql\data\ib_buffer_pool<br>[Note] Plugin &#x27;FEEDBACK&#x27; is disabled.<br>[Note] Server socket created on IP: &#x27;::&#x27;.<br></code></pre></td></tr></table></figure>
 可能是异常关机导致数据库有些进程异常终止，造成无法再次启动。</p>
@@ -429,7 +431,7 @@ target="_blank" rel="noopener" href="https://blog.csdn.net/Quincylk/article/deta
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年10月13日</div>
+          <div>2022年10月31日</div>
         </div>
       
       <div class="license-meta-item">

@@ -16,24 +16,25 @@
   <meta name="author" content="Sicong Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="凯撒密码介绍和破解方法">
+    <meta name="description" content="太长不看 如果导出数据库时使用 GB2312编码，数据里又有汉字“啰”时，会报错，因为 GB2312 没有收入“啰”字。 背景 最近饱受背单词折磨。之前因为想订制背单词的内容，又不想自己一个一个输入，或者对着 Excel 背单词，所以使用了 WordReview，可以读取 Excel 中的单词到数据库中。过了几轮单词后，我打算把所有没背熟的单词导出，每天看一遍。 过程 编写 SQ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="凯撒密码">
-<meta property="og:url" content="https://term-inator.github.io/2022/09/20/caesar-cipher/index.html">
+<meta property="og:title" content="GB2312 没有收入“啰”字">
+<meta property="og:url" content="https://term-inator.github.io/2022/10/31/GB2312/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
-<meta property="og:description" content="凯撒密码介绍和破解方法">
+<meta property="og:description" content="太长不看 如果导出数据库时使用 GB2312编码，数据里又有汉字“啰”时，会报错，因为 GB2312 没有收入“啰”字。 背景 最近饱受背单词折磨。之前因为想订制背单词的内容，又不想自己一个一个输入，或者对着 Excel 背单词，所以使用了 WordReview，可以读取 Excel 中的单词到数据库中。过了几轮单词后，我打算把所有没背熟的单词导出，每天看一遍。 过程 编写 SQ">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://term-inator.github.io/img/2022/09/20/frequency.png">
-<meta property="article:published_time" content="2022-09-20T15:08:00.000Z">
-<meta property="article:modified_time" content="2022-10-23T15:41:40.662Z">
+<meta property="og:image" content="https://term-inator.github.io/img/2022/10/31/excel.png">
+<meta property="article:published_time" content="2022-10-31T12:58:28.000Z">
+<meta property="article:modified_time" content="2022-10-31T14:38:38.079Z">
 <meta property="article:author" content="Sicong Chen">
-<meta property="article:tag" content="Caesar">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="GB2312">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://term-inator.github.io/img/2022/09/20/frequency.png">
+<meta name="twitter:image" content="https://term-inator.github.io/img/2022/10/31/excel.png">
   
   
   
-  <title>凯撒密码 - Sicong&#39;s Blog</title>
+  <title>GB2312 没有收入“啰”字 - Sicong&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -215,7 +216,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="凯撒密码"></span>
+            <span id="subtitle" data-typed-text="GB2312 没有收入“啰”字"></span>
           
         </div>
 
@@ -226,8 +227,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-20 23:08" pubdate>
-          2022年9月20日 晚上
+        <time datetime="2022-10-31 20:58" pubdate>
+          2022年10月31日 晚上
         </time>
       </span>
     
@@ -249,7 +250,7 @@
         
         
         
-          11 分钟
+          10 分钟
         
       </span>
     
@@ -295,12 +296,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">凯撒密码</h1>
+            <h1 style="display: none">GB2312 没有收入“啰”字</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年10月23日 晚上
+                    本文最后更新于：2022年10月31日 晚上
                   
                 
               </p>
@@ -308,38 +309,73 @@
             
               <div class="markdown-body">
                 
-                <h3 id="凯撒密码">凯撒密码</h3>
-<p>经典的移位密码。<br />
-定义 <span class="math inline">\(ord()\)</span> 和 <span
-class="math inline">\(chr()\)</span>，<span
-class="math inline">\(ord(&#39;a&#39;) = 97\)</span>, <span
-class="math inline">\(chr(97) = &#39;a&#39;\)</span>。秘钥 <span
-class="math inline">\(K \in \{0, 25\}\)</span> 。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">encryption</span>(<span class="hljs-params">S, K</span>):<br>  res = <span class="hljs-string">&#x27;&#x27;</span><br>  <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> S:<br>    res += (<span class="hljs-built_in">ord</span>(c) + K) % <span class="hljs-number">26</span><br>  <span class="hljs-keyword">return</span> res<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">decryption</span>(<span class="hljs-params">S, K</span>):<br>  res = <span class="hljs-string">&#x27;&#x27;</span><br>  <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> S:<br>    res += (<span class="hljs-built_in">ord</span>(c) - K) % <span class="hljs-number">26</span><br>  <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></table></figure></p>
-<h3 id="破解方法">破解方法</h3>
-<h4 id="暴力">暴力</h4>
-<p>因为 <span class="math inline">\(|K| = 26\)</span>，所以枚举 26
-次就能得到有意义的明文。</p>
-<h4 id="统计">统计</h4>
-<p>因为凯撒密码不是概率加密，即同一个字符每一次加密的结果都是一样的，所以密文和明文的字母概率分布是相同的，所以对于有意义的文本，可以通过统计字母出现的频率，如下图，猜测出秘钥
-K。 <img src="/img/2022/09/20/frequency.png" srcset="/img/loading.gif" lazyload
-alt="英文文本中字母的平均频率[1]" /> 不难算出 <span
-class="math display">\[
-\sum_{i=0}^{25} p_i^2 \approx 0.065
-\]</span> 令 <span class="math inline">\(q_i\)</span> 表示第 <span
-class="math inline">\(i\)</span> 个字符在密文中出现的频率（A 是第 <span
-class="math inline">\(0\)</span> 个字符）。对于秘钥 <span
-class="math inline">\(k \in {0, .., 25}\)</span>， <span
-class="math display">\[
-I_k = \sum_{i=0}^{25} p_i * q_{(i+k) \mod 26} \approx 0.065
-\]</span> 核心代码如下。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs python">p = &#123;<br>  <span class="hljs-number">0</span>: <span class="hljs-number">0.082</span>,<br>  <span class="hljs-number">1</span>: <span class="hljs-number">0.015</span>,<br>  <span class="hljs-number">2</span>: <span class="hljs-number">0.028</span>,<br>  <span class="hljs-number">3</span>: <span class="hljs-number">0.042</span>,<br>  <span class="hljs-number">4</span>: <span class="hljs-number">0.127</span>,<br>  <span class="hljs-number">5</span>: <span class="hljs-number">0.022</span>,<br>  <span class="hljs-number">6</span>: <span class="hljs-number">0.020</span>,<br>  <span class="hljs-number">7</span>: <span class="hljs-number">0.061</span>,<br>  <span class="hljs-number">8</span>: <span class="hljs-number">0.070</span>,<br>  <span class="hljs-number">9</span>: <span class="hljs-number">0.001</span>,<br>  <span class="hljs-number">10</span>: <span class="hljs-number">0.008</span>,<br>  <span class="hljs-number">11</span>: <span class="hljs-number">0.040</span>,<br>  <span class="hljs-number">12</span>: <span class="hljs-number">0.024</span>,<br>  <span class="hljs-number">13</span>: <span class="hljs-number">0.067</span>,<br>  <span class="hljs-number">14</span>: <span class="hljs-number">0.075</span>,<br>  <span class="hljs-number">15</span>: <span class="hljs-number">0.019</span>,<br>  <span class="hljs-number">16</span>: <span class="hljs-number">0.001</span>,<br>  <span class="hljs-number">17</span>: <span class="hljs-number">0.060</span>,<br>  <span class="hljs-number">18</span>: <span class="hljs-number">0.063</span>,<br>  <span class="hljs-number">19</span>: <span class="hljs-number">0.090</span>,<br>  <span class="hljs-number">20</span>: <span class="hljs-number">0.028</span>,<br>  <span class="hljs-number">21</span>: <span class="hljs-number">0.010</span>,<br>  <span class="hljs-number">22</span>: <span class="hljs-number">0.024</span>,<br>  <span class="hljs-number">23</span>: <span class="hljs-number">0.020</span>,<br>  <span class="hljs-number">24</span>: <span class="hljs-number">0.001</span>,<br>  <span class="hljs-number">25</span>: <span class="hljs-number">0.001</span><br>&#125;<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">attack</span>(<span class="hljs-params">ciphertext</span>):<br>  n = <span class="hljs-built_in">len</span>(ciphertext)<br>  I = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>)]<br>  freq = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>)]<br>  <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> ciphertext:<br>    freq[getIndex(char)] += <span class="hljs-number">1</span><br>  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>):<br>    freq[i] /= n<br><br>  eps = <span class="hljs-number">0.005</span><br>  res = -<span class="hljs-number">1</span><br>  <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-number">26</span>):<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">26</span>):<br>      I[key] += p[i] * freq[(i + key) % <span class="hljs-number">26</span>]<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(I[key] - <span class="hljs-number">0.065</span>) &lt; eps:<br>      res = key<br>      eps = <span class="hljs-built_in">abs</span>(I[key] - <span class="hljs-number">0.065</span>)<br>  <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></table></figure> <a
-target="_blank" rel="noopener" href="https://github.com/Term-inator/Cipher/blob/main/Caesar/main.py">完整代码</a></p>
-<h3 id="参考文献">参考文献</h3>
+                <h3 id="太长不看">太长不看</h3>
+<p>如果导出数据库时使用 GB2312编码，数据里又有汉字“啰”时，会报错，因为
+GB2312 没有收入“啰”字。</p>
+<h3 id="背景">背景</h3>
+<p>最近饱受背单词折磨。之前因为想订制背单词的内容，又不想自己一个一个输入，或者对着
+Excel 背单词，所以使用了 <a
+target="_blank" rel="noopener" href="https://github.com/Term-inator/WordReview">WordReview</a>，可以读取
+Excel
+中的单词到数据库中。过了几轮单词后，我打算把所有没背熟的单词导出，每天看一遍。</p>
+<h3 id="过程">过程</h3>
+<h4 id="编写-sql">编写 SQL</h4>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> word, mean, mnemonic, note <span class="hljs-keyword">FROM</span> `words` <br><span class="hljs-keyword">WHERE</span> history <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%001&#x27;</span> <span class="hljs-keyword">or</span> history <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%00&#x27;</span> <br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> forget_num <span class="hljs-keyword">DESC</span>;<br></code></pre></td></tr></table></figure>
+<p>其中 history 字段记录了单词背诵历史，1 代表记得，0
+代表不记得，所以认为那些最后一次记得但前两次不记得 和 最后两次不记得
+的单词是没背熟的单词。forget_num 代表忘记的次数。</p>
+<h4 id="导出查询结果">导出查询结果</h4>
+<p>查询出数据后，因为想偷懒，所以打算借助 phpmyadmin 导出数据（选择 CSV
+格式，编码
+GB2312），但是导出的文件显示，导出某个单词时产生了报错。然后我把 SQL
+里的 DESC 去掉，再导出，发现在另一个单词处报错。</p>
+<p>找到这两个单词
+diffuse，garrulous，发现它们有一个共同的意思“啰嗦的”。通过控制变量法发现有“啰”就会报错。通过查询才得知
+GB2312
+没有收入“啰”字<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="[为什么许多字体都没有收录啰这个字？](https://www.zhihu.com/question/37745887#:~:text=%E5%87%A0%E4%B9%8E%E6%89%80%E6%9C%89%E7%9A%84%E7%AE%80%E4%BD%93%E6%B1%89%E5%AD%97%E5%AD%97%E5%BA%93%E9%87%87%E7%94%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E4%B8%BA%E4%B8%8A%E4%B8%96%E7%BA%AA80%E5%B9%B4%E4%BB%A3%E9%A2%81%E5%B8%83%E7%9A%84%20GB2312%20%E7%BC%96%E7%A0%81%EF%BC%88%E3%80%8A%E4%BF%A1%E6%81%AF%E4%BA%A4%E6%8D%A2%E7%94%A8%E6%B1%89%E5%AD%97%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E9%9B%86%E3%80%8B%EF%BC%8C%E6%A0%87%E5%87%86%E5%8F%B7%EF%BC%9AGB2312-1980%EF%BC%89%EF%BC%8C%E8%AF%A5%E7%BC%96%E7%A0%81%E5%85%B1%E6%94%B6%E5%85%A56763%E4%B8%AA%E6%B1%89%E5%AD%97%E3%80%82,%E2%80%9C%E5%95%B0%E2%80%9D%20%E5%AD%97%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%94%B6%E5%85%A5%EF%BC%8C%E7%94%B1%E6%AD%A4%E5%AF%BC%E8%87%B4%E6%89%80%E6%9C%89%E9%87%87%E7%94%A8%20GB2312%20%E7%BC%96%E7%A0%81%E7%9A%84%E6%B1%89%E5%AD%97%E5%AD%97%E4%BD%93%E9%83%BD%E6%B2%A1%E6%9C%89%E6%94%B6%E5%85%A5%E8%AF%A5%E5%AD%97%E3%80%82)">[1]</span></a></sup>。</p>
+<p>知道原因后，用 utf-8 导出然后解决中文乱码问题即可。</p>
+<h4 id="解决乱码">解决乱码</h4>
+<ol type="1">
+<li>通过 Excel
+解决<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="[mysql load data, select into outfile 导入和导出 CSV格式](https://www.cnblogs.com/digdeep/p/12369244.html)">[2]</span></a></sup>
+<img src="/img/2022/10/31/excel.png" srcset="/img/loading.gif" lazyload /> 如图，选择“从文本/CSV”，以
+Unicode编码 导入数据即可。</li>
+<li>通过记事本解决<br />
+用记事本打开导出的 CSV 文件，然后更改文件编码。</li>
+</ol>
+<h3 id="后记">后记</h3>
+<p>顺带学习一下如何用 SQL 导出 CSV 格式的数据 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> word, mean, mnemonic, note <span class="hljs-keyword">into</span> outfile <span class="hljs-string">&#x27;D:/words.csv&#x27;</span><br>FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;,&#x27;</span> <br>OPTIONALLY<br>ENCLOSED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;&quot;&#x27;</span> ESCAPED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27; &#x27;</span><br>LINES TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;\n&#x27;</span>   <br><span class="hljs-keyword">FROM</span> `words` <span class="hljs-keyword">WHERE</span> history <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%001&#x27;</span> <span class="hljs-keyword">or</span> history <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%00&#x27;</span> <br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> forget_num <span class="hljs-keyword">DESC</span>;<br></code></pre></td></tr></table></figure> TERMINATED
+BY 分隔符（默认：\t）<br />
+ENCLOSED BY 字段括起字符<br />
+ESCAPED BY
+转义字符（默认：\）<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="[MySQL直接导出CSV文件，并解决中文乱码的问题](https://www.cnblogs.com/xs-yqz/p/7238242.html)">[3]</span></a></sup></p>
+<h3 id="参考">参考</h3>
 <section class="footnotes">
 <div class="footnote-list">
 <ol>
 <li>
-<span id="fn:1" class="footnote-text"><span>Introduction To Modern
-Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
+<span id="fn:1" class="footnote-text"><span><a
+target="_blank" rel="noopener" href="https://www.zhihu.com/question/37745887#:~:text=%E5%87%A0%E4%B9%8E%E6%89%80%E6%9C%89%E7%9A%84%E7%AE%80%E4%BD%93%E6%B1%89%E5%AD%97%E5%AD%97%E5%BA%93%E9%87%87%E7%94%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E4%B8%BA%E4%B8%8A%E4%B8%96%E7%BA%AA80%E5%B9%B4%E4%BB%A3%E9%A2%81%E5%B8%83%E7%9A%84%20GB2312%20%E7%BC%96%E7%A0%81%EF%BC%88%E3%80%8A%E4%BF%A1%E6%81%AF%E4%BA%A4%E6%8D%A2%E7%94%A8%E6%B1%89%E5%AD%97%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E9%9B%86%E3%80%8B%EF%BC%8C%E6%A0%87%E5%87%86%E5%8F%B7%EF%BC%9AGB2312-1980%EF%BC%89%EF%BC%8C%E8%AF%A5%E7%BC%96%E7%A0%81%E5%85%B1%E6%94%B6%E5%85%A56763%E4%B8%AA%E6%B1%89%E5%AD%97%E3%80%82,%E2%80%9C%E5%95%B0%E2%80%9D%20%E5%AD%97%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%94%B6%E5%85%A5%EF%BC%8C%E7%94%B1%E6%AD%A4%E5%AF%BC%E8%87%B4%E6%89%80%E6%9C%89%E9%87%87%E7%94%A8%20GB2312%20%E7%BC%96%E7%A0%81%E7%9A%84%E6%B1%89%E5%AD%97%E5%AD%97%E4%BD%93%E9%83%BD%E6%B2%A1%E6%9C%89%E6%94%B6%E5%85%A5%E8%AF%A5%E5%AD%97%E3%80%82">为什么许多字体都没有收录啰这个字？</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2"
+class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.cnblogs.com/digdeep/p/12369244.html">mysql
+load data, select into outfile 导入和导出 CSV格式</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:3" class="footnote-text"><span><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/xs-yqz/p/7238242.html">MySQL直接导出CSV文件，并解决中文乱码的问题</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref">
 ↩︎</a></span></span>
 </li>
 </ol>
@@ -363,7 +399,7 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
     
       <span class="category-chain">
         
-  <a href="/categories/Cipher/" class="category-chain-item">Cipher</a>
+  <a href="/categories/%E8%B8%A9%E5%9D%91/" class="category-chain-item">踩坑</a>
   
   
 
@@ -378,7 +414,9 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Caesar/">#Caesar</a>
+        <a href="/tags/mysql/">#mysql</a>
+      
+        <a href="/tags/GB2312/">#GB2312</a>
       
     </div>
   
@@ -390,8 +428,8 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>凯撒密码</div>
-      <div>https://term-inator.github.io/2022/09/20/caesar-cipher/</div>
+      <div>GB2312 没有收入“啰”字</div>
+      <div>https://term-inator.github.io/2022/10/31/GB2312/</div>
     </div>
     <div class="license-meta">
       
@@ -403,13 +441,13 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年9月20日</div>
+          <div>2022年10月31日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年10月23日</div>
+          <div>2022年10月31日</div>
         </div>
       
       <div class="license-meta-item">
@@ -444,18 +482,12 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/29/XAMPP-Mysql/" title="MYSQL shutdown unexpectedly on XAMPP - Plugin &#39;FEEDBACK&#39; is disabled. Server socket created on IP: &#39;::&#39;">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MYSQL shutdown unexpectedly on XAMPP - Plugin &#39;FEEDBACK&#39; is disabled. Server socket created on IP: &#39;::&#39;</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/08/minimum-representation/" title="最小表示法">
-                        <span class="hidden-mobile">最小表示法</span>
+                      <a href="/2022/10/13/XAMPP-Mysql/" title="InnoDB: Missing MLOG_CHECKPOINT at XXXXX between the checkpoint XXXXX and the end XXXXX.">
+                        <span class="hidden-mobile">InnoDB: Missing MLOG_CHECKPOINT at XXXXX between the checkpoint XXXXX and the end XXXXX.</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -509,12 +541,6 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -706,40 +732,6 @@ Cryptography <a href="#fnref:1" rev="footnote" class="footnote-backref">
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 
