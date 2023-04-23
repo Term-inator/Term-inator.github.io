@@ -16,25 +16,28 @@
   <meta name="author" content="Sicong Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="太长不看 如果导出数据库时使用 GB2312编码，数据里又有汉字“啰”时，会报错，因为 GB2312 没有收入“啰”字。 背景 最近饱受背单词折磨。之前因为想订制背单词的内容，又不想自己一个一个输入，或者对着 Excel 背单词，所以使用了 WordReview，可以读取 Excel 中的单词到数据库中。过了几轮单词后，我打算把所有没背熟的单词导出，每天看一遍。 过程 编写 SQ">
+    <meta name="description" content="本文是本地部署 Nextcloud 的记录。 有用的链接 VM仓库 VM文档 Ubuntu软件仓库镜像 流程  下载 ova 导入到 VMware 双击 ova 选择 VMware 打开即可 启动虚拟机 启动完成后记录显示的 ip 打开终端 1ssh ncadmin@$&amp;#123;ip&amp;#125; 密码 nextcloud （可选）使用代理 （可选）使用镜像软件源 备份 &#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GB2312 没有收入“啰”字">
-<meta property="og:url" content="https://term-inator.github.io/2022/10/31/GB2312/index.html">
+<meta property="og:title" content="Nextcloud VM 部署">
+<meta property="og:url" content="https://term-inator.github.io/2023/04/17/Nextcloud/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
-<meta property="og:description" content="太长不看 如果导出数据库时使用 GB2312编码，数据里又有汉字“啰”时，会报错，因为 GB2312 没有收入“啰”字。 背景 最近饱受背单词折磨。之前因为想订制背单词的内容，又不想自己一个一个输入，或者对着 Excel 背单词，所以使用了 WordReview，可以读取 Excel 中的单词到数据库中。过了几轮单词后，我打算把所有没背熟的单词导出，每天看一遍。 过程 编写 SQ">
+<meta property="og:description" content="本文是本地部署 Nextcloud 的记录。 有用的链接 VM仓库 VM文档 Ubuntu软件仓库镜像 流程  下载 ova 导入到 VMware 双击 ova 选择 VMware 打开即可 启动虚拟机 启动完成后记录显示的 ip 打开终端 1ssh ncadmin@$&amp;#123;ip&amp;#125; 密码 nextcloud （可选）使用代理 （可选）使用镜像软件源 备份 &#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://term-inator.github.io/img/2022/10/31/excel.png">
-<meta property="article:published_time" content="2022-10-31T12:58:28.000Z">
-<meta property="article:modified_time" content="2023-04-17T15:27:49.973Z">
+<meta property="og:image" content="https://term-inator.github.io/img/2023/21/expand_disk.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2023/21/zpool_status.png">
+<meta property="article:published_time" content="2023-04-17T15:23:50.000Z">
+<meta property="article:modified_time" content="2023-04-23T08:10:57.939Z">
 <meta property="article:author" content="Sicong Chen">
-<meta property="article:tag" content="mysql">
-<meta property="article:tag" content="GB2312">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Nextcloud">
+<meta property="article:tag" content="ZFS">
+<meta property="article:tag" content="VMware">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://term-inator.github.io/img/2022/10/31/excel.png">
+<meta name="twitter:image" content="https://term-inator.github.io/img/2023/21/expand_disk.png">
   
   
   
-  <title>GB2312 没有收入“啰”字 - Sicong&#39;s Blog</title>
+  <title>Nextcloud VM 部署 - Sicong&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -216,7 +219,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="GB2312 没有收入“啰”字"></span>
+            <span id="subtitle" data-typed-text="Nextcloud VM 部署"></span>
           
         </div>
 
@@ -227,8 +230,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-31 20:58" pubdate>
-          2022年10月31日 晚上
+        <time datetime="2023-04-17 23:23" pubdate>
+          2023年4月17日 晚上
         </time>
       </span>
     
@@ -239,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.1k 字
         
       </span>
     
@@ -296,12 +299,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">GB2312 没有收入“啰”字</h1>
+            <h1 style="display: none">Nextcloud VM 部署</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年4月17日 晚上
+                    本文最后更新于：2023年4月23日 下午
                   
                 
               </p>
@@ -309,73 +312,64 @@
             
               <div class="markdown-body">
                 
-                <h3 id="太长不看">太长不看</h3>
-<p>如果导出数据库时使用 GB2312编码，数据里又有汉字“啰”时，会报错，因为
-GB2312 没有收入“啰”字。</p>
-<h3 id="背景">背景</h3>
-<p>最近饱受背单词折磨。之前因为想订制背单词的内容，又不想自己一个一个输入，或者对着
-Excel 背单词，所以使用了 <a
-target="_blank" rel="noopener" href="https://github.com/Term-inator/WordReview">WordReview</a>，可以读取
-Excel
-中的单词到数据库中。过了几轮单词后，我打算把所有没背熟的单词导出，每天看一遍。</p>
-<h3 id="过程">过程</h3>
-<h4 id="编写-sql">编写 SQL</h4>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> word, mean, mnemonic, note <span class="hljs-keyword">FROM</span> `words` <br><span class="hljs-keyword">WHERE</span> history <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%001&#x27;</span> <span class="hljs-keyword">or</span> history <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%00&#x27;</span> <br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> forget_num <span class="hljs-keyword">DESC</span>;<br></code></pre></td></tr></table></figure>
-<p>其中 history 字段记录了单词背诵历史，1 代表记得，0
-代表不记得，所以认为那些最后一次记得但前两次不记得 和 最后两次不记得
-的单词是没背熟的单词。forget_num 代表忘记的次数。</p>
-<h4 id="导出查询结果">导出查询结果</h4>
-<p>查询出数据后，因为想偷懒，所以打算借助 phpmyadmin 导出数据（选择 CSV
-格式，编码
-GB2312），但是导出的文件显示，导出某个单词时产生了报错。然后我把 SQL
-里的 DESC 去掉，再导出，发现在另一个单词处报错。</p>
-<p>找到这两个单词
-diffuse，garrulous，发现它们有一个共同的意思“啰嗦的”。通过控制变量法发现有“啰”就会报错。通过查询才得知
-GB2312
-没有收入“啰”字<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
-class="hint--top hint--rounded"
-aria-label="[为什么许多字体都没有收录啰这个字？](https://www.zhihu.com/question/37745887#:~:text=%E5%87%A0%E4%B9%8E%E6%89%80%E6%9C%89%E7%9A%84%E7%AE%80%E4%BD%93%E6%B1%89%E5%AD%97%E5%AD%97%E5%BA%93%E9%87%87%E7%94%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E4%B8%BA%E4%B8%8A%E4%B8%96%E7%BA%AA80%E5%B9%B4%E4%BB%A3%E9%A2%81%E5%B8%83%E7%9A%84%20GB2312%20%E7%BC%96%E7%A0%81%EF%BC%88%E3%80%8A%E4%BF%A1%E6%81%AF%E4%BA%A4%E6%8D%A2%E7%94%A8%E6%B1%89%E5%AD%97%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E9%9B%86%E3%80%8B%EF%BC%8C%E6%A0%87%E5%87%86%E5%8F%B7%EF%BC%9AGB2312-1980%EF%BC%89%EF%BC%8C%E8%AF%A5%E7%BC%96%E7%A0%81%E5%85%B1%E6%94%B6%E5%85%A56763%E4%B8%AA%E6%B1%89%E5%AD%97%E3%80%82,%E2%80%9C%E5%95%B0%E2%80%9D%20%E5%AD%97%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%94%B6%E5%85%A5%EF%BC%8C%E7%94%B1%E6%AD%A4%E5%AF%BC%E8%87%B4%E6%89%80%E6%9C%89%E9%87%87%E7%94%A8%20GB2312%20%E7%BC%96%E7%A0%81%E7%9A%84%E6%B1%89%E5%AD%97%E5%AD%97%E4%BD%93%E9%83%BD%E6%B2%A1%E6%9C%89%E6%94%B6%E5%85%A5%E8%AF%A5%E5%AD%97%E3%80%82)">[1]</span></a></sup>。</p>
-<p>知道原因后，用 utf-8 导出然后解决中文乱码问题即可。</p>
-<h4 id="解决乱码">解决乱码</h4>
+                <p>本文是本地部署 Nextcloud 的记录。</p>
+<h3 id="有用的链接">有用的链接</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/nextcloud/vm">VM仓库</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://docs.hanssonit.se/s/W6fMouPiqQz3_Mog/virtual-machines-vm/d/W6fMquPiqQz3_Moi/nextcloud-vm">VM文档</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">Ubuntu软件仓库镜像</a></p>
+<h3 id="流程">流程</h3>
 <ol type="1">
-<li>通过 Excel
-解决<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
-class="hint--top hint--rounded"
-aria-label="[mysql load data, select into outfile 导入和导出 CSV格式](https://www.cnblogs.com/digdeep/p/12369244.html)">[2]</span></a></sup>
-<img src="/img/2022/10/31/excel.png" srcset="/img/loading.gif" lazyload /> 如图，选择“从文本/CSV”，以
-Unicode编码 导入数据即可。</li>
-<li>通过记事本解决<br />
-用记事本打开导出的 CSV 文件，然后更改文件编码。</li>
+<li><p>下载 ova</p></li>
+<li><p>导入到 VMware 双击 ova 选择 VMware 打开即可</p></li>
+<li><p>启动虚拟机 启动完成后记录显示的 ip</p></li>
+<li><p>打开终端 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh ncadmin@<span class="hljs-variable">$&#123;ip&#125;</span><br></code></pre></td></tr></table></figure> 密码 nextcloud</p></li>
+<li><p>（可选）使用代理</p></li>
+<li><p>（可选）使用镜像软件源 备份 /etc/apt/sources.list <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">cp</span> /etc/apt/sources.list /etc/apt/sources.list.old<br></code></pre></td></tr></table></figure>
+修改 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo nano /etc/apt/sources.list<br></code></pre></td></tr></table></figure> 用<a
+target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">Ubuntu软件仓库镜像</a>的内容替换原来的内容</p></li>
+<li><p>（如果做了5、6）再次启动部署脚本 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo bash /var/scripts/nextcloud-startup-script.sh<br></code></pre></td></tr></table></figure></p></li>
+<li><p>跟随脚本流程完成部署</p></li>
+<li><p>（可选）扩容磁盘 关闭虚拟机后，右键虚拟机，选择设置 -&gt; 硬盘2
+-&gt; 扩展 <img src="/img/2023/21/expand_disk.png" srcset="/img/loading.gif" lazyload /> 查看 zpool 状态
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zpool status<br></code></pre></td></tr></table></figure> 结果为： <img src="/img/2023/21/zpool_status.png" srcset="/img/loading.gif" lazyload /> 执行
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo partprobe<br>sudo zpool online -e ncdata wwn-0x6000c2979bd2bf346fc8f256f16d4dbd<br></code></pre></td></tr></table></figure></p></li>
+<li><p>（可选）设置透明压缩 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo zfs <span class="hljs-built_in">set</span> compression=lz4 ncdata<br></code></pre></td></tr></table></figure>
+lz4是一种压缩算法，可以选择其他的。<br />
+如果要查看压缩率，执行 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zfs get compressratio ncdata<br></code></pre></td></tr></table></figure> 或 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zfs list -o name,used,logicalused ncdata<br></code></pre></td></tr></table></figure> used
+为实际占用空间，logicalused 为文件大小</p></li>
+<li><p>（可选）配置代理 获取 root 权限 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo -i<br></code></pre></td></tr></table></figure> 进入
+nextcloud/config 目录 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ../../var/www/nextcloud/config<br></code></pre></td></tr></table></figure> 修改 config.php
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$CONFIG</span> = <span class="hljs-keyword">array</span> (<br>   <span class="hljs-string">&#x27;proxy&#x27;</span> =&gt; <span class="hljs-string">&#x27;$&#123;代理ip&#125;:$&#123;代理port&#125;&#x27;</span>,<br>   ...<br>);<br></code></pre></td></tr></table></figure></p></li>
+<li><p>（可选）如果安装 app 时超时 cURL error 28: Operation timed out
+after 120000 milliseconds ... 可以尝试修改
+/nextcloud/lib/private/Installer.php</p></li>
 </ol>
-<h3 id="后记">后记</h3>
-<p>顺带学习一下如何用 SQL 导出 CSV 格式的数据 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> word, mean, mnemonic, note <span class="hljs-keyword">into</span> outfile <span class="hljs-string">&#x27;D:/words.csv&#x27;</span><br>FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;,&#x27;</span> <br>OPTIONALLY<br>ENCLOSED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;&quot;&#x27;</span> ESCAPED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27; &#x27;</span><br>LINES TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;\n&#x27;</span>   <br><span class="hljs-keyword">FROM</span> `words` <span class="hljs-keyword">WHERE</span> history <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%001&#x27;</span> <span class="hljs-keyword">or</span> history <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%00&#x27;</span> <br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> forget_num <span class="hljs-keyword">DESC</span>;<br></code></pre></td></tr></table></figure> TERMINATED
-BY 分隔符（默认：\t）<br />
-ENCLOSED BY 字段括起字符<br />
-ESCAPED BY
-转义字符（默认：\）<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span
+<p>将 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$timeout</span> = <span class="hljs-variable language_">$this</span>-&gt;isCLI ? <span class="hljs-number">0</span> : <span class="hljs-number">120</span>;<br></code></pre></td></tr></table></figure> 修改为 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$timeout</span> = <span class="hljs-variable language_">$this</span>-&gt;isCLI ? <span class="hljs-number">0</span> : <span class="hljs-number">300</span>;<br></code></pre></td></tr></table></figure>
+或更大的值。<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span
 class="hint--top hint--rounded"
-aria-label="[MySQL直接导出CSV文件，并解决中文乱码的问题](https://www.cnblogs.com/xs-yqz/p/7238242.html)">[3]</span></a></sup></p>
+aria-label="[curl error 28](https://help.nextcloud.com/t/curl-error-28-operation-timed-out-after-xxxxxx-milliseconds-with-xxxxxx-out-of-xxxxxx-bytes-received-see-http-curl-haxx-se-libcurl-c-libcurl-errors-html/67621/2)">[3]</span></a></sup></p>
 <h3 id="参考">参考</h3>
 <section class="footnotes">
 <div class="footnote-list">
 <ol>
 <li>
 <span id="fn:1" class="footnote-text"><span><a
-target="_blank" rel="noopener" href="https://www.zhihu.com/question/37745887#:~:text=%E5%87%A0%E4%B9%8E%E6%89%80%E6%9C%89%E7%9A%84%E7%AE%80%E4%BD%93%E6%B1%89%E5%AD%97%E5%AD%97%E5%BA%93%E9%87%87%E7%94%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E4%B8%BA%E4%B8%8A%E4%B8%96%E7%BA%AA80%E5%B9%B4%E4%BB%A3%E9%A2%81%E5%B8%83%E7%9A%84%20GB2312%20%E7%BC%96%E7%A0%81%EF%BC%88%E3%80%8A%E4%BF%A1%E6%81%AF%E4%BA%A4%E6%8D%A2%E7%94%A8%E6%B1%89%E5%AD%97%E7%BC%96%E7%A0%81%E5%AD%97%E7%AC%A6%E9%9B%86%E3%80%8B%EF%BC%8C%E6%A0%87%E5%87%86%E5%8F%B7%EF%BC%9AGB2312-1980%EF%BC%89%EF%BC%8C%E8%AF%A5%E7%BC%96%E7%A0%81%E5%85%B1%E6%94%B6%E5%85%A56763%E4%B8%AA%E6%B1%89%E5%AD%97%E3%80%82,%E2%80%9C%E5%95%B0%E2%80%9D%20%E5%AD%97%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%94%B6%E5%85%A5%EF%BC%8C%E7%94%B1%E6%AD%A4%E5%AF%BC%E8%87%B4%E6%89%80%E6%9C%89%E9%87%87%E7%94%A8%20GB2312%20%E7%BC%96%E7%A0%81%E7%9A%84%E6%B1%89%E5%AD%97%E5%AD%97%E4%BD%93%E9%83%BD%E6%B2%A1%E6%9C%89%E6%94%B6%E5%85%A5%E8%AF%A5%E5%AD%97%E3%80%82">为什么许多字体都没有收录啰这个字？</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref">
+target="_blank" rel="noopener" href="https://dieken.gitlab.io/posts/dynamically-expand-zfs-pool/#:~:text=%E5%8A%A8%E6%80%81%E6%89%A9%E5%AE%B9%20ZFS%20pool%201%20%E5%88%9B%E5%BB%BA%20zpool%EF%BC%9A%20zpool%20create,%E5%9C%A8%20Ubuntu%20%E9%87%8C%E6%89%A7%E8%A1%8C%20zpool%20online%20-e%20test%20vdb">动态扩容ZFS
+pool</a> <a href="#fnref:1" rev="footnote" class="footnote-backref">
 ↩︎</a></span></span>
 </li>
 <li>
-<span id="fn:2"
-class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.cnblogs.com/digdeep/p/12369244.html">mysql
-load data, select into outfile 导入和导出 CSV格式</a>
+<span id="fn:2" class="footnote-text"><span><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/cclethe/article/details/126341073">ZFS分区扩容</a>
 <a href="#fnref:2" rev="footnote" class="footnote-backref">
 ↩︎</a></span></span>
 </li>
 <li>
 <span id="fn:3" class="footnote-text"><span><a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/xs-yqz/p/7238242.html">MySQL直接导出CSV文件，并解决中文乱码的问题</a>
-<a href="#fnref:3" rev="footnote" class="footnote-backref">
+target="_blank" rel="noopener" href="https://help.nextcloud.com/t/curl-error-28-operation-timed-out-after-xxxxxx-milliseconds-with-xxxxxx-out-of-xxxxxx-bytes-received-see-http-curl-haxx-se-libcurl-c-libcurl-errors-html/67621/2">curl
+error 28</a> <a href="#fnref:3" rev="footnote" class="footnote-backref">
 ↩︎</a></span></span>
 </li>
 </ol>
@@ -399,7 +393,7 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/xs-yqz/p/7238242.ht
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%B8%A9%E5%9D%91/" class="category-chain-item">踩坑</a>
+  <a href="/categories/Nextcloud/" class="category-chain-item">Nextcloud</a>
   
   
 
@@ -414,9 +408,13 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/xs-yqz/p/7238242.ht
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/mysql/">#mysql</a>
+        <a href="/tags/Linux/">#Linux</a>
       
-        <a href="/tags/GB2312/">#GB2312</a>
+        <a href="/tags/Nextcloud/">#Nextcloud</a>
+      
+        <a href="/tags/ZFS/">#ZFS</a>
+      
+        <a href="/tags/VMware/">#VMware</a>
       
     </div>
   
@@ -428,8 +426,8 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/xs-yqz/p/7238242.ht
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GB2312 没有收入“啰”字</div>
-      <div>https://term-inator.github.io/2022/10/31/GB2312/</div>
+      <div>Nextcloud VM 部署</div>
+      <div>https://term-inator.github.io/2023/04/17/Nextcloud/</div>
     </div>
     <div class="license-meta">
       
@@ -441,13 +439,13 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/xs-yqz/p/7238242.ht
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年10月31日</div>
+          <div>2023年4月17日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年4月17日</div>
+          <div>2023年4月23日</div>
         </div>
       
       <div class="license-meta-item">
@@ -482,9 +480,9 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/xs-yqz/p/7238242.ht
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/17/Nextcloud/" title="Nextcloud VM 部署">
+                      <a href="/2023/04/18/Ubuntu-proxy/" title="Linux 虚拟机使用主机代理">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Nextcloud VM 部署</span>
+                        <span class="hidden-mobile">Linux 虚拟机使用主机代理</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -492,8 +490,8 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/xs-yqz/p/7238242.ht
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/13/XAMPP-Mysql/" title="InnoDB: Missing MLOG_CHECKPOINT at XXXXX between the checkpoint XXXXX and the end XXXXX.">
-                        <span class="hidden-mobile">InnoDB: Missing MLOG_CHECKPOINT at XXXXX between the checkpoint XXXXX and the end XXXXX.</span>
+                      <a href="/2022/10/31/GB2312/" title="GB2312 没有收入“啰”字">
+                        <span class="hidden-mobile">GB2312 没有收入“啰”字</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
