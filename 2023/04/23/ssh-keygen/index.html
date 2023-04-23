@@ -16,15 +16,15 @@
   <meta name="author" content="Sicong Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一个 ssh key 用在多个 ip 上似乎问题不大，但我还是更希望使用不同的 ssh key。本文作为记录。 创建 ssh key 1ssh-keygen -t rsa -C &quot;$&amp;#123;your_email@example.com&amp;#125;&quot; -f &quot;$&amp;#123;your_ssh_key_path&amp;#125;&quot; 建议的路径为默认路径 C:">
+    <meta name="description" content="一个 ssh key 用在多个 ip 上似乎问题不大，但我还是更希望使用不同的 ssh key。本文作为记录。 创建 ssh key 1ssh-keygen -t rsa -C &quot;$&amp;#123;your_email@example.com&amp;#125;&quot; -f &quot;$&amp;#123;your_ssh_key_path&amp;#125;&quot; 建议的路径为默认路径 1C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows 系统中创建多个 ssh 密钥">
 <meta property="og:url" content="https://term-inator.github.io/2023/04/23/ssh-keygen/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
-<meta property="og:description" content="一个 ssh key 用在多个 ip 上似乎问题不大，但我还是更希望使用不同的 ssh key。本文作为记录。 创建 ssh key 1ssh-keygen -t rsa -C &quot;$&amp;#123;your_email@example.com&amp;#125;&quot; -f &quot;$&amp;#123;your_ssh_key_path&amp;#125;&quot; 建议的路径为默认路径 C:">
+<meta property="og:description" content="一个 ssh key 用在多个 ip 上似乎问题不大，但我还是更希望使用不同的 ssh key。本文作为记录。 创建 ssh key 1ssh-keygen -t rsa -C &quot;$&amp;#123;your_email@example.com&amp;#125;&quot; -f &quot;$&amp;#123;your_ssh_key_path&amp;#125;&quot; 建议的路径为默认路径 1C">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-23T06:12:38.000Z">
-<meta property="article:modified_time" content="2023-04-23T07:31:42.234Z">
+<meta property="article:modified_time" content="2023-04-23T08:25:21.898Z">
 <meta property="article:author" content="Sicong Chen">
 <meta property="article:tag" content="ssh">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          286 字
+          320 字
         
       </span>
     
@@ -310,7 +310,7 @@
 key。本文作为记录。</p>
 <h3 id="创建-ssh-key">创建 ssh key</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -t rsa -C <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;your_email@example.com&#125;</span>&quot;</span> -f <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;your_ssh_key_path&#125;</span>&quot;</span><br></code></pre></td></tr></table></figure>
-<p>建议的路径为默认路径 C:${username}.ssh<em>rsa</em>${filename}</p>
+<p>建议的路径为默认路径 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">C:/Users/<span class="hljs-variable">$&#123;username&#125;</span>/.ssh/id_rsa_<span class="hljs-variable">$&#123;filename&#125;</span><br></code></pre></td></tr></table></figure></p>
 <h3 id="使用特定的-ssh-key">使用特定的 ssh key</h3>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">ssh</span> -i <span class="hljs-variable">$&#123;your_ssh_key_path&#125;</span> <span class="hljs-variable">$&#123;user&#125;</span>@<span class="hljs-variable">$&#123;ip&#125;</span><br></code></pre></td></tr></table></figure>
 
