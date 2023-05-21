@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Linux qpdf 拼接 pdf 文件</title>
+    <link href="/2023/05/17/concatenate-pdf/"/>
+    <url>/2023/05/17/concatenate-pdf/</url>
+    
+    <content type="html"><![CDATA[<ol type="1"><li><p>安装 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install qpdf<br></code></pre></td></tr></table></figure></p></li><li><p>合并 pdf 文件 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">qpdf <span class="hljs-attr">--empty</span> <span class="hljs-attr">--pages</span> file1<span class="hljs-selector-class">.pdf</span> file2<span class="hljs-selector-class">.pdf</span> -- output merged.pdf<br></code></pre></td></tr></table></figure> 将 file2 拼接到 file1 末尾，生成新的merged.pdf</p></li><li><p>穿插合并 pdf 文件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">qpdf --empty --pages file1.pdf 1-<span class="hljs-variable">$&#123;x&#125;</span> file2.pdf 1-<span class="hljs-variable">$&#123;z&#125;</span> file1.pdf <span class="hljs-variable">$&#123;x+1&#125;</span>-<span class="hljs-variable">$&#123;y&#125;</span> -- merged.pdf<br></code></pre></td></tr></table></figure> 按照 file1 1-x 页，file2 1-z页，file1 x+1-y 页的顺序，拼接成 merge.pdf</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Tools</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>Ubuntu</tag>
+      
+      <tag>qpdf</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Windows 系统中创建多个 ssh 密钥</title>
     <link href="/2023/04/23/ssh-keygen/"/>
     <url>/2023/04/23/ssh-keygen/</url>
@@ -120,7 +149,7 @@
     <link href="/2022/10/13/XAMPP-Mysql/"/>
     <url>/2022/10/13/XAMPP-Mysql/</url>
     
-    <content type="html"><![CDATA[<p>标题中的 XXXXX 代表数字</p><h3 id="问题发生时间">问题发生时间</h3><p>2022/10/13</p><h3 id="问题描述">问题描述</h3><p>Xampp mysql 又启动不了了，原因未知，报错如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Log">[Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions<br>[Note] InnoDB: Uses event mutexes<br>[Note] InnoDB: Compressed tables use zlib 1.2.11<br>[Note] InnoDB: Number of pools: 1<br>[Note] InnoDB: Using SSE2 crc32 instructions<br>[Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M<br>[Note] InnoDB: Completed initialization of buffer pool<br>[ERROR] InnoDB: Missing MLOG_CHECKPOINT at 5963236 between the checkpoint 5963236 and the end 5962752.<br>[ERROR] InnoDB: Plugin initialization aborted with error Generic error<br>[Note] InnoDB: Starting shutdown...<br>[ERROR] Plugin &#x27;InnoDB&#x27; init function returned error.<br>[ERROR] Plugin &#x27;InnoDB&#x27; registration as a STORAGE ENGINE failed.<br>[Note] Plugin &#x27;FEEDBACK&#x27; is disabled.<br>[ERROR] Unknown/unsupported storage engine: InnoDB<br>[ERROR] Aborting<br></code></pre></td></tr></table></figure></p><h3 id="环境">环境</h3><p>OS: Win11<br />XAMPP: 3.2.4</p><h3 id="解决方案">解决方案</h3><ol type="1"><li>删除 /mysql/data/ib_logfile<em>（</em>代表数字）</li><li>重启 mysql</li><li>问题解决</li></ol><p><strong>注意</strong>：<br />ib_logfile*是 redolog，所以删除虽然可以解决问题，但可能带来风险。不过目前我没有更好地解决方案。<br />该数据库是我个人使用且业务量不大，从目前的结果看没有丢失数据。</p><h3 id="参考">参考</h3><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><ahref="https://nready.net/xampp-error-mysql-shutdown-unexpectedly-wont-start-again/">XAMPPError: InnoDB/MySQL shutdown unexpectedly won’t start again</a><a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><ahref="https://dba.stackexchange.com/questions/163445/innodb-ignoring-the-redo-log-due-to-missing-mlog-checkpoint">InnoDB:Ignoring the redo log due to missing MLOG_CHECKPOINT</a><a href="#fnref:2" rev="footnote" class="footnote-backref">↩︎</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><ahref="https://support.inductiveautomation.com/hc/en-us/articles/4415186180493-MySQL-or-MariaDB-is-faulted-due-a-startup-error">MySQLor MariaDB is faulted due a startup error</a><a href="#fnref:3" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
+    <content type="html"><![CDATA[<p>标题中的 XXXXX 代表数字</p><h3 id="问题发生时间">问题发生时间</h3><p>2022/10/13</p><h3 id="问题描述">问题描述</h3><p>Xampp mysql 又启动不了了，原因未知，报错如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Log">[Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions<br>[Note] InnoDB: Uses event mutexes<br>[Note] InnoDB: Compressed tables use zlib 1.2.11<br>[Note] InnoDB: Number of pools: 1<br>[Note] InnoDB: Using SSE2 crc32 instructions<br>[Note] InnoDB: Initializing buffer pool, total size = 16M, instances = 1, chunk size = 16M<br>[Note] InnoDB: Completed initialization of buffer pool<br>[ERROR] InnoDB: Missing MLOG_CHECKPOINT at 5963236 between the checkpoint 5963236 and the end 5962752.<br>[ERROR] InnoDB: Plugin initialization aborted with error Generic error<br>[Note] InnoDB: Starting shutdown...<br>[ERROR] Plugin &#x27;InnoDB&#x27; init function returned error.<br>[ERROR] Plugin &#x27;InnoDB&#x27; registration as a STORAGE ENGINE failed.<br>[Note] Plugin &#x27;FEEDBACK&#x27; is disabled.<br>[ERROR] Unknown/unsupported storage engine: InnoDB<br>[ERROR] Aborting<br></code></pre></td></tr></table></figure></p><h3 id="环境">环境</h3><p>OS: Win11<br />XAMPP: 3.2.4</p><h3 id="解决方案">解决方案</h3><ol type="1"><li>删除 /mysql/data/ib_logfile<em>（</em>代表数字）</li><li>重启 mysql</li><li>问题解决</li></ol><p><strong>注意</strong>：<br />ib_logfile*是 redolog，所以删除虽然可以解决问题，但可能带来风险。不过目前我没有更好的解决方案。<br />该数据库是我个人使用且业务量不大，从目前的结果看没有丢失数据。</p><h3 id="参考">参考</h3><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><ahref="https://nready.net/xampp-error-mysql-shutdown-unexpectedly-wont-start-again/">XAMPPError: InnoDB/MySQL shutdown unexpectedly won’t start again</a><a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><ahref="https://dba.stackexchange.com/questions/163445/innodb-ignoring-the-redo-log-due-to-missing-mlog-checkpoint">InnoDB:Ignoring the redo log due to missing MLOG_CHECKPOINT</a><a href="#fnref:2" rev="footnote" class="footnote-backref">↩︎</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><ahref="https://support.inductiveautomation.com/hc/en-us/articles/4415186180493-MySQL-or-MariaDB-is-faulted-due-a-startup-error">MySQLor MariaDB is faulted due a startup error</a><a href="#fnref:3" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
     
     
     <categories>
