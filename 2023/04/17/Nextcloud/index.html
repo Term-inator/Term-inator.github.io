@@ -23,17 +23,17 @@
 <meta property="og:site_name" content="Sicong&#39;s Blog">
 <meta property="og:description" content="本文是本地部署 Nextcloud 的记录。 有用的链接 VM仓库 VM文档 Ubuntu软件仓库镜像 流程  下载 ova 导入到 VMware 双击 ova 选择 VMware 打开即可 启动虚拟机 启动完成后记录显示的 ip 打开终端 1ssh ncadmin@$&amp;#123;ip&amp;#125; 密码 nextcloud （可选）使用代理 （可选）使用镜像软件源 备份 &#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://term-inator.github.io/img/2023/21/expand_disk.png">
-<meta property="og:image" content="https://term-inator.github.io/img/2023/21/zpool_status.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2023/04/17/expand_disk.png">
+<meta property="og:image" content="https://term-inator.github.io/img/2023/04/17/zpool_status.png">
 <meta property="article:published_time" content="2023-04-17T15:23:50.000Z">
-<meta property="article:modified_time" content="2023-04-23T08:10:57.939Z">
+<meta property="article:modified_time" content="2023-05-22T05:57:35.729Z">
 <meta property="article:author" content="Sicong Chen">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Nextcloud">
 <meta property="article:tag" content="ZFS">
 <meta property="article:tag" content="VMware">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://term-inator.github.io/img/2023/21/expand_disk.png">
+<meta name="twitter:image" content="https://term-inator.github.io/img/2023/04/17/expand_disk.png">
   
   
   
@@ -304,7 +304,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年4月23日 下午
+                    本文最后更新于：2023年5月22日 下午
                   
                 
               </p>
@@ -332,9 +332,9 @@ target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/u
 <li><p>（如果做了5、6）再次启动部署脚本 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo bash /var/scripts/nextcloud-startup-script.sh<br></code></pre></td></tr></table></figure></p></li>
 <li><p>跟随脚本流程完成部署</p></li>
 <li><p>（可选）扩容磁盘 关闭虚拟机后，右键虚拟机，选择设置 -&gt; 硬盘2
--&gt; 扩展 <img src="/img/2023/21/expand_disk.png" srcset="/img/loading.gif" lazyload /> 查看 zpool 状态
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zpool status<br></code></pre></td></tr></table></figure> 结果为： <img src="/img/2023/21/zpool_status.png" srcset="/img/loading.gif" lazyload /> 执行
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo partprobe<br>sudo zpool online -e ncdata wwn-0x6000c2979bd2bf346fc8f256f16d4dbd<br></code></pre></td></tr></table></figure></p></li>
+-&gt; 扩展 <img src="/img/2023/04/17/expand_disk.png" srcset="/img/loading.gif" lazyload /> 查看 zpool 状态
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zpool status<br></code></pre></td></tr></table></figure> 结果为： <img src="/img/2023/04/17/zpool_status.png" srcset="/img/loading.gif" lazyload />
+执行 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo partprobe<br>sudo zpool online -e ncdata wwn-0x6000c2979bd2bf346fc8f256f16d4dbd<br></code></pre></td></tr></table></figure></p></li>
 <li><p>（可选）设置透明压缩 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo zfs <span class="hljs-built_in">set</span> compression=lz4 ncdata<br></code></pre></td></tr></table></figure>
 lz4是一种压缩算法，可以选择其他的。<br />
 如果要查看压缩率，执行 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zfs get compressratio ncdata<br></code></pre></td></tr></table></figure> 或 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zfs list -o name,used,logicalused ncdata<br></code></pre></td></tr></table></figure> used
@@ -445,7 +445,7 @@ error 28</a> <a href="#fnref:3" rev="footnote" class="footnote-backref">
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年4月23日</div>
+          <div>2023年5月22日</div>
         </div>
       
       <div class="license-meta-item">

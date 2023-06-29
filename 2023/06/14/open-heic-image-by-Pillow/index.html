@@ -16,26 +16,23 @@
   <meta name="author" content="Sicong Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="安装 1sudo apt-get install qpdf 合并 pdf 文件 1qpdf --empty --pages file1.pdf file2.pdf -- merged.pdf 将 file2 拼接到 file1 末尾，生成新的 merged.pdf 穿插合并 pdf 文件 1qpdf --empty --pages file1.pdf 1-$&amp;#123;x&amp;#125; f">
+    <meta name="description" content="Apple 相册中存在 heic 格式的图片，在 Python 中无法用一般方法打开。 1pip install pillow_heif 123456from PIL import Imagefrom pillow_heif import register_heif_openerregister_heif_opener()image &#x3D; Image.open(&amp;#x27;image.heic">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux qpdf 拼接 pdf 文件">
-<meta property="og:url" content="https://term-inator.github.io/2023/05/17/concatenate-pdf/index.html">
+<meta property="og:title" content="使用 Pillow 库打开 heic heif 格式的图片">
+<meta property="og:url" content="https://term-inator.github.io/2023/06/14/open-heic-image-by-Pillow/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
-<meta property="og:description" content="安装 1sudo apt-get install qpdf 合并 pdf 文件 1qpdf --empty --pages file1.pdf file2.pdf -- merged.pdf 将 file2 拼接到 file1 末尾，生成新的 merged.pdf 穿插合并 pdf 文件 1qpdf --empty --pages file1.pdf 1-$&amp;#123;x&amp;#125; f">
+<meta property="og:description" content="Apple 相册中存在 heic 格式的图片，在 Python 中无法用一般方法打开。 1pip install pillow_heif 123456from PIL import Imagefrom pillow_heif import register_heif_openerregister_heif_opener()image &#x3D; Image.open(&amp;#x27;image.heic">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://term-inator.github.io/img/index/20220914_linux_1280x720.png">
-<meta property="article:published_time" content="2023-05-17T08:42:54.000Z">
-<meta property="article:modified_time" content="2023-05-29T08:05:23.405Z">
+<meta property="article:published_time" content="2023-06-14T12:59:01.000Z">
+<meta property="article:modified_time" content="2023-06-15T15:27:35.389Z">
 <meta property="article:author" content="Sicong Chen">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Ubuntu">
-<meta property="article:tag" content="qpdf">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Pillow">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://term-inator.github.io/img/index/20220914_linux_1280x720.png">
   
   
   
-  <title>Linux qpdf 拼接 pdf 文件 - Sicong&#39;s Blog</title>
+  <title>使用 Pillow 库打开 heic heif 格式的图片 - Sicong&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -217,7 +214,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux qpdf 拼接 pdf 文件"></span>
+            <span id="subtitle" data-typed-text="使用 Pillow 库打开 heic heif 格式的图片"></span>
           
         </div>
 
@@ -228,8 +225,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-17 16:42" pubdate>
-          2023年5月17日 下午
+        <time datetime="2023-06-14 20:59" pubdate>
+          2023年6月14日 晚上
         </time>
       </span>
     
@@ -240,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          314 字
+          230 字
         
       </span>
     
@@ -251,7 +248,7 @@
         
         
         
-          3 分钟
+          2 分钟
         
       </span>
     
@@ -297,12 +294,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Linux qpdf 拼接 pdf 文件</h1>
+            <h1 style="display: none">使用 Pillow 库打开 heic heif 格式的图片</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年5月29日 下午
+                    本文最后更新于：2023年6月15日 晚上
                   
                 
               </p>
@@ -310,14 +307,24 @@
             
               <div class="markdown-body">
                 
-                <ol type="1">
-<li><p>安装 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install qpdf<br></code></pre></td></tr></table></figure></p></li>
-<li><p>合并 pdf 文件 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">qpdf <span class="hljs-attr">--empty</span> <span class="hljs-attr">--pages</span> file1<span class="hljs-selector-class">.pdf</span> file2<span class="hljs-selector-class">.pdf</span> -- merged.pdf<br></code></pre></td></tr></table></figure> 将 file2 拼接到 file1 末尾，生成新的
-merged.pdf</p></li>
-<li><p>穿插合并 pdf 文件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">qpdf --empty --pages file1.pdf 1-<span class="hljs-variable">$&#123;x&#125;</span> file2.pdf 1-<span class="hljs-variable">$&#123;z&#125;</span> file1.pdf <span class="hljs-variable">$&#123;x+1&#125;</span>-<span class="hljs-variable">$&#123;y&#125;</span> -- merged.pdf<br></code></pre></td></tr></table></figure> 按照 file1 1-x 页，file2 1-z
-页，file1 x+1-y 页的顺序，拼接成 merge.pdf 如果写成
-${x+1}-z，则表示一直到最后一页</p></li>
+                <p>Apple 相册中存在 heic 格式的图片，在 Python
+中无法用一般方法打开。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install pillow_heif<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">from</span> pillow_heif <span class="hljs-keyword">import</span> register_heif_opener<br><br>register_heif_opener()<br><br>image = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;image.heic&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="参考">参考</h3>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span><a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/54395735/how-to-work-with-heic-image-file-types-in-python">How
+to work with HEIC image file types in Python</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
 </ol>
+</div>
+</section>
 
                 
               </div>
@@ -336,7 +343,7 @@ ${x+1}-z，则表示一直到最后一页</p></li>
     
       <span class="category-chain">
         
-  <a href="/categories/Tools/" class="category-chain-item">Tools</a>
+  <a href="/categories/Libs/" class="category-chain-item">Libs</a>
   
   
 
@@ -351,11 +358,9 @@ ${x+1}-z，则表示一直到最后一页</p></li>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Linux/">#Linux</a>
+        <a href="/tags/Python/">#Python</a>
       
-        <a href="/tags/Ubuntu/">#Ubuntu</a>
-      
-        <a href="/tags/qpdf/">#qpdf</a>
+        <a href="/tags/Pillow/">#Pillow</a>
       
     </div>
   
@@ -367,8 +372,8 @@ ${x+1}-z，则表示一直到最后一页</p></li>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux qpdf 拼接 pdf 文件</div>
-      <div>https://term-inator.github.io/2023/05/17/concatenate-pdf/</div>
+      <div>使用 Pillow 库打开 heic heif 格式的图片</div>
+      <div>https://term-inator.github.io/2023/06/14/open-heic-image-by-Pillow/</div>
     </div>
     <div class="license-meta">
       
@@ -380,13 +385,13 @@ ${x+1}-z，则表示一直到最后一页</p></li>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月17日</div>
+          <div>2023年6月14日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月29日</div>
+          <div>2023年6月15日</div>
         </div>
       
       <div class="license-meta-item">
@@ -421,18 +426,12 @@ ${x+1}-z，则表示一直到最后一页</p></li>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/22/vite-electron/" title="使用 Electron Vite 初始化 Electron 项目">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">使用 Electron Vite 初始化 Electron 项目</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/23/ssh-keygen/" title="Windows 系统中创建多个 ssh 密钥">
-                        <span class="hidden-mobile">Windows 系统中创建多个 ssh 密钥</span>
+                      <a href="/2023/05/22/vite-electron/" title="使用 Electron Vite 初始化 Electron 项目">
+                        <span class="hidden-mobile">使用 Electron Vite 初始化 Electron 项目</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
