@@ -16,23 +16,26 @@
   <meta name="author" content="Sicong Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Apple 相册中存在 heic 格式的图片，在 Python 中无法用一般方法打开。 1pip install pillow_heif 123456from PIL import Imagefrom pillow_heif import register_heif_openerregister_heif_opener()image &#x3D; Image.open(&amp;#x27;image.heic">
+    <meta name="description" content="我是用 Electron Vite + Prisma + SQlite 做了个项目 Schedule，在用 electron-builder + nsis 打包的时候遇到了问题。 完成这件事会遇到两个问题 1. 数据库在 dev 和 prod 环境路径不同，Prisma 可能找不到数据库 2. 由于 @prisma&#x2F;client 的代码是 Prisma 根据 *.prisma 文件生">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用 Pillow 库打开 heic heif 格式的图片">
-<meta property="og:url" content="https://term-inator.github.io/2023/06/14/open-heic-image-by-Pillow/index.html">
+<meta property="og:title" content="在 Electron Vite 项目中使用 Prisma">
+<meta property="og:url" content="https://term-inator.github.io/2023/07/23/use-prisma-with-electron/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
-<meta property="og:description" content="Apple 相册中存在 heic 格式的图片，在 Python 中无法用一般方法打开。 1pip install pillow_heif 123456from PIL import Imagefrom pillow_heif import register_heif_openerregister_heif_opener()image &#x3D; Image.open(&amp;#x27;image.heic">
+<meta property="og:description" content="我是用 Electron Vite + Prisma + SQlite 做了个项目 Schedule，在用 electron-builder + nsis 打包的时候遇到了问题。 完成这件事会遇到两个问题 1. 数据库在 dev 和 prod 环境路径不同，Prisma 可能找不到数据库 2. 由于 @prisma&#x2F;client 的代码是 Prisma 根据 *.prisma 文件生">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-14T12:59:01.000Z">
-<meta property="article:modified_time" content="2023-06-15T15:27:35.389Z">
+<meta property="og:image" content="https://term-inator.github.io/img/2023/07/23/error.png">
+<meta property="article:published_time" content="2023-07-23T12:21:43.000Z">
+<meta property="article:modified_time" content="2023-07-23T15:31:31.423Z">
 <meta property="article:author" content="Sicong Chen">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="Pillow">
+<meta property="article:tag" content="Vite">
+<meta property="article:tag" content="Electron">
+<meta property="article:tag" content="Prisma">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://term-inator.github.io/img/2023/07/23/error.png">
   
   
   
-  <title>使用 Pillow 库打开 heic heif 格式的图片 - Sicong&#39;s Blog</title>
+  <title>在 Electron Vite 项目中使用 Prisma - Sicong&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +217,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="使用 Pillow 库打开 heic heif 格式的图片"></span>
+            <span id="subtitle" data-typed-text="在 Electron Vite 项目中使用 Prisma"></span>
           
         </div>
 
@@ -225,8 +228,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-14 20:59" pubdate>
-          2023年6月14日 晚上
+        <time datetime="2023-07-23 20:21" pubdate>
+          2023年7月23日 晚上
         </time>
       </span>
     
@@ -237,7 +240,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          230 字
+          1.3k 字
         
       </span>
     
@@ -248,7 +251,7 @@
         
         
         
-          2 分钟
+          11 分钟
         
       </span>
     
@@ -294,12 +297,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">使用 Pillow 库打开 heic heif 格式的图片</h1>
+            <h1 style="display: none">在 Electron Vite 项目中使用 Prisma</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月15日 晚上
+                    本文最后更新于：2023年7月23日 晚上
                   
                 
               </p>
@@ -307,19 +310,45 @@
             
               <div class="markdown-body">
                 
-                <p>Apple 相册中存在 heic 格式的图片，在 Python
-中无法用一般方法打开。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install pillow_heif<br></code></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">from</span> pillow_heif <span class="hljs-keyword">import</span> register_heif_opener<br><br>register_heif_opener()<br><br>image = Image.<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;image.heic&#x27;</span>)<br></code></pre></td></tr></table></figure>
+                <p>我是用 <a target="_blank" rel="noopener" href="https://github.com/alex8088/electron-vite">Electron
+Vite</a> + <a target="_blank" rel="noopener" href="https://github.com/prisma/prisma">Prisma</a> +
+SQlite 做了个项目 <a
+target="_blank" rel="noopener" href="https://github.com/Term-inator/Schedule">Schedule</a>，在用
+electron-builder + nsis 打包的时候遇到了问题。</p>
+<p>完成这件事会遇到两个问题<br />
+1. 数据库在 dev 和 prod 环境路径不同，Prisma 可能找不到数据库<br />
+2. 由于 <span class="citation"
+data-cites="prisma/client">@prisma/client</span> 的代码是 Prisma 根据
+*.prisma 文件生成的，不在 dependencies 中，可能不会被打包</p>
+<h3 id="问题一">问题一</h3>
+<p>prima 文件中默认 dev 环境的数据库 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs prisma">// src/prisma/schema.prisma<br>datasource db &#123;<br>  provider = &quot;sqlite&quot;<br>  url      = &quot;file:./dev.db&quot;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>electron-builder.yml 把 prod 数据库打包进 resources/
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment"># electron-builder.yml</span><br><span class="hljs-attr">extraResources:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;database/**/*&#x27;</span><br></code></pre></td></tr></table></figure></p>
+<p>实例化 PrismaClient 的时候根据 is.dev 计算数据库路径
+dbPath，然后覆盖配置 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// src/main/client.ts</span><br><span class="hljs-keyword">import</span> &#123; is &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@electron-toolkit/utils&#x27;</span><br><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">PrismaClient</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@prisma/client&#x27;</span><br><span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span><br><br><span class="hljs-keyword">const</span> globalForPrisma = globalThis <span class="hljs-keyword">as</span> <span class="hljs-built_in">unknown</span> <span class="hljs-keyword">as</span> &#123; <span class="hljs-attr">prisma</span>: <span class="hljs-title class_">PrismaClient</span> &#125;<br><span class="hljs-keyword">const</span> dbPath = is.<span class="hljs-property">dev</span> ? <span class="hljs-string">&#x27;dev.db&#x27;</span> : path.<span class="hljs-title function_">join</span>(process.<span class="hljs-property">resourcesPath</span>, <span class="hljs-string">&quot;database/prod.db&quot;</span>)<br><br><span class="hljs-comment">// 保证只有一个实例</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> prisma =<br>  globalForPrisma.<span class="hljs-property">prisma</span> || <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrismaClient</span>(&#123;<br>    <span class="hljs-attr">datasources</span>: &#123;<br>      <span class="hljs-attr">db</span>: &#123;<br>        <span class="hljs-attr">url</span>: <span class="hljs-string">`file:<span class="hljs-subst">$&#123;dbPath&#125;</span>`</span>,<br>      &#125;,<br>    &#125;<br>  &#125;)<br></code></pre></td></tr></table></figure></p>
+<h3 id="问题二">问题二</h3>
+<p>直接打包运行会报错</p>
+<p><img src="/img/2023/07/23/error.png" srcset="/img/loading.gif" lazyload /></p>
+<p>一个简单的解决方法是把 .prisma 和 <span class="citation"
+data-cites="prisma/client">@prisma/client</span> 当作 extraResources
+打包进去</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment"># electron-builder.yml</span><br><span class="hljs-attr">extraResources:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;node_modules/.prisma/**/*&#x27;</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;node_modules/@prisma/client/**/*&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>安装后，resources/ 下就会出现 node_modules 文件夹，运行也不再报错</p>
 <h3 id="参考">参考</h3>
 <section class="footnotes">
 <div class="footnote-list">
 <ol>
 <li>
-<span id="fn:1" class="footnote-text"><span><a
-target="_blank" rel="noopener" href="https://stackoverflow.com/questions/54395735/how-to-work-with-heic-image-file-types-in-python">How
-to work with HEIC image file types in Python</a>
+<span id="fn:1"
+class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/prisma/prisma/issues/9613">Using
+Prisma with the Electron Framework</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2" class="footnote-text"><span><a
+target="_blank" rel="noopener" href="https://github.com/NickyMeuleman/electron-trpc-prisma">electron-trpc-prisma</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
 ↩︎</a></span></span>
 </li>
 </ol>
@@ -343,7 +372,7 @@ to work with HEIC image file types in Python</a>
     
       <span class="category-chain">
         
-  <a href="/categories/Libs/" class="category-chain-item">Libs</a>
+  <a href="/categories/Projects/" class="category-chain-item">Projects</a>
   
   
 
@@ -358,9 +387,11 @@ to work with HEIC image file types in Python</a>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Python/">#Python</a>
+        <a href="/tags/Vite/">#Vite</a>
       
-        <a href="/tags/Pillow/">#Pillow</a>
+        <a href="/tags/Electron/">#Electron</a>
+      
+        <a href="/tags/Prisma/">#Prisma</a>
       
     </div>
   
@@ -372,8 +403,8 @@ to work with HEIC image file types in Python</a>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>使用 Pillow 库打开 heic heif 格式的图片</div>
-      <div>https://term-inator.github.io/2023/06/14/open-heic-image-by-Pillow/</div>
+      <div>在 Electron Vite 项目中使用 Prisma</div>
+      <div>https://term-inator.github.io/2023/07/23/use-prisma-with-electron/</div>
     </div>
     <div class="license-meta">
       
@@ -385,13 +416,13 @@ to work with HEIC image file types in Python</a>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月14日</div>
+          <div>2023年7月23日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月15日</div>
+          <div>2023年7月23日</div>
         </div>
       
       <div class="license-meta-item">
@@ -426,18 +457,12 @@ to work with HEIC image file types in Python</a>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/23/use-prisma-with-electron/" title="在 Electron Vite 项目中使用 Prisma">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">在 Electron Vite 项目中使用 Prisma</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/22/vite-electron/" title="使用 Electron Vite 初始化 Electron 项目">
-                        <span class="hidden-mobile">使用 Electron Vite 初始化 Electron 项目</span>
+                      <a href="/2023/06/14/open-heic-image-by-Pillow/" title="使用 Pillow 库打开 heic heif 格式的图片">
+                        <span class="hidden-mobile">使用 Pillow 库打开 heic heif 格式的图片</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
