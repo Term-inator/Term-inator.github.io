@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Jupyter 无法将含 \begin{align} 的 Markdown 导出为 PDF</title>
+    <link href="/2023/09/06/jupyter-export-pdf-error/"/>
+    <url>/2023/09/06/jupyter-export-pdf-error/</url>
+    
+    <content type="html"><![CDATA[<p>用 jupyter notebook 写作业，导出成 PDF 时(PDF viaLaTex)，出现了错误。</p><p><img src="/img/2023/09/06/error.png" /></p><p>阅读发现和 \end{align} 有关，原因不明。</p><p>用 split 替换 align后，问题解决。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><spanclass="hint--top hint--rounded"aria-label="[Failed to run &#39;xelatex .\notebook.tex -quiet&#39; command when trying to download Jupyter Notebook as PDF](https://stackoverflow.com/questions/62354358/failed-to-run-xelatex-notebook-tex-quiet-command-when-trying-to-download-ju)">[1]</span></a></sup></p><h3 id="参考">参考</h3><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><ahref="https://stackoverflow.com/questions/62354358/failed-to-run-xelatex-notebook-tex-quiet-command-when-trying-to-download-ju">Failedto run 'xelatex ..tex -quiet' command when trying to download JupyterNotebook as PDF</a><a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>Problems(Solved)</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Jupyter</tag>
+      
+      <tag>Markdown</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>在 Electron Vite 项目中使用 Prisma</title>
     <link href="/2023/07/23/use-prisma-with-electron/"/>
     <url>/2023/07/23/use-prisma-with-electron/</url>
