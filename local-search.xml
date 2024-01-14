@@ -4,6 +4,62 @@
   
   
   <entry>
+    <title>RStudio 生成 pdf 文件失败</title>
+    <link href="/2024/01/14/RStudio-complie-pdf-report-failed/"/>
+    <url>/2024/01/14/RStudio-complie-pdf-report-failed/</url>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述">问题描述</h3><p>将 R Script 转换为 pdf 文件时，出现如下错误： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">! LaTeX Error: Unicode character 载 (U+8F7D)<br>               not <span class="hljs-built_in">set</span> up <span class="hljs-keyword">for</span> use with LaTeX.<br></code></pre></td></tr></table></figure></p><h3 id="环境">环境</h3><p>OS: Win11<br />RStudio: 2023.12.0 Build 369<br />R: 4.3.2<br /></p><h3 id="解决方案">解决方案</h3><p>载入包时会输出一些信息，如 library(UsingR) 会输出： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">## Loading required package: MASS</span><br><span class="hljs-comment">## Loading required package: HistData</span><br><span class="hljs-comment">## Loading required package: Hmisc</span><br></code></pre></td></tr></table></figure>如果系统语言是中文，这些信息会是中文 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">## 载入需要的程辑包：MASS</span><br><span class="hljs-comment">## 载入需要的程辑包：HistData</span><br><span class="hljs-comment">## 载入需要的程辑包：Hmisc</span><br></code></pre></td></tr></table></figure> 对于 library函数，可以使用 SuppressPackageStartupMessages 函数来禁止输出信息<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs r">suppressPackageStartupMessages<span class="hljs-punctuation">(</span>library<span class="hljs-punctuation">(</span>UsingR<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure></p><p>可以先生成 HTML文件查看是否有中文，然后修改那些会输出中文的语句<br />比如删除 help 函数</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>R</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>R</tag>
+      
+      <tag>RStudio</tag>
+      
+      <tag>LaTeX</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Windows CMD [已退出进程，代码为 1 (0x00000001)]</title>
+    <link href="/2024/01/14/windows-terminal/"/>
+    <url>/2024/01/14/windows-terminal/</url>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述">问题描述</h3><p>卸载 Anaconda 后， 打开 CMD(命令提示符) 时，出现如下错误：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[已退出进程，代码为 1 (0x00000001)] 现在可以使用Ctrl+D关闭此终端，或按 Enter 重新启动。<br></code></pre></td></tr></table></figure> Windows PowerShell 正常</p><h3 id="环境">环境</h3><p>OS: Win11</p><h3 id="解决方案">解决方案</h3><ol type="1"><li>打开注册表 win + r 输入 regedit</li><li>将 HKEY_CURRENT_USERProcessor 中的 AutoRun 赋值为空</li><li>将 HKEY_LOCAL_MACHINEProcessor 中的 AutoRun赋值为空（我这里没有这个键值）</li><li>问题解决</li></ol><h3 id="参考">参考</h3><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><ahref="https://www.zhihu.com/question/464682040">Win10打开cmd闪退怎么办？</a><a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><ahref="https://blog.csdn.net/differencer/article/details/126809272#:~:text=%E8%A7%A3%E5%86%B3%EF%BC%9A%E5%8D%B8%E8%BD%BDanaconda%E5%90%8E%20cmd%E9%97%AA%E9%80%80%E6%88%96%E6%89%93%E4%B8%8D%E5%BC%80%201%20win%E9%94%AE%2Br%20%E8%BE%93%E5%85%A5regedit%20%E5%9B%9E%E8%BD%A6%EF%BC%8C%E6%89%93%E5%BC%80%E6%B3%A8%E5%86%8C%E8%A1%A8%E7%BC%96%E8%BE%91%E5%99%A8%E9%A1%B5%E9%9D%A2%202%20%E6%89%BE%E5%88%B0HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CCommand,Processor%E6%96%87%E4%BB%B6%E5%A4%B9%20%E5%A6%82%E6%9E%9C%E6%9C%89AutoRun%E8%BF%99%E4%B8%AA%E5%8F%98%E9%87%8F%EF%BC%8C%E5%88%99%E5%B0%86%E5%8F%98%E9%87%8F%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E2%80%9C%E7%BD%AE%E7%A9%BA%E2%80%9D%20%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89AutoRun%E8%BF%99%E4%B8%AA%E5%8F%98%E9%87%8F%EF%BC%8C%E5%88%99%E5%8F%B3%E9%94%AE%EF%BC%8C%E7%82%B9%E5%87%BB%E6%96%B0%E5%BB%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%BC%EF%BC%8C%E5%8F%98%E9%87%8F%E5%90%8D%E7%A7%B0%E5%91%BD%E5%90%8D%E4%B8%BAAutoRun%EF%BC%8C%E5%8F%98%E9%87%8F%E6%95%B0%E5%80%BC%E4%B8%8D%E7%94%A8%E8%AE%BE%E7%BD%AE%EF%BC%8C%E8%87%AA%E5%8A%A8%E5%B0%B1%E6%98%AF%E7%A9%BA%E5%80%BC%E3%80%82%203%20%E6%89%BE%E5%88%B0%20HKEY_LOCAL_MACHINE%5CSoftware%5CMicrosoft%5CCommand%20Processor%20%E5%90%8C%E6%A0%B7%E6%89%BEAutoRun%EF%BC%8C%E4%B8%8E%E4%B8%8A%E4%B8%80%E6%AD%A5%E7%9B%B8%E5%90%8C%E6%93%8D%E4%BD%9C">解决：卸载anaconda后cmd闪退或打不开</a><a href="#fnref:2" rev="footnote" class="footnote-backref">↩︎</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><ahref="https://github.com/ContinuumIO/anaconda-issues/issues/11702">Anacondauninstall left my system broken</a><a href="#fnref:3" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>Problems(Solved)</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Windows</tag>
+      
+      <tag>terminal</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Jupyter 无法将含 \begin{align} 的 Markdown 导出为 PDF</title>
     <link href="/2023/09/06/jupyter-export-pdf-error/"/>
     <url>/2023/09/06/jupyter-export-pdf-error/</url>
