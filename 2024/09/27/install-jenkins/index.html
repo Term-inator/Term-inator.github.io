@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://term-inator.github.io/img/2024/09/27/jenkins.png">
 <meta property="article:published_time" content="2024-09-27T21:56:31.000Z">
-<meta property="article:modified_time" content="2024-09-29T21:11:40.961Z">
+<meta property="article:modified_time" content="2024-10-01T19:46:37.960Z">
 <meta property="article:author" content="Sicong Chen">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Ubuntu">
@@ -302,7 +302,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年9月29日 下午
+                    本文最后更新于 2024年10月1日 下午
                   
                 
               </p>
@@ -316,7 +316,7 @@
 <li><p>下载并运行 docker:dind Docker 镜像以在 Jenkins 节点内执行 Docker
 命令 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run --name jenkins-docker --<span class="hljs-built_in">rm</span> --detach \<br>  --privileged --network jenkins --network-alias docker \<br>  --<span class="hljs-built_in">env</span> DOCKER_TLS_CERTDIR=/certs \<br>  --volume jenkins-docker-certs:/certs/client \<br>  --volume jenkins-data:/var/jenkins_home \<br>  --publish 2376:2376 \<br>  docker:dind --storage-driver overlay2<br></code></pre></td></tr></table></figure></p></li>
 <li><p>自定义 Jenkins Docker 镜像 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Dockerfile"><span class="hljs-keyword">FROM</span> jenkins/jenkins:<span class="hljs-number">2.462</span>.<span class="hljs-number">2</span>-jdk17<br><span class="hljs-keyword">USER</span> root<br><span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y lsb-release</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \</span><br><span class="language-bash">  https://download.docker.com/linux/debian/gpg</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb [arch=<span class="hljs-subst">$(dpkg --print-architecture)</span> \</span></span><br><span class="hljs-string"><span class="language-bash">  signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \</span></span><br><span class="hljs-string"><span class="language-bash">  https://download.docker.com/linux/debian \</span></span><br><span class="hljs-string"><span class="language-bash">  <span class="hljs-subst">$(lsb_release -cs)</span> stable&quot;</span> &gt; /etc/apt/sources.list.d/docker.list</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y docker-ce-cli</span><br><span class="hljs-keyword">USER</span> jenkins<br><span class="hljs-keyword">RUN</span><span class="language-bash"> jenkins-plugin-cli --plugins <span class="hljs-string">&quot;blueocean docker-workflow&quot;</span></span><br></code></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker build -t myjenkins-blueocean:2.462.2-1 .<br></code></pre></td></tr></table></figure></p></li>
-<li><p>运行 Jenkins Docker 镜像 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run --name <span class="hljs-variable">$&#123;your_container_name&#125;</span> \<br>  -u root --restart=on-failure --detach \<br>  --network jenkins --<span class="hljs-built_in">env</span> DOCKER_HOST=tcp://docker:2376 \<br>  --<span class="hljs-built_in">env</span> DOCKER_CERT_PATH=/certs/client --<span class="hljs-built_in">env</span> DOCKER_TLS_VERIFY=1 \<br>  --<span class="hljs-built_in">env</span> JENKINS_OPTS=<span class="hljs-string">&quot;–-prefix=/<span class="hljs-variable">$&#123;your_prefix&#125;</span>&quot;</span> \<br>  --publish 20000:8080 --publish 50000:50000 \<br>  --volume jenkins-data:/var/jenkins_home \<br>  --volume jenkins-docker-certs:/certs/client:ro \<br>  myjenkins-blueocean:2.462.2-1<br></code></pre></td></tr></table></figure></p></li>
+<li><p>运行 Jenkins Docker 镜像 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run --name <span class="hljs-variable">$&#123;your_container_name&#125;</span> \<br>  -u root --restart=on-failure --detach \<br>  --network jenkins --<span class="hljs-built_in">env</span> DOCKER_HOST=tcp://docker:2376 \<br>  --<span class="hljs-built_in">env</span> DOCKER_CERT_PATH=/certs/client --<span class="hljs-built_in">env</span> DOCKER_TLS_VERIFY=1 \<br>  --<span class="hljs-built_in">env</span> JENKINS_OPTS=<span class="hljs-string">&quot;--prefix=/<span class="hljs-variable">$&#123;your_prefix&#125;</span>&quot;</span> \<br>  --publish 20000:8080 --publish 50000:50000 \<br>  --volume jenkins-data:/var/jenkins_home \<br>  --volume jenkins-docker-certs:/certs/client:ro \<br>  myjenkins-blueocean:2.462.2-1<br></code></pre></td></tr></table></figure></p></li>
 </ol>
 <p>--prefix=/${your_prefix}/ 用于配置 Jenkins 的路径前缀</p>
 <h3 id="配置-nginx-反向代理">配置 Nginx 反向代理</h3>
@@ -375,7 +375,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年9月29日</div>
+          <div>2024年10月1日</div>
         </div>
       
       
