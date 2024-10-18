@@ -239,6 +239,110 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2024/10/18/install-miniconda/" target="_self">
+          <img src="/img/default.png" srcset="/img/loading.gif" lazyload alt="在 Ubuntu 上安装 Miniconda">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/10/18/install-miniconda/" target="_self">
+          在 Ubuntu 上安装 Miniconda
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/2024/10/18/install-miniconda/" target="_self">
+        <div>
+          Anaconda 很好用，但某些限制存储空间的情况下，可以考虑安装 Miniconda。 下载 Miniconda 安装脚本 1wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh 运行安装脚本 1bash Miniconda3-latest-Linux-x86_64.sh 一般情况，Min
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-10-18 00:17" pubdate>
+              2024-10-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+              <a href="/tags/Ubuntu/">#Ubuntu</a>
+            
+              <a href="/tags/Python/">#Python</a>
+            
+              <a href="/tags/Miniconda/">#Miniconda</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2024/10/18/install-scons-and-valgrind/" target="_self">
+          <img src="/img/default.png" srcset="/img/loading.gif" lazyload alt="在 Ubuntu 上安装 SCons 和 Valgrind">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/10/18/install-scons-and-valgrind/" target="_self">
+          在 Ubuntu 上安装 SCons 和 Valgrind
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/2024/10/18/install-scons-and-valgrind/" target="_self">
+        <div>
+          准备 Python 环境 在 Ubuntu 上安装 Miniconda 安装 SCons 激活 Miniconda 环境后，执行以下命令安装 SCons： 12pip install sconsscons --version 安装 Valgrind  下载 Valgrind 源代码 12wget https://sourceware.org/pub/valgrind/valgrind
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-10-18 00:00" pubdate>
+              2024-10-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+              <a href="/tags/Ubuntu/">#Ubuntu</a>
+            
+              <a href="/tags/SCons/">#SCons</a>
+            
+              <a href="/tags/Valgrind/">#Valgrind</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2024/09/27/install-jenkins/" target="_self">
           <img src="/img/default.png" srcset="/img/loading.gif" lazyload alt="在 Ubuntu 20.04 上部署 Jenkins 并配置 Nginx 反向代理">
         </a>
@@ -255,7 +359,7 @@
       
       <a class="index-excerpt " href="/2024/09/27/install-jenkins/" target="_self">
         <div>
-          通过 Docker 部署  创建一个 Docker 网络 1docker network create jenkins 下载并运行 docker:dind Docker 镜像以在 Jenkins 节点内执行 Docker 命令 1234567docker run --name jenkins-docker --rm --detach \  --privileged --network je
+          通过 Docker 部署  创建一个 Docker 网络 1docker network create jenkins 自定义 Jenkins Docker 镜像 123456789101112FROM jenkins/jenkins:2.462.2-jdk17USER rootRUN apt-get update &amp;&amp; apt-get install -y lsb-rele
         </div>
       </a>
 
@@ -771,144 +875,6 @@
               <a href="/tags/Vite/">#Vite</a>
             
               <a href="/tags/Electron/">#Electron</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/05/17/concatenate-pdf/" target="_self">
-          <img src="/img/index/20220914_linux_1280x720.png" srcset="/img/loading.gif" lazyload alt="Linux qpdf 拼接 pdf 文件">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/05/17/concatenate-pdf/" target="_self">
-          Linux qpdf 拼接 pdf 文件
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/2023/05/17/concatenate-pdf/" target="_self">
-        <div>
-          安装 1sudo apt-get install qpdf 合并 pdf 文件 1qpdf --empty --pages file1.pdf file2.pdf -- merged.pdf 将 file2 拼接到 file1 末尾，生成新的 merged.pdf 穿插合并 pdf 文件 1qpdf --empty --pages file1.pdf 1-$&#123;x&#125; f
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-17 16:42" pubdate>
-              2023-05-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Tools/" class="category-chain-item">Tools</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">#Linux</a>
-            
-              <a href="/tags/Ubuntu/">#Ubuntu</a>
-            
-              <a href="/tags/qpdf/">#qpdf</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/04/23/ssh-keygen/" target="_self">
-          <img src="/img/default.png" srcset="/img/loading.gif" lazyload alt="Windows 系统中创建多个 ssh 密钥">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/04/23/ssh-keygen/" target="_self">
-          Windows 系统中创建多个 ssh 密钥
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/2023/04/23/ssh-keygen/" target="_self">
-        <div>
-          一个 ssh key 用在多个 ip 上似乎问题不大，但我还是更希望使用不同的 ssh key。本文作为记录。 创建 ssh key 1ssh-keygen -t rsa -C &quot;$&#123;your_email@example.com&#125;&quot; -f &quot;$&#123;your_ssh_key_path&#125;&quot; 建议的路径为默认路径 1C
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-23 14:12" pubdate>
-              2023-04-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/ssh/" class="category-chain-item">ssh</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/ssh/">#ssh</a>
             
           </div>
         
