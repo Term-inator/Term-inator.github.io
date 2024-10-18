@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>WSL2 导入和导出</title>
+    <link href="/2024/10/18/wsl2-import-and-export/"/>
+    <url>/2024/10/18/wsl2-import-and-export/</url>
+    
+    <content type="html"><![CDATA[<p>WSL 的虚拟磁盘 ext4.vdhx只会随着数据的增加自动扩展，但不会自动缩小。导出压缩再导入似乎是一种解决方法，但我并没有成功。所以想到虚拟机创建镜像的方式，在某个时间节点备份一下 WSL的数据，达到缩小磁盘的目的，同时避免重装系统带来的重复的配置工作。</p><h3 id="导出-wsl">导出 WSL</h3><ol type="1"><li><p>查看 WSL 发行版列表 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--list</span><br></code></pre></td></tr></table></figure></p></li><li><p>关闭 WSL <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--shutdown</span><br></code></pre></td></tr></table></figure> 或 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--terminate</span> <span class="hljs-variable">$</span>&#123;wsl&#125;<br></code></pre></td></tr></table></figure></p></li><li><p>导出 WSL 发行版 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--export</span> <span class="hljs-variable">$</span>&#123;wsl&#125; <span class="hljs-variable">$</span>&#123;path&#125;<br></code></pre></td></tr></table></figure></p></li></ol><ul><li>wsl 是发行版名称，如 Ubuntu-20.04</li><li>path 是导出的路径，如 <code>D:\wsl\Ubuntu-20.04.tar</code></li></ul><p>此处导出的文件就可以作为系统的备份。</p><h3 id="导入-wsl">导入 WSL</h3><p>由于 wsl --import 需要指定一个安装路径，我采用先删除再创建新的WSL，创建时导入备份文件。</p><ol type="1"><li><p>在 PowerShell 中查看 WSL 发行版路径 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Get-ChildItem</span> <span class="hljs-string">&quot;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&quot;</span> | <span class="hljs-built_in">ForEach-Object</span> &#123;<br>    <span class="hljs-built_in">Get-ItemProperty</span> <span class="hljs-variable">$_</span>.PSPath | <span class="hljs-built_in">Select-Object</span> DistributionName, BasePath<br>&#125;<br></code></pre></td></tr></table></figure>这里是为了把新系统安装到相同的路径，如果不需要可以跳过这一步。</p><p>如果得到类似C:\Users\user\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc\LocalState这样的路径，说明 WSL 是通过 Microsoft Store 安装的，不建议在 import时指定相同的路径，因为这样可能会导致系统不稳定或损坏现有的发行版（没试过）。</p><p>如果一定要安装到相同的路径，可以先备份 ext4.vhdx 文件，然后删除 WSL发行版，创建新的 WSL 后，把新的 ext4.vhdx 文件删除，再把备份的 ext4.vhdx文件放到那里（也没试过）<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><spanclass="hint--top hint--rounded"aria-label="[wsl2子系统的备份和还原](https://www.cnblogs.com/Chary/p/18011740)">[1]</span></a></sup>。</p></li><li><p>删除 WSL 发行版 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--unregister</span> <span class="hljs-variable">$</span>&#123;wsl&#125;<br></code></pre></td></tr></table></figure></p></li></ol><ul><li>wsl 是发行版名称，如 Ubuntu-20.04</li></ul><ol type="1"><li>创建 WSL 发行版 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--import</span> <span class="hljs-variable">$</span>&#123;wsl&#125; <span class="hljs-variable">$</span>&#123;path&#125; <span class="hljs-variable">$</span>&#123;tar&#125;<br></code></pre></td></tr></table></figure></li></ol><ul><li>wsl 是发行版名称，如 Ubuntu-20.04</li><li>path 是安装路径，如 <code>D:\wsl\Ubuntu-20.04</code></li><li>tar 是备份文件路径，如 <code>D:\wsl\Ubuntu-20.04.tar</code></li></ul><h3 id="参考">参考</h3><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><ahref="https://www.cnblogs.com/Chary/p/18011740">wsl2子系统的备份和还原</a><a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>WSL</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>在 Ubuntu 上安装 Miniconda</title>
     <link href="/2024/10/18/install-miniconda/"/>
     <url>/2024/10/18/install-miniconda/</url>

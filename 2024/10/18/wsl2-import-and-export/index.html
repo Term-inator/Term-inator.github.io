@@ -16,25 +16,23 @@
   <meta name="author" content="Sicong Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Anaconda 很好用，但某些限制存储空间的情况下，可以考虑安装 Miniconda。 下载 Miniconda 安装脚本 1wget https:&#x2F;&#x2F;repo.anaconda.com&#x2F;miniconda&#x2F;Miniconda3-latest-Linux-x86_64.sh 运行安装脚本 1bash Miniconda3-latest-Linux-x86_64.sh 一般情况，Min">
+    <meta name="description" content="WSL 的虚拟磁盘 ext4.vdhx 只会随着数据的增加自动扩展，但不会自动缩小。导出压缩再导入似乎是一种解决方法，但我并没有成功。 所以想到虚拟机创建镜像的方式，在某个时间节点备份一下 WSL 的数据，达到缩小磁盘的目的，同时避免重装系统带来的重复的配置工作。 导出 WSL  查看 WSL 发行版列表 1wsl --list 关闭 WSL 1wsl --shutdown 或 1w">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在 Ubuntu 上安装 Miniconda">
-<meta property="og:url" content="https://term-inator.github.io/2024/10/18/install-miniconda/index.html">
+<meta property="og:title" content="WSL2 导入和导出">
+<meta property="og:url" content="https://term-inator.github.io/2024/10/18/wsl2-import-and-export/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
-<meta property="og:description" content="Anaconda 很好用，但某些限制存储空间的情况下，可以考虑安装 Miniconda。 下载 Miniconda 安装脚本 1wget https:&#x2F;&#x2F;repo.anaconda.com&#x2F;miniconda&#x2F;Miniconda3-latest-Linux-x86_64.sh 运行安装脚本 1bash Miniconda3-latest-Linux-x86_64.sh 一般情况，Min">
+<meta property="og:description" content="WSL 的虚拟磁盘 ext4.vdhx 只会随着数据的增加自动扩展，但不会自动缩小。导出压缩再导入似乎是一种解决方法，但我并没有成功。 所以想到虚拟机创建镜像的方式，在某个时间节点备份一下 WSL 的数据，达到缩小磁盘的目的，同时避免重装系统带来的重复的配置工作。 导出 WSL  查看 WSL 发行版列表 1wsl --list 关闭 WSL 1wsl --shutdown 或 1w">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-10-18T05:17:44.000Z">
-<meta property="article:modified_time" content="2024-10-18T06:55:25.411Z">
+<meta property="article:published_time" content="2024-10-18T14:14:57.000Z">
+<meta property="article:modified_time" content="2024-10-18T14:56:57.229Z">
 <meta property="article:author" content="Sicong Chen">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Ubuntu">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="Miniconda">
+<meta property="article:tag" content="WSL">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>在 Ubuntu 上安装 Miniconda - Sicong&#39;s Blog</title>
+  <title>WSL2 导入和导出 - Sicong&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -215,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="在 Ubuntu 上安装 Miniconda"></span>
+            <span id="subtitle" data-typed-text="WSL2 导入和导出"></span>
           
         </div>
 
@@ -226,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-18 00:17" pubdate>
-          2024年10月18日 凌晨
+        <time datetime="2024-10-18 09:14" pubdate>
+          2024年10月18日 上午
         </time>
       </span>
     
@@ -238,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          222 字
+          490 字
         
       </span>
     
@@ -249,7 +247,7 @@
         
         
         
-          2 分钟
+          5 分钟
         
       </span>
     
@@ -294,12 +292,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">在 Ubuntu 上安装 Miniconda</h1>
+            <h1 id="seo-header">WSL2 导入和导出</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年10月18日 凌晨
+                    本文最后更新于 2024年10月18日 上午
                   
                 
               </p>
@@ -307,23 +305,62 @@
             
               <div class="markdown-body">
                 
-                <p>Anaconda 很好用，但某些限制存储空间的情况下，可以考虑安装
-Miniconda。</p>
-<h3 id="下载-miniconda-安装脚本">下载 Miniconda 安装脚本</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh<br></code></pre></td></tr></table></figure>
-<h3 id="运行安装脚本">运行安装脚本</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash Miniconda3-latest-Linux-x86_64.sh<br></code></pre></td></tr></table></figure>
-<p>一般情况，Miniconda 会将安装路径添加到 <code>~/.bashrc</code>
-文件中，下面是添加的内容： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span><br><span class="hljs-comment"># !! Contents within this block are managed by &#x27;conda init&#x27; !!</span><br>__conda_setup=<span class="hljs-string">&quot;<span class="hljs-subst">$(&#x27;/home/$&#123;username&#125;/miniconda3/bin/conda&#x27; &#x27;shell.bash&#x27; &#x27;hook&#x27; 2&gt; /dev/null)</span>&quot;</span><br><span class="hljs-keyword">if</span> [ $? -eq 0 ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$__conda_setup</span>&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-keyword">if</span> [ -f <span class="hljs-string">&quot;/home/<span class="hljs-variable">$&#123;username&#125;</span>/miniconda3/etc/profile.d/conda.sh&quot;</span> ]; <span class="hljs-keyword">then</span><br>        . <span class="hljs-string">&quot;/home/<span class="hljs-variable">$&#123;username&#125;</span>/miniconda3/etc/profile.d/conda.sh&quot;</span><br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;/home/<span class="hljs-variable">$&#123;username&#125;</span>/miniconda3/bin:<span class="hljs-variable">$PATH</span>&quot;</span><br>    <span class="hljs-keyword">fi</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-built_in">unset</span> __conda_setup<br><span class="hljs-comment"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span><br></code></pre></td></tr></table></figure></p>
-<p>如果没有添加，可以手动添加到 <code>~/.bashrc</code> 文件中：
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;/home/<span class="hljs-variable">$&#123;username&#125;</span>/miniconda3/bin:<span class="hljs-variable">$PATH</span>&quot;</span><br></code></pre></td></tr></table></figure></p>
-<h3 id="验证安装">验证安装</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda --version<br></code></pre></td></tr></table></figure>
-<h3 id="更新-miniconda-可选">更新 Miniconda (可选)</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda update conda<br></code></pre></td></tr></table></figure>
-<h3 id="创建虚拟环境">创建虚拟环境</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda create -n <span class="hljs-variable">$&#123;env_name&#125;</span> python=<span class="hljs-variable">$&#123;version&#125;</span><br></code></pre></td></tr></table></figure>
-<p>version 可以是 <code>3.8</code>、<code>3.9</code> 等。</p>
+                <p>WSL 的虚拟磁盘 ext4.vdhx
+只会随着数据的增加自动扩展，但不会自动缩小。导出压缩再导入似乎是一种解决方法，但我并没有成功。
+所以想到虚拟机创建镜像的方式，在某个时间节点备份一下 WSL
+的数据，达到缩小磁盘的目的，同时避免重装系统带来的重复的配置工作。</p>
+<h3 id="导出-wsl">导出 WSL</h3>
+<ol type="1">
+<li><p>查看 WSL 发行版列表 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--list</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>关闭 WSL <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--shutdown</span><br></code></pre></td></tr></table></figure> 或 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--terminate</span> <span class="hljs-variable">$</span>&#123;wsl&#125;<br></code></pre></td></tr></table></figure></p></li>
+<li><p>导出 WSL 发行版 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--export</span> <span class="hljs-variable">$</span>&#123;wsl&#125; <span class="hljs-variable">$</span>&#123;path&#125;<br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<ul>
+<li>wsl 是发行版名称，如 Ubuntu-20.04</li>
+<li>path 是导出的路径，如 <code>D:\wsl\Ubuntu-20.04.tar</code></li>
+</ul>
+<p>此处导出的文件就可以作为系统的备份。</p>
+<h3 id="导入-wsl">导入 WSL</h3>
+<p>由于 wsl --import 需要指定一个安装路径，我采用先删除再创建新的
+WSL，创建时导入备份文件。</p>
+<ol type="1">
+<li><p>在 PowerShell 中查看 WSL 发行版路径 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Get-ChildItem</span> <span class="hljs-string">&quot;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&quot;</span> | <span class="hljs-built_in">ForEach-Object</span> &#123;<br>    <span class="hljs-built_in">Get-ItemProperty</span> <span class="hljs-variable">$_</span>.PSPath | <span class="hljs-built_in">Select-Object</span> DistributionName, BasePath<br>&#125;<br></code></pre></td></tr></table></figure>
+这里是为了把新系统安装到相同的路径，如果不需要可以跳过这一步。</p>
+<p>如果得到类似
+C:\Users\user\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc\LocalState
+这样的路径，说明 WSL 是通过 Microsoft Store 安装的，不建议在 import
+时指定相同的路径，因为这样可能会导致系统不稳定或损坏现有的发行版（没试过）。</p>
+<p>如果一定要安装到相同的路径，可以先备份 ext4.vhdx 文件，然后删除 WSL
+发行版，创建新的 WSL 后，把新的 ext4.vhdx 文件删除，再把备份的 ext4.vhdx
+文件放到那里（也没试过）<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="[wsl2子系统的备份和还原](https://www.cnblogs.com/Chary/p/18011740)">[1]</span></a></sup>。</p></li>
+<li><p>删除 WSL 发行版 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--unregister</span> <span class="hljs-variable">$</span>&#123;wsl&#125;<br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<ul>
+<li>wsl 是发行版名称，如 Ubuntu-20.04</li>
+</ul>
+<ol type="1">
+<li>创建 WSL 发行版 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--import</span> <span class="hljs-variable">$</span>&#123;wsl&#125; <span class="hljs-variable">$</span>&#123;path&#125; <span class="hljs-variable">$</span>&#123;tar&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>wsl 是发行版名称，如 Ubuntu-20.04</li>
+<li>path 是安装路径，如 <code>D:\wsl\Ubuntu-20.04</code></li>
+<li>tar 是备份文件路径，如 <code>D:\wsl\Ubuntu-20.04.tar</code></li>
+</ul>
+<h3 id="参考">参考</h3>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/Chary/p/18011740">wsl2子系统的备份和还原</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
 
                 
               </div>
@@ -338,11 +375,7 @@ Miniconda。</p>
       
         <a href="/tags/Linux/" class="print-no-link">#Linux</a>
       
-        <a href="/tags/Ubuntu/" class="print-no-link">#Ubuntu</a>
-      
-        <a href="/tags/Python/" class="print-no-link">#Python</a>
-      
-        <a href="/tags/Miniconda/" class="print-no-link">#Miniconda</a>
+        <a href="/tags/WSL/" class="print-no-link">#WSL</a>
       
     </div>
   
@@ -354,8 +387,8 @@ Miniconda。</p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>在 Ubuntu 上安装 Miniconda</div>
-      <div>https://term-inator.github.io/2024/10/18/install-miniconda/</div>
+      <div>WSL2 导入和导出</div>
+      <div>https://term-inator.github.io/2024/10/18/wsl2-import-and-export/</div>
     </div>
     <div class="license-meta">
       
@@ -410,18 +443,12 @@ Miniconda。</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/18/wsl2-import-and-export/" title="WSL2 导入和导出">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">WSL2 导入和导出</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/18/install-scons-and-valgrind/" title="在 Ubuntu 上安装 SCons 和 Valgrind">
-                        <span class="hidden-mobile">在 Ubuntu 上安装 SCons 和 Valgrind</span>
+                      <a href="/2024/10/18/install-miniconda/" title="在 Ubuntu 上安装 Miniconda">
+                        <span class="hidden-mobile">在 Ubuntu 上安装 Miniconda</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
