@@ -24,7 +24,7 @@
 <meta property="og:description" content="WSL 的虚拟磁盘 ext4.vdhx 只会随着数据的增加自动扩展，但不会自动缩小。导出压缩再导入似乎是一种解决方法，但我并没有成功。 所以想到虚拟机创建镜像的方式，在某个时间节点备份一下 WSL 的数据，达到缩小磁盘的目的，同时避免重装系统带来的重复的配置工作。 导出 WSL  查看 WSL 发行版列表 1wsl --list 关闭 WSL 1wsl --shutdown 或 1w">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-18T14:14:57.000Z">
-<meta property="article:modified_time" content="2024-10-20T17:01:48.168Z">
+<meta property="article:modified_time" content="2024-12-13T21:38:36.153Z">
 <meta property="article:author" content="Sicong Chen">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="WSL">
@@ -297,7 +297,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年10月20日 中午
+                    本文最后更新于 2024年12月13日 下午
                   
                 
               </p>
@@ -332,7 +332,7 @@ C:\Users\user\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp
 时指定相同的路径，因为这样可能会导致系统不稳定或损坏现有的发行版（没试过）。</p>
 <p>如果一定要安装到相同的路径，可以先备份 ext4.vhdx 文件，然后删除 WSL
 发行版，创建新的 WSL 后，把新的 ext4.vhdx 文件删除，再把备份的 ext4.vhdx
-文件放到那里（也没试过）<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+文件放到那里（<strong>亲测有用</strong>）<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
 class="hint--top hint--rounded"
 aria-label="[wsl2子系统的备份和还原](https://www.cnblogs.com/Chary/p/18011740)">[1]</span></a></sup>。</p></li>
 <li><p>删除 WSL 发行版 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--unregister</span> <span class="hljs-variable">$</span>&#123;wsl&#125;<br></code></pre></td></tr></table></figure></p></li>
@@ -427,7 +427,7 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/Chary/p/18011740">w
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年10月20日</div>
+          <div>2024年12月13日</div>
         </div>
       
       
