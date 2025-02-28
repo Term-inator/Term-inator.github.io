@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
   <link rel="icon" href="/img/fluid.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -54,11 +57,11 @@
 <!-- 主题依赖的图标库，不要自行修改 -->
 <!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -75,7 +78,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"term-inator.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"NSLgCyW2xj2NWaUzqpEOPNUw-gzGzoHsz","app_key":"xF6owlUMqsLa8jfDP652O4sg","server_url":"https://nslgcyw2.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"gtag":"G-5H7MBSHG5R"},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"term-inator.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-5H7MBSHG5R"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"NSLgCyW2xj2NWaUzqpEOPNUw-gzGzoHsz","app_key":"xF6owlUMqsLa8jfDP652O4sg","server_url":"https://nslgcyw2.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -89,7 +92,19 @@
   
 
   
-
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-5H7MBSHG5R", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-5H7MBSHG5R');
+        });
+      }
+    </script>
   
 
   
@@ -103,7 +118,7 @@
 
 
   
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
@@ -116,7 +131,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Sicong Chen&#39;s Blog</strong>
+      <strong>Sicong&#39;s Blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -266,6 +281,7 @@
         </span>
         
       
+      
     
   </div>
 
@@ -324,20 +340,20 @@ target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/u
 <li><p>启动虚拟机 启动完成后记录显示的 ip</p></li>
 <li><p>打开终端 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh ncadmin@<span class="hljs-variable">$&#123;ip&#125;</span><br></code></pre></td></tr></table></figure> 密码 nextcloud</p></li>
 <li><p>（可选）使用代理</p></li>
-<li><p>（可选）使用镜像软件源 备份 /etc/apt/sources.list <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">cp</span> /etc/apt/sources.list /etc/apt/sources.list.old<br></code></pre></td></tr></table></figure>
-修改 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo nano /etc/apt/sources.list<br></code></pre></td></tr></table></figure> 用<a
+<li><p>（可选）使用镜像软件源 备份 /etc/apt/sources.list <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /etc/apt/sources.list /etc/apt/sources.list.old<br></code></pre></td></tr></table></figure>
+修改 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> nano /etc/apt/sources.list<br></code></pre></td></tr></table></figure> 用<a
 target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">Ubuntu软件仓库镜像</a>的内容替换原来的内容</p></li>
-<li><p>（如果做了5、6）再次启动部署脚本 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo bash /var/scripts/nextcloud-startup-script.sh<br></code></pre></td></tr></table></figure></p></li>
+<li><p>（如果做了5、6）再次启动部署脚本 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> bash /var/scripts/nextcloud-startup-script.sh<br></code></pre></td></tr></table></figure></p></li>
 <li><p>跟随脚本流程完成部署</p></li>
 <li><p>（可选）扩容磁盘 关闭虚拟机后，右键虚拟机，选择设置 -&gt; 硬盘2
 -&gt; 扩展 <img src="/img/2023/04/17/expand_disk.png" srcset="/img/loading.gif" lazyload /> 查看 zpool 状态
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zpool status<br></code></pre></td></tr></table></figure> 结果为： <img src="/img/2023/04/17/zpool_status.png" srcset="/img/loading.gif" lazyload />
-执行 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo partprobe<br>sudo zpool online -e ncdata wwn-0x6000c2979bd2bf346fc8f256f16d4dbd<br></code></pre></td></tr></table></figure></p></li>
-<li><p>（可选）设置透明压缩 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo zfs <span class="hljs-built_in">set</span> compression=lz4 ncdata<br></code></pre></td></tr></table></figure>
+执行 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> partprobe<br><span class="hljs-built_in">sudo</span> zpool online -e ncdata wwn-0x6000c2979bd2bf346fc8f256f16d4dbd<br></code></pre></td></tr></table></figure></p></li>
+<li><p>（可选）设置透明压缩 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> zfs <span class="hljs-built_in">set</span> compression=lz4 ncdata<br></code></pre></td></tr></table></figure>
 lz4是一种压缩算法，可以选择其他的。<br />
 如果要查看压缩率，执行 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zfs get compressratio ncdata<br></code></pre></td></tr></table></figure> 或 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">zfs list -o name,used,logicalused ncdata<br></code></pre></td></tr></table></figure> used
 为实际占用空间，logicalused 为文件大小</p></li>
-<li><p>（可选）配置代理 获取 root 权限 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo -i<br></code></pre></td></tr></table></figure> 进入
+<li><p>（可选）配置代理 获取 root 权限 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> -i<br></code></pre></td></tr></table></figure> 进入
 nextcloud/config 目录 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ../../var/www/nextcloud/config<br></code></pre></td></tr></table></figure> 修改 config.php
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$CONFIG</span> = <span class="hljs-keyword">array</span> (<br>   <span class="hljs-string">&#x27;proxy&#x27;</span> =&gt; <span class="hljs-string">&#x27;$&#123;代理ip&#125;:$&#123;代理port&#125;&#x27;</span>,<br>   ...<br>);<br></code></pre></td></tr></table></figure></p></li>
 <li><p>（可选）如果安装 app 时超时 cURL error 28: Operation timed out
@@ -453,15 +469,9 @@ error 28</a> <a href="#fnref:3" rev="footnote" class="footnote-backref">
             
               
               
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
                   <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
-                    <i class="iconfont icon-sa"></i>
+                    <i class="iconfont icon-cc-by"></i>
                   </span>
                 </a>
               
@@ -620,9 +630,9 @@ error 28</a> <a href="#fnref:3" rev="footnote" class="footnote-backref">
     
 
   
+
 </div>
 
-  
   
   
 </div>
@@ -643,7 +653,7 @@ error 28</a> <a href="#fnref:3" rev="footnote" class="footnote-backref">
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -676,7 +686,7 @@ error 28</a> <a href="#fnref:3" rev="footnote" class="footnote-backref">
 
   
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
     var toc = jQuery('#toc');
     if (toc.length === 0 || !window.tocbot) { return; }
     var boardCtn = jQuery('#board-ctn');
@@ -714,14 +724,14 @@ error 28</a> <a href="#fnref:3" rev="footnote" class="footnote-backref">
 </script>
 
 
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
   <script>Fluid.plugins.codeWidget();</script>
 
 
   
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
     window.anchors.options = {
       placement: CONFIG.anchorjs.placement,
       visible  : CONFIG.anchorjs.visible

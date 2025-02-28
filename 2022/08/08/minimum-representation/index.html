@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
   <link rel="icon" href="/img/fluid.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -47,11 +50,11 @@
 <!-- 主题依赖的图标库，不要自行修改 -->
 <!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -68,7 +71,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"term-inator.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"NSLgCyW2xj2NWaUzqpEOPNUw-gzGzoHsz","app_key":"xF6owlUMqsLa8jfDP652O4sg","server_url":"https://nslgcyw2.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"gtag":"G-5H7MBSHG5R"},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"term-inator.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-5H7MBSHG5R"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"NSLgCyW2xj2NWaUzqpEOPNUw-gzGzoHsz","app_key":"xF6owlUMqsLa8jfDP652O4sg","server_url":"https://nslgcyw2.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -82,7 +85,19 @@
   
 
   
-
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-5H7MBSHG5R", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-5H7MBSHG5R');
+        });
+      }
+    </script>
   
 
   
@@ -96,7 +111,7 @@
 
 
   
-<meta name="generator" content="Hexo 7.1.1"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
@@ -109,7 +124,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Sicong Chen&#39;s Blog</strong>
+      <strong>Sicong&#39;s Blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -259,6 +274,7 @@
         </span>
         
       
+      
     
   </div>
 
@@ -310,7 +326,7 @@ class="math inline">\(S\)</span> 循环同构。</p>
 <h3 id="最小表示">最小表示</h3>
 <p>字符串 <span class="math inline">\(S\)</span>
 的循环同构中字典序最小的字符串</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minimumRepresentation</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">number</span> &#123;<br>  <span class="hljs-keyword">let</span> <span class="hljs-attr">len</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">i</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">j</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">n</span>: <span class="hljs-built_in">number</span> = s.<span class="hljs-property">length</span><br>  <span class="hljs-keyword">while</span> (len &lt; n &amp;&amp; i &lt; n &amp;&amp; j &lt; n) &#123;<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">a</span>: <span class="hljs-built_in">string</span> = s[(i + len) % n]<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span> = s[(j + len) % n]<br>    <span class="hljs-keyword">if</span> (a == b) &#123;<br>      ++len<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (a &gt; b) &#123;<br>        ++i<br>      &#125;<br>      <span class="hljs-keyword">else</span> &#123;<br>        ++j<br>      &#125;<br>      len = <span class="hljs-number">0</span><br>      <span class="hljs-keyword">if</span> (i == j) &#123;<br>        ++i<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(i, j)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minimumRepresentation</span>(<span class="hljs-params"><span class="hljs-attr">s</span>: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">number</span> &#123;<br>  <span class="hljs-keyword">let</span> <span class="hljs-attr">len</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">i</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">j</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">n</span>: <span class="hljs-built_in">number</span> = s.<span class="hljs-property">length</span><br>  <span class="hljs-keyword">while</span> (len &lt; n &amp;&amp; i &lt; n &amp;&amp; j &lt; n) &#123;<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">a</span>: <span class="hljs-built_in">string</span> = s[(i + len) % n]<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span> = s[(j + len) % n]<br>    <span class="hljs-keyword">if</span> (a == b) &#123;<br>      ++len<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (a &gt; b) &#123;<br>        ++i<br>      &#125;<br>      <span class="hljs-keyword">else</span> &#123;<br>        ++j<br>      &#125;<br>      len = <span class="hljs-number">0</span><br>      <span class="hljs-keyword">if</span> (i == j) &#123;<br>        ++i<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(i, j)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>算法时间复杂度最好情况 <span
 class="math inline">\(O(n)\)</span>，最坏 <span
 class="math inline">\(O(n^2)\)</span><br />
@@ -343,7 +359,7 @@ S[j+l+1...]\)</span><br />
 所以 <span class="math inline">\(j\)</span> 可以跳过下标 <span
 class="math inline">\([j, j+l]\)</span>，直接去比较 <span
 class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minimumRepresentation</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">number</span> &#123;<br>  <span class="hljs-keyword">let</span> <span class="hljs-attr">len</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">i</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">j</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">n</span>: <span class="hljs-built_in">number</span> = s.<span class="hljs-property">length</span><br>  <span class="hljs-keyword">while</span> (len &lt; n &amp;&amp; i &lt; n &amp;&amp; j &lt; n) &#123;<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">a</span>: <span class="hljs-built_in">string</span> = s[(i + len) % n]<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span> = s[(j + len) % n]<br>    <span class="hljs-keyword">if</span> (a == b) &#123;<br>      ++len<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (a &gt; b) &#123;<br>        i = i + len + <span class="hljs-number">1</span><br>      &#125;<br>      <span class="hljs-keyword">else</span> &#123;<br>        j = j + len + <span class="hljs-number">1</span><br>      &#125;<br>      len = <span class="hljs-number">0</span><br>      <span class="hljs-keyword">if</span> (i == j) &#123;<br>        ++i<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(i, j)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minimumRepresentation</span>(<span class="hljs-params"><span class="hljs-attr">s</span>: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">number</span> &#123;<br>  <span class="hljs-keyword">let</span> <span class="hljs-attr">len</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">i</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">j</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">n</span>: <span class="hljs-built_in">number</span> = s.<span class="hljs-property">length</span><br>  <span class="hljs-keyword">while</span> (len &lt; n &amp;&amp; i &lt; n &amp;&amp; j &lt; n) &#123;<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">a</span>: <span class="hljs-built_in">string</span> = s[(i + len) % n]<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span> = s[(j + len) % n]<br>    <span class="hljs-keyword">if</span> (a == b) &#123;<br>      ++len<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (a &gt; b) &#123;<br>        i = i + len + <span class="hljs-number">1</span><br>      &#125;<br>      <span class="hljs-keyword">else</span> &#123;<br>        j = j + len + <span class="hljs-number">1</span><br>      &#125;<br>      len = <span class="hljs-number">0</span><br>      <span class="hljs-keyword">if</span> (i == j) &#123;<br>        ++i<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(i, j)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>此时时间复杂度稳定在 <span class="math inline">\(O(n)\)</span>。</p>
 
                 
@@ -412,15 +428,9 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
             
               
               
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
                   <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
-                    <i class="iconfont icon-sa"></i>
+                    <i class="iconfont icon-cc-by"></i>
                   </span>
                 </a>
               
@@ -585,9 +595,9 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
     
 
   
+
 </div>
 
-  
   
   
 </div>
@@ -608,7 +618,7 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -641,7 +651,7 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
 
   
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
     var toc = jQuery('#toc');
     if (toc.length === 0 || !window.tocbot) { return; }
     var boardCtn = jQuery('#board-ctn');
@@ -679,14 +689,14 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
 </script>
 
 
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
   <script>Fluid.plugins.codeWidget();</script>
 
 
   
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
     window.anchors.options = {
       placement: CONFIG.anchorjs.placement,
       visible  : CONFIG.anchorjs.visible
@@ -773,7 +783,7 @@ class="math inline">\(S[i] 和 S[j+l+1]\)</span></p>
       </script>
     
 
-  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 
