@@ -24,8 +24,8 @@
 <meta property="og:url" content="https://term-inator.github.io/2022/08/04/899-Orderly-Queue/index.html">
 <meta property="og:site_name" content="Sicong&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-05T04:54:52.000Z">
-<meta property="article:modified_time" content="2022-08-11T16:12:14.909Z">
+<meta property="article:published_time" content="2022-08-04T15:54:52.000Z">
+<meta property="article:modified_time" content="2025-08-31T13:21:16.497Z">
 <meta property="article:author" content="Sicong Chen">
 <meta property="article:tag" content="LeetCode">
 <meta property="article:tag" content="Hard">
@@ -312,7 +312,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2022年8月11日 上午
+                    本文最后更新于 2025年8月31日 晚上
                   
                 
               </p>
@@ -352,7 +352,7 @@ class="math inline">\(O(n \log n)\)</span></p>
 <h3 id="k-1-情况的优化"><span class="math inline">\(k = 1\)</span>
 情况的优化</h3>
 <p><span class="math inline">\(k = 1\)</span> 其实就是求字符串的<a
-href="https://term-inator.github.io/2022/08/08/minimum-representation/">最小表示</a>，可以将时间复杂度优化到
+href="/2022/08/08/minimum-representation/">最小表示</a>，可以将时间复杂度优化到
 <span class="math inline">\(O(n)\)</span>。 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">minimumRepresentation</span>(<span class="hljs-params"><span class="hljs-attr">s</span>: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">number</span> &#123;<br>  <span class="hljs-keyword">let</span> <span class="hljs-attr">len</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">i</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">j</span>: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span><br>  <span class="hljs-keyword">const</span> <span class="hljs-attr">n</span>: <span class="hljs-built_in">number</span> = s.<span class="hljs-property">length</span><br>  <span class="hljs-keyword">while</span> (len &lt; n &amp;&amp; i &lt; n &amp;&amp; j &lt; n) &#123;<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">a</span>: <span class="hljs-built_in">string</span> = s[(i + len) % n]<br>    <span class="hljs-keyword">const</span> <span class="hljs-attr">b</span>: <span class="hljs-built_in">string</span> = s[(j + len) % n]<br>    <span class="hljs-keyword">if</span> (a == b) &#123;<br>      ++len<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (a &gt; b) &#123;<br>        i = i + len + <span class="hljs-number">1</span><br>      &#125;<br>      <span class="hljs-keyword">else</span> &#123;<br>        j = j + len + <span class="hljs-number">1</span><br>      &#125;<br>      len = <span class="hljs-number">0</span><br>      <span class="hljs-keyword">if</span> (i == j) &#123;<br>        ++i<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(i, j)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">orderlyQueue</span>(<span class="hljs-params"><span class="hljs-attr">s</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">k</span>: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">string</span> &#123;<br>    <span class="hljs-keyword">if</span>(s.<span class="hljs-property">length</span> === <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-keyword">return</span> s<br>    &#125;<br>    <span class="hljs-keyword">if</span>(k == <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-keyword">const</span> index = <span class="hljs-title function_">minimumRepresentation</span>(s)<br>        <span class="hljs-keyword">return</span> s.<span class="hljs-title function_">substring</span>(index) + s.<span class="hljs-title function_">substring</span>(<span class="hljs-number">0</span>, index)<br>    &#125;<br>    <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> [...s].<span class="hljs-title function_">sort</span>().<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;&#x27;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p>
 
                 
@@ -422,7 +422,7 @@ href="https://term-inator.github.io/2022/08/08/minimum-representation/">最小�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2022年8月11日</div>
+          <div>2025年8月31日</div>
         </div>
       
       
