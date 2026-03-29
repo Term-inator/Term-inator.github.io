@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN,en,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Sicong Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="背景 最近想在 linux 中玩一些开车游戏，比如 尘埃2（Dirt Rally 2.0）和 神力科莎（Assetto Corsa），但是接上方向盘后发现没有力反馈 环境 宿主机：Proxmox VE 9.1 虚拟机：EndeavourOS 内核版本：6.19.9-arch1-1 方向盘：莱仕达（PXN）V10 Pro 分析 之前安装的 欧卡2 有力反馈，查看 Steam 库发现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch Linux Steam Proton PXN V10 Pro 力反馈问题">
+<meta property="og:url" content="https://term-inator.github.io/2026/03/29/arch-linux-steam-proton-force-feedback/index.html">
+<meta property="og:site_name" content="Sicong&#39;s Blog">
+<meta property="og:description" content="背景 最近想在 linux 中玩一些开车游戏，比如 尘埃2（Dirt Rally 2.0）和 神力科莎（Assetto Corsa），但是接上方向盘后发现没有力反馈 环境 宿主机：Proxmox VE 9.1 虚拟机：EndeavourOS 内核版本：6.19.9-arch1-1 方向盘：莱仕达（PXN）V10 Pro 分析 之前安装的 欧卡2 有力反馈，查看 Steam 库发现">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-29T03:02:29.000Z">
+<meta property="article:modified_time" content="2026-03-29T05:07:14.628Z">
+<meta property="article:author" content="Sicong Chen">
+<meta property="article:tag" content="Proxmox(PVE)">
+<meta property="article:tag" content="Arch Linux">
+<meta property="article:tag" content="EndeavourOS">
+<meta property="article:tag" content="Steam">
+<meta property="article:tag" content="Proton">
+<meta property="article:tag" content="Force Feedback">
+<meta property="article:tag" content="FFB">
+<meta property="article:tag" content="PXN V10 Pro">
+<meta property="article:tag" content="PXN">
+<meta property="article:tag" content="莱仕达">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Arch Linux Steam Proton PXN V10 Pro 力反馈问题 - Sicong&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"term-inator.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-5H7MBSHG5R"},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"NSLgCyW2xj2NWaUzqpEOPNUw-gzGzoHsz","app_key":"xF6owlUMqsLa8jfDP652O4sg","server_url":"https://nslgcyw2.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":true},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-5H7MBSHG5R", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-5H7MBSHG5R');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sicong&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Arch Linux Steam Proton PXN V10 Pro 力反馈问题"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-29 11:02" pubdate>
+          2026年3月29日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Arch Linux Steam Proton PXN V10 Pro 力反馈问题</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2026年3月29日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="背景">背景</h3>
+<p>最近想在 linux 中玩一些开车游戏，比如 尘埃2（Dirt Rally 2.0）和
+神力科莎（Assetto Corsa），但是接上方向盘后发现没有力反馈</p>
+<h3 id="环境">环境</h3>
+<p>宿主机：Proxmox VE 9.1<br />
+虚拟机：EndeavourOS<br />
+内核版本：6.19.9-arch1-1<br />
+方向盘：莱仕达（PXN）V10 Pro</p>
+<h3 id="分析">分析</h3>
+<p>之前安装的 欧卡2 有力反馈，查看 Steam 库发现 欧卡2 支持原生
+linux，而在 Windows 中，尘埃2 和 神力科莎 支持力反馈，所以应该是 Proton
+的问题。尘埃2 还有特殊的问题，因为在 Windows 中要替换 device_defines.xml
+才能让 PXN V10 Pro 的力反馈正常工作，但这个文件不一定能在 Proton
+中正常工作。</p>
+<h3 id="过程">过程</h3>
+<h4
+id="一修改游戏启动参数显式指定-proton-访问-hidraw-设备">一、修改游戏启动参数，显式指定
+Proton 访问 hidraw 设备</h4>
+<ol type="1">
+<li><p>获取 PXN V10 Pro 的 USB 设备 ID <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsusb | grep -i -E <span class="hljs-string">&#x27;pxn&#x27;</span><br>Bus 009 Device 005: ID 36e6:400b PXN PXN V10 Pro<br></code></pre></td></tr></table></figure> 可以看到设备 ID 是
+36e6:400b</p></li>
+<li><p>修改游戏启动参数，添加环境变量
+PROTON_ENABLE_HIDRAW=0x36e6/0x400b，强制 Proton 访问这个设备的 hidraw
+接口 在 Steam
+游戏库中右键点击游戏，选择“属性”，在“启动选项”中添加以下内容：
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">PROTON_LOG=1 WINEDEBUG=+timestamp,+hid,+plugplay,+joystick,+winebus SDL_JOYSTICK_WHEEL_DEVICES=0x36e6/0x400b PROTON_ENABLE_HIDRAW=0x36e6/0x400b %<span class="hljs-built_in">command</span>%<br></code></pre></td></tr></table></figure></p>
+<ul>
+<li>PROTON_LOG=1：生成 ~/steam-690790.log 这类 Proton 日志</li>
+<li>WINEDEBUG=+timestamp,+hid,+plugplay,+joystick,+winebus：把
+HID、即插即用、摇杆、winebus 这些输入相关日志打出来</li>
+<li>SDL_JOYSTICK_WHEEL_DEVICES=0x36e6/0x400b：告诉 SDL
+这个设备是个方向盘</li>
+<li>PROTON_ENABLE_HIDRAW=0x36e6/0x400b：强制 Proton 访问这个设备的
+hidraw 接口</li>
+</ul>
+<p>运行游戏后获取日志 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">grep -Ei <span class="hljs-string">&#x27;hidraw|winebus|joystick|plugplay|36e6|400b|pxn&#x27;</span> ~/steam-690790.<span class="hljs-built_in">log</span> | <span class="hljs-built_in">tail</span> -n 400<br></code></pre></td></tr></table></figure> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs log">4312.688:00b8:trace:hid:maybe_add_devnode Considering /dev/hidraw9...<br>4312.688:00b8:trace:hid:maybe_add_devnode Unable to open &quot;/dev/hidraw9&quot;, ignoring: Permission denied<br>4312.688:00b8:trace:hid:maybe_add_devnode Considering /dev/hidraw2...<br>4312.688:00b8:trace:hid:maybe_add_devnode Unable to open &quot;/dev/hidraw2&quot;, ignoring: Permission denied<br>4312.688:00b8:trace:hid:maybe_add_devnode Considering /dev/hidraw1...<br>4312.688:00b8:trace:hid:maybe_add_devnode Unable to open &quot;/dev/hidraw1&quot;, ignoring: Permission denied<br>4312.688:00b8:trace:hid:maybe_add_devnode Considering /dev/hidraw8...<br>4312.688:00b8:trace:hid:maybe_add_devnode Unable to open &quot;/dev/hidraw8&quot;, ignoring: Permission denied<br>4312.688:00b8:trace:hid:maybe_add_devnode Considering /dev/hidraw7...<br>4312.688:00b8:trace:hid:maybe_add_devnode Unable to open &quot;/dev/hidraw7&quot;, ignoring: Permission denied<br>4312.688:00b8:trace:hid:maybe_add_devnode Considering /dev/hidraw6...<br>4312.688:00b8:trace:hid:maybe_add_devnode Unable to open &quot;/dev/hidraw6&quot;, ignoring: Permission denied<br>4312.688:00b8:trace:hid:maybe_add_devnode Considering /dev/hidraw5...<br>4312.688:00b8:trace:hid:maybe_add_devnode Unable to open &quot;/dev/hidraw5&quot;, ignoring: Permission denied<br>4312.688:00b8:trace:hid:maybe_add_devnode Considering /dev/hidraw4...<br>4312.688:00b8:trace:hid:maybe_add_devnode Unable to open &quot;/dev/hidraw4&quot;, ignoring: Permission denied<br>4312.688:00b8:trace:hid:maybe_add_devnode Considering /dev/hidraw3...<br>4312.688:00b8:trace:hid:maybe_add_devnode Unable to open &quot;/dev/hidraw3&quot;, ignoring: Permission denied<br></code></pre></td></tr></table></figure> 可以看到 Proton 在枚举
+/dev/hidraw* 时提示没有权限访问 hidraw 设备<br />
+hidraw 是 Linux 给 HID (Human Interface Device)
+设备提供的一种“原始访问接口”</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> -l /dev/input/by-id/<br>usb-PXN_PXN_V10_Pro_4171200542288672-hidraw -&gt; ../../hidraw5<br>usb-PXN_PXN_V10_Pro_4171200542288672-if01-hidraw -&gt; ../../hidraw6<br>usb-PXN_PXN_V10_Pro_4171200542288672-if02-hidraw -&gt; ../../hidraw7<br></code></pre></td></tr></table></figure> 可以看到 PXN V10 Pro 的 hidraw 设备是
+hidraw5、hidraw6、hidraw7，但是 Proton
+无法访问这些设备，所以没有力反馈</p></li>
+</ol>
+<h4
+id="二修改-udev-规则给-pxn-v10-pro-的-hidraw-设备添加访问权限">二、修改
+udev 规则，给 PXN V10 Pro 的 hidraw 设备添加访问权限</h4>
+<ol type="1">
+<li><p>查看当前 hidraw 设备的权限 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> -l /dev/hidraw5 /dev/hidraw6 /dev/hidraw7 <br>crw------- 1 root root 242, 5 3月28日 18:57 /dev/hidraw5 <br>crw------- 1 root root 242, 6 3月28日 18:57 /dev/hidraw6 <br>crw------- 1 root root 242, 7 3月28日 18:57 /dev/hidraw7<br></code></pre></td></tr></table></figure> 可以看到这些设备的权限是
+root 用户独占的，所以普通用户无法访问</p></li>
+<li><p>创建 udev 规则文件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/udev/rules.d/99-pxn-v10pro-hidraw.rules &gt;/dev/null &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span><br>KERNEL==<span class="hljs-string">&quot;hidraw*&quot;</span>, SUBSYSTEM==<span class="hljs-string">&quot;hidraw&quot;</span>, MODE=<span class="hljs-string">&quot;0666&quot;</span>, TAG+=<span class="hljs-string">&quot;uaccess&quot;</span><br>EOF<br></code></pre></td></tr></table></figure> 这条 udev 规则会匹配所有 hidraw
+设备节点，并将其权限设置为 0666，也就是允许所有用户读写；<br />
+同时添加 uaccess
+标签，以便系统在支持的会话环境下，为当前本地登录用户自动授予设备访问权限。<br />
+<strong>注意这条规则是比较宽泛的，如果担心安全问题，可以改成更具体的规则。</strong></p></li>
+<li><p>重新加载 udev 规则并触发 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> udevadm control --reload-rules<br><span class="hljs-built_in">sudo</span> udevadm trigger<br></code></pre></td></tr></table></figure></p></li>
+<li><p>重插方向盘后再看 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> -l /dev/hidraw5 /dev/hidraw6 /dev/hidraw7 <br>crw-rw-rw- 1 root root 242, 5 3月28日 20:25 /dev/hidraw5 <br>crw-rw-rw- 1 root root 242, 6 3月28日 20:25 /dev/hidraw6 <br>crw-rw-rw- 1 root root 242, 7 3月28日 20:25 /dev/hidraw7<br></code></pre></td></tr></table></figure> 可以看到这些设备的权限已经变成了
+0666，普通用户可以访问</p></li>
+</ol>
+<h4 id="三修改-device_defines.xml">三、修改 device_defines.xml</h4>
+<p>经过上面的修改后，尘埃2 虽然还没有力反馈，但是
+神力科莎已有力反馈，说明 Proton 已经能够访问到方向盘。<br />
+尘埃2 的问题可能是因为 device_defines.xml 没有正确识别 PXN V10
+Pro，Windows 下能用的 device_defines.xml 可能在 Proton
+中不兼容，所以需要修改一下。</p>
+<p>路径：path_to_steam/steamapps/common/DiRT Rally
+2.0/input/devices/device_defines.xml<br />
+给从莱仕达<a
+target="_blank" rel="noopener" href="https://e-pxn.com.cn/tutorialDetail?id=192">《尘埃2.0》设置教程</a>获取的
+device_defines.xml 中增加以下内容： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;400B36E6-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PXN-V10PRO&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb</span>=<span class="hljs-string">&quot;enabled&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure> <strong>ffb="enabled"
+是否必须未知</strong></p>
+<p>完整的 device_defines.xml： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">device_list</span>&gt;</span><br>  <span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">    Device configuration file.</span><br><span class="hljs-comment">    This file is used to define device definitions and their usage in the game.</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">    To add a new device add a device node with following attributes:</span><br><span class="hljs-comment">      id -  The hardware id for PC devices is essentially &#x27;&#123;PID#VID#-0000-0000-0000-504944564944&#125;&#x27; where PID# and VID# is replaced with the Product ID and Vender ID of the device.</span><br><span class="hljs-comment">            You can get these ID&#x27;s by looking in Devices &amp; Printers, Properties on the required device, Hardware tab, USB Input Device, Properties. In &#x27;Information&#x27; you should see VID_#### and PID_####. </span><br><span class="hljs-comment">            Take the hex values proceeding the underscore and replace into the above sample.</span><br><span class="hljs-comment">            e.g. </span><br><span class="hljs-comment">              &#x27;Device USB\VID_045E&amp;PID_028E&amp;IG_00\8&amp;3afa0edf&amp;0&amp;00 was configured.&#x27;</span><br><span class="hljs-comment">              &#123;028E045E-0000-0000-0000-504944564944&#125;</span><br><span class="hljs-comment">      name - The name of the device matching the name used in the action maps.</span><br><span class="hljs-comment">      priority - The higher the priority the more likely the device is used in automatic selection mode as the steering device over other devices.</span><br><span class="hljs-comment">      &#123;</span><br><span class="hljs-comment">        0 - reserved for not_supported devices</span><br><span class="hljs-comment">        1-5, 99 - reserved for library defaults</span><br><span class="hljs-comment">        6-98 - pads</span><br><span class="hljs-comment">        100+ - wheels</span><br><span class="hljs-comment">      &#125;</span><br><span class="hljs-comment">      version (Optional) - Hardware version of the device, used in conjunction with action map device versioning</span><br><span class="hljs-comment">      type (Optional) - The type of device, if set to &#x27;unknown&#x27; will use the type returned from the driver, otherwise it will overwrite with the selection.</span><br><span class="hljs-comment">      &#123;</span><br><span class="hljs-comment">        wheel</span><br><span class="hljs-comment">        pad</span><br><span class="hljs-comment">        joystick</span><br><span class="hljs-comment">        keyboard</span><br><span class="hljs-comment">        mouse</span><br><span class="hljs-comment">        pedal</span><br><span class="hljs-comment">        shifter</span><br><span class="hljs-comment">        handbreak</span><br><span class="hljs-comment">        unknown - Default</span><br><span class="hljs-comment">        not_supported</span><br><span class="hljs-comment">      &#125;</span><br><span class="hljs-comment">  </span><br><span class="hljs-comment">      ffb (Optional)</span><br><span class="hljs-comment">      &#123;</span><br><span class="hljs-comment">        default - Default - Uses the value returned from the drivers</span><br><span class="hljs-comment">        enabled - Force enables the ffb even if the drivers return disabled.</span><br><span class="hljs-comment">        disabled - Force disables the ffb even if the drivers return enabled.</span><br><span class="hljs-comment">      &#125;</span><br><span class="hljs-comment">      ffb_force (Optional)</span><br><span class="hljs-comment">      &#123;</span><br><span class="hljs-comment">        1.0 - Default</span><br><span class="hljs-comment">      &#125;</span><br><span class="hljs-comment">      ffb_friction (Optional)</span><br><span class="hljs-comment">      &#123;</span><br><span class="hljs-comment">        1.0 - Default</span><br><span class="hljs-comment">      &#125;</span><br><span class="hljs-comment">      ffb_high_pass (Optional)</span><br><span class="hljs-comment">      &#123;</span><br><span class="hljs-comment">        0.0 - Default</span><br><span class="hljs-comment">      &#125;</span><br><span class="hljs-comment">      default (Optional)</span><br><span class="hljs-comment">      &#123;</span><br><span class="hljs-comment">        false - Default</span><br><span class="hljs-comment">        true - Used only by input library defaults</span><br><span class="hljs-comment">      &#125;</span><br><span class="hljs-comment">      collections_max (Optional) -  A collection limit &gt;1 or 0 will allow new devices to be created with the postfix &#x27;_col##&#x27; to the hardware id.</span><br><span class="hljs-comment">                                    These devices can be used to extend functionality with additional device id&#x27;s if the device supports them.</span><br><span class="hljs-comment">                                    e.g.</span><br><span class="hljs-comment">                                      &lt;device id=&quot;&#123;00050EB7-0000-0000-0000-504944564944&#125;&quot; name=&quot;ftec_csl_p1&quot; priority=&quot;100&quot; type=&quot;wheel&quot; collections_max=&quot;2&quot; /&gt;</span><br><span class="hljs-comment">                                    </span><br><span class="hljs-comment">                                    You can now setup an optional collection id to give the second collection it&#x27;s own action map.                                    </span><br><span class="hljs-comment">                                      &lt;device id=&quot;&#123;00050EB7-0000-0000-0000-504944564944&#125;_col02&quot; name=&quot;ftec_csl_p1_col02&quot; priority=&quot;100&quot; type=&quot;wheel&quot; ffb=&quot;disabled&quot; /&gt;</span><br><span class="hljs-comment">      &#123;</span><br><span class="hljs-comment">        0 - No collection limit</span><br><span class="hljs-comment">        1 - Default</span><br><span class="hljs-comment">        &gt;1</span><br><span class="hljs-comment">      &#125;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">    Unknown devices fallback to default libraries defined below in &#x27;Library Default (fallbacks)&#x27; if not manually defined.</span><br><span class="hljs-comment">    Unsupported devices that are not compatible with the game can be added to the &#x27;Not Supported&#x27; list to prevent initialisation.</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">  --&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;038E0EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_clubsport_v1&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;00010EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_clubsport&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;00040EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_clubsport&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;3&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;0E030EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_csl&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;00050EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_csl_ps4&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;18390EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_clubsport_pedal&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pedal&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;183B0EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_clubsport_pedal_v3&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;3&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pedal&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;1A920EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_clubsport_shifter&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;shifter&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;1A930EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_clubsport_handbrake&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;handbrake&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B65A044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_f430&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B677044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_t150&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B66E044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_t300_rs&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_force</span>=<span class="hljs-string">&quot;0.9&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B689044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_ts_pc&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_force</span>=<span class="hljs-string">&quot;0.9&quot;</span> <span class="hljs-attr">ffb_friction</span>=<span class="hljs-string">&quot;1.5&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B667044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_t80&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B67F044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_tmx&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B671044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_f458&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;45030738-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;mc_pro_r&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B65E044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_t500_rs&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_force</span>=<span class="hljs-string">&quot;0.9&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B662044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_t500_rs_f1&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_force</span>=<span class="hljs-string">&quot;0.9&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B660044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_shifter&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;shifter&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C262046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_g920&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C24F046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_g29&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;10201DD2-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sim_steering&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_force</span>=<span class="hljs-string">&quot;0.5&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;22301DD2-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sim_steering&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_force</span>=<span class="hljs-string">&quot;0.5&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;22331DD2-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sim_steering&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;3&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_force</span>=<span class="hljs-string">&quot;0.5&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;05220483-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;simagic ddw&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;324511FF-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PXN-V10 Wheel&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;121211FF-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PXN-V12 Wheel&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;111211FF-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PXN-V12lite Wheel&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;121111FF-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PXN-V12lite Wheel&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;400B36E6-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PXN-V10 Wheel&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb</span>=<span class="hljs-string">&quot;enabled&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;804C1FC9-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;simxperience_accuforce_pro&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;00110EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_csr_elite&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;01970EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_porsche_wheel&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C294046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_driving_force_ex&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;97&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C29A046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_driving_force_gt&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;96&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C298046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_driving_force_pro&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;98&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_friction</span>=<span class="hljs-string">&quot;0.15&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C216046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_dual_action&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;94&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C218046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_f510&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;94&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C219046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_f710_and_cordless_rumblepad_2&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;94&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C299046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_g25&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C29B046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_g27&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;CA03046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lg_momo_racing&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_friction</span>=<span class="hljs-string">&quot;0.15&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;0034045E-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ms_sidewinder_ffb&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb</span>=<span class="hljs-string">&quot;enabled&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;00030E8F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sl_strikefx&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;94&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;910511C0-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sl_torid&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;94&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B323044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_dual_trigger_3_in_1&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;94&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B655044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_fgt_3_in_1&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B653044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_rgt_ffb_pro&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B669044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_tx&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;00080E8F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;grid2_pad&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">official</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;05C4054C-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ps4_pad&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;0BA0054C-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ps4_pad&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B678044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_usb_adapter&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pedal&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;keyboard&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;keyboard&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;keyboard&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;mouse&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;mouse&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;mouse&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;xinput_pad&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;xinput_pad&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;5&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;xinput_wheel&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;xinput_wheel&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;99&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_force</span>=<span class="hljs-string">&quot;10&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;pad_virtual&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;pad_virtual&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;lib_direct_input&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lib_direct_input&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;5&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;unknown&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;lib_direct_input_pad&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lib_direct_input_pad&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;5&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pad&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;lib_direct_input_wheel&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lib_direct_input_wheel&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;99&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;C626046D-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;space_navigator&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;not_supported&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;046DBEEF-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;space_navigator_driver&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;not_supported&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B695044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_tss_hb&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;handbrake&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B692044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_ts_xw&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_force</span>=<span class="hljs-string">&quot;0.9&quot;</span> <span class="hljs-attr">ffb_friction</span>=<span class="hljs-string">&quot;1.5&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B684044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_t_gt&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wheel&quot;</span> <span class="hljs-attr">ffb_force</span>=<span class="hljs-string">&quot;0.9&quot;</span> <span class="hljs-attr">ffb_friction</span>=<span class="hljs-string">&quot;1.5&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;B681044F-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;tm_t_gt&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;not_supported&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">device</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;&#123;62040EB7-0000-0000-0000-504944564944&#125;&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ftec_csl_pedals&quot;</span> <span class="hljs-attr">priority</span>=<span class="hljs-string">&quot;100&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;pedal&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">device_list</span>&gt;</span><br></code></pre></td></tr></table></figure></p>
+<p><strong>注意：必要时可能要重建 Proton 前缀，ID 是
+690790，也可能要重启 Steam 客户端</strong></p>
+<h3 id="后记">后记</h3>
+<p>后来发现之前在 Windows 上装的 尘埃2，内部的 device_defines.xml 里面有
+V10 Pro 的定义，且 ID 是正确的，但是莱仕达官网上下载的
+device_defines.xml 确实没有这一项<br />
+可能是 Windows 对 PXN V10 Pro
+的识别比较好，运行游戏后就自动添加了这一条配置？</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Record/" class="category-chain-item">Record</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Proxmox-PVE/" class="print-no-link">#Proxmox(PVE)</a>
+      
+        <a href="/tags/Arch-Linux/" class="print-no-link">#Arch Linux</a>
+      
+        <a href="/tags/EndeavourOS/" class="print-no-link">#EndeavourOS</a>
+      
+        <a href="/tags/Steam/" class="print-no-link">#Steam</a>
+      
+        <a href="/tags/Proton/" class="print-no-link">#Proton</a>
+      
+        <a href="/tags/Force-Feedback/" class="print-no-link">#Force Feedback</a>
+      
+        <a href="/tags/FFB/" class="print-no-link">#FFB</a>
+      
+        <a href="/tags/PXN-V10-Pro/" class="print-no-link">#PXN V10 Pro</a>
+      
+        <a href="/tags/PXN/" class="print-no-link">#PXN</a>
+      
+        <a href="/tags/%E8%8E%B1%E4%BB%95%E8%BE%BE/" class="print-no-link">#莱仕达</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Arch Linux Steam Proton PXN V10 Pro 力反馈问题</div>
+      <div>https://term-inator.github.io/2026/03/29/arch-linux-steam-proton-force-feedback/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Sicong Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月29日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2026年3月29日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/11/29/pve-unable-to-change-power-state-from-D3hot-to-D0/" title="PVE Unable to change power state from D3hot to D0">
+                        <span class="hidden-mobile">PVE Unable to change power state from D3hot to D0</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
